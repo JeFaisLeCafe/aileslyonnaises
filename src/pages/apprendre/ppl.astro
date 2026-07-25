@@ -1,0 +1,47 @@
+---
+import TrainingLayout from "@/layouts/TrainingLayout.astro";
+
+const facts = [
+  { value: "45 h", label: "minimum réglementaire de formation en vol" },
+  { value: "17 ans", label: "âge minimum pour la délivrance" },
+  { value: "Classe 2", label: "certificat médical requis" },
+];
+
+const sections = [
+  {
+    title: "La licence de référence pour voyager",
+    content: [
+      "Le PPL(A), Private Pilot Licence, permet d’exercer les fonctions de commandant de bord ou de copilote sur avion monomoteur à pistons, sans rémunération, dans le cadre des privilèges détenus. Il ouvre la voie au voyage avec des passagers et aux qualifications complémentaires.",
+      "La licence donne accès au vol VFR de jour. Le vol de nuit nécessite une qualification complémentaire dédiée.",
+    ],
+  },
+  {
+    title: "Une progression pratique et théorique",
+    content: [
+      "Le programme réglementaire comprend au moins 45 heures de formation en vol, dont au moins 25 heures en double commande et 10 heures en solo supervisé. La durée réellement nécessaire dépend de la régularité, de la progression et de l’aisance de chaque élève.",
+      "La préparation théorique couvre neuf matières, notamment la réglementation, la météorologie, la navigation, les principes du vol, les communications et les facteurs humains. Elle se conclut par un examen avant le test pratique.",
+    ],
+  },
+  {
+    title: "Prérequis",
+    content: [
+      "Le premier vol solo peut intervenir à partir de 16 ans. La licence est délivrée à partir de 17 ans après réussite des examens théorique et pratique.",
+      "Un certificat médical de classe 2 en cours de validité est requis. Nous recommandons d’effectuer cette démarche tôt dans le parcours.",
+    ],
+  },
+];
+---
+
+<TrainingLayout
+  eyebrow="Formation PPL(A)"
+  title="Licence de pilote privé"
+  introduction="Pour voler en autonomie, emmener des passagers et construire une véritable expérience de voyage en Europe."
+  description="Préparez votre licence PPL(A) à Lyon-Bron avec l’école de pilotage approuvée ATO des Ailes Lyonnaises."
+  {facts}
+  {sections}
+>
+  <div class="notice">
+    Les minima réglementaires ne constituent pas un devis. Consultez la page
+    tarifs et contactez l’équipe formation pour une estimation adaptée.
+  </div>
+</TrainingLayout>

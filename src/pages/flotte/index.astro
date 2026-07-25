@@ -1,0 +1,144 @@
+---
+import CtaBand from "@/components/CtaBand.astro";
+import PageHero from "@/components/PageHero.astro";
+import { getAircraft } from "@/lib/cms";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const aircraft = await getAircraft();
+const fallbackImages: Record<string, string> = {
+  "F-HSMB": "/images/aircraft/bristell-b23.webp",
+  "F-GXGE": "/images/aircraft/dr400-gxge.webp",
+  "F-GJQT": "/images/aircraft/dr400-gxge.webp",
+  "F-HLYO": "/images/aircraft/dr401-hlyo.webp",
+  "F-GYPG": "/images/aircraft/dr401-hlyo.webp",
+};
+---
+
+<BaseLayout
+  title="Notre flotte"
+  description="Découvrez les cinq avions des Ailes Lyonnaises à Lyon-Bron : Bristell B23, Robin DR400 et DR401 pour l’école et le voyage."
+>
+  <PageHero
+    eyebrow="Cinq avions"
+    title="Du premier tour de piste au voyage"
+    introduction="Une flotte cohérente, entretenue et adaptée à chaque étape : apprendre, gagner en autonomie et partir plus loin."
+    image="/images/aircraft/dr401-hlyo.webp"
+    imageAlt="Robin DR401 des Ailes Lyonnaises sur le tarmac"
+  >
+    <div class="button-row">
+      <a class="button" href="/tarifs/">Voir les tarifs avions</a>
+    </div>
+  </PageHero>
+
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Une flotte polyvalente</p>
+        <h2>Un avion adapté à la mission, pas l’inverse.</h2>
+      </div>
+      <p class="lede">
+        Les avions école privilégient la simplicité et la disponibilité. Les
+        appareils de voyage ajoutent puissance, autonomie et équipements pour
+        les navigations plus ambitieuses.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container aircraft-list">
+      {
+        aircraft.map((plane, index) => (
+          <article class="aircraft">
+            <div class="aircraft__image-wrap">
+              <img
+                src={plane.image?.url ?? fallbackImages[plane.registration]}
+                alt={
+                  plane.image?.alt ??
+                  `${plane.model} immatriculé ${plane.registration}`
+                }
+                width="1365"
+                height="2048"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            </div>
+            <div class="aircraft__content">
+              <span class="tag">{plane.uses.join(" & ")}</span>
+              <p class="aircraft__registration">{plane.registration}</p>
+              <h2>{plane.model}</h2>
+              <p class="lede">{plane.summary}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <CtaBand
+    title="Découvrez la flotte dans son environnement."
+    text="Venez rencontrer l’équipe à Lyon-Bron et parler de l’avion qui accompagnera vos premières heures."
+    href="/contact/"
+    label="Nous rencontrer"
+  />
+</BaseLayout>
+
+<style>
+  .aircraft-list {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .aircraft {
+    display: grid;
+    min-height: 33rem;
+    overflow: hidden;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+
+  .aircraft:nth-child(even) .aircraft__image-wrap {
+    order: 2;
+  }
+
+  .aircraft__image-wrap {
+    min-height: 28rem;
+    overflow: hidden;
+    background: #dce7ef;
+  }
+
+  .aircraft img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .aircraft__content {
+    display: grid;
+    align-content: center;
+    padding: clamp(2rem, 6vw, 5rem);
+  }
+
+  .aircraft__registration {
+    margin: 2rem 0 0.4rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+  }
+
+  .aircraft h2 {
+    margin-bottom: 1.25rem;
+    font-size: clamp(2.3rem, 4vw, 4rem);
+  }
+
+  @media (max-width: 48rem) {
+    .aircraft {
+      grid-template-columns: 1fr;
+    }
+
+    .aircraft:nth-child(even) .aircraft__image-wrap {
+      order: initial;
+    }
+  }
+</style>

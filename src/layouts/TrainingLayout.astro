@@ -1,0 +1,125 @@
+---
+import CtaBand from "@/components/CtaBand.astro";
+import PageHero from "@/components/PageHero.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+interface Fact {
+  value: string;
+  label: string;
+}
+
+interface Section {
+  title: string;
+  content: string[];
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  introduction: string;
+  description: string;
+  facts: Fact[];
+  sections: Section[];
+}
+
+const { eyebrow, title, introduction, description, facts, sections } =
+  Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <PageHero eyebrow={eyebrow} title={title} introduction={introduction}>
+    <div class="button-row">
+      <a class="button" href="/contact/#formation">Parler de mon projet</a>
+      <a class="button button--ghost" href="/tarifs/">Voir les tarifs</a>
+    </div>
+  </PageHero>
+
+  <section class="section section--white">
+    <div class="container detail-layout">
+      <aside aria-label="Repères de la formation">
+        <div class="fact-list">
+          {
+            facts.map((fact) => (
+              <div class="fact">
+                <strong>{fact.value}</strong>
+                <span>{fact.label}</span>
+              </div>
+            ))
+          }
+        </div>
+        <a class="text-link" href="/apprendre/">Comparer les formations</a>
+      </aside>
+      <div class="prose">
+        {
+          sections.map((section) => (
+            <section>
+              <h2>{section.title}</h2>
+              {section.content.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </section>
+          ))
+        }
+        <slot />
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Un parcours personnel"
+    title="Vérifions ensemble que cette formation vous correspond."
+    text="L’âge, le rythme, l’expérience et les objectifs de chacun sont différents. Notre équipe formation vous répond avec un premier conseil concret."
+    href="/contact/#formation"
+    label="Contacter l’équipe formation"
+  />
+</BaseLayout>
+
+<style>
+  .detail-layout {
+    display: grid;
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+    grid-template-columns: minmax(14rem, 19rem) minmax(0, 1fr);
+  }
+
+  aside {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .fact-list {
+    margin-bottom: 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .fact {
+    display: grid;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fact strong {
+    color: var(--navy-900);
+    font-size: 1.4rem;
+  }
+
+  .fact span {
+    margin-top: 0.25rem;
+    color: var(--muted);
+    font-size: 0.84rem;
+  }
+
+  .prose section:first-child h2 {
+    margin-top: 0;
+  }
+
+  @media (max-width: 50rem) {
+    .detail-layout {
+      grid-template-columns: 1fr;
+    }
+
+    aside {
+      position: static;
+    }
+  }
+</style>

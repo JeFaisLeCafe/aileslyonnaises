@@ -1,0 +1,39 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Page introuvable"
+  description="La page demandée n’existe pas ou a été déplacée."
+  noindex
+>
+  <section class="not-found">
+    <div class="narrow">
+      <p class="eyebrow">Erreur 404</p>
+      <h1>Cette trajectoire ne mène nulle part.</h1>
+      <p class="lede">
+        La page a peut-être changé d’adresse lors de la refonte du site.
+      </p>
+      <div class="button-row">
+        <a class="button" href="/">Revenir à l’accueil</a>
+        <a class="button button--ghost" href="/contact/">Signaler le problème</a
+        >
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    min-height: 65vh;
+    align-items: center;
+    color: var(--white);
+    background: var(--navy-950);
+  }
+
+  .not-found h1 {
+    max-width: 12ch;
+    color: var(--white);
+  }
+</style>

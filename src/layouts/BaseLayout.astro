@@ -1,0 +1,84 @@
+---
+import { ClientRouter } from "astro:transitions";
+
+import Analytics from "@/components/Analytics.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import "@/styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  image = "/images/landscapes/lyon-tete-or.webp",
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL(image, Astro.site);
+const fullTitle =
+  title === "Les Ailes Lyonnaises"
+    ? `${title} — Aéroclub et école de pilotage à Lyon-Bron`
+    : `${title} | Les Ailes Lyonnaises`;
+
+const organization = {
+  "@context": "https://schema.org",
+  "@type": ["SportsClub", "EducationalOrganization"],
+  name: "Aéroclub Les Ailes Lyonnaises",
+  url: Astro.site,
+  logo: new URL("/images/brand/logo.png", Astro.site),
+  telephone: "+33640369229",
+  email: "info2@aileslyonnaises.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "305 rue Albert Kimmerling",
+    postalCode: "69680",
+    addressLocality: "Chassieu",
+    addressCountry: "FR",
+  },
+};
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#031735" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/images/brand/logo.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Les Ailes Lyonnaises" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <ClientRouter />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(organization)}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+    <Header />
+    <main id="contenu">
+      <slot />
+    </main>
+    <Footer />
+    <Analytics />
+  </body>
+</html>

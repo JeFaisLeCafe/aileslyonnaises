@@ -1,0 +1,66 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  text: string;
+  href: string;
+  label: string;
+}
+
+const {
+  eyebrow = "Prêt à commencer ?",
+  title,
+  text,
+  href,
+  label,
+} = Astro.props;
+---
+
+<section class="cta-band">
+  <div class="container cta-band__inner">
+    <div>
+      <p class="eyebrow">{eyebrow}</p>
+      <h2>{title}</h2>
+      <p class="lede">{text}</p>
+    </div>
+    <a class="button" href={href}>{label}</a>
+  </div>
+</section>
+
+<style>
+  .cta-band {
+    padding-block: clamp(4rem, 7vw, 6rem);
+    color: var(--white);
+    background:
+      radial-gradient(
+        circle at 85% 50%,
+        rgb(91 168 212 / 0.28),
+        transparent 30%
+      ),
+      var(--navy-950);
+  }
+
+  .cta-band__inner {
+    display: grid;
+    align-items: center;
+    gap: 2rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .cta-band h2 {
+    margin-bottom: 1rem;
+    color: var(--white);
+  }
+
+  .cta-band .lede {
+    margin-bottom: 0;
+    color: rgb(255 255 255 / 0.7);
+  }
+
+  @media (max-width: 44rem) {
+    .cta-band__inner {
+      justify-items: start;
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

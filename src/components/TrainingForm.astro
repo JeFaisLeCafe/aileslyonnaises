@@ -1,0 +1,283 @@
+---
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+
+<form
+  class="training-form"
+  action="/api/training-enquiry"
+  method="post"
+  data-training-form
+>
+  <div class="form-grid">
+    <label>
+      <span>Nom et prénom *</span>
+      <input
+        name="name"
+        type="text"
+        autocomplete="name"
+        required
+        maxlength="100"
+      />
+    </label>
+    <label>
+      <span>Adresse email *</span>
+      <input
+        name="email"
+        type="email"
+        autocomplete="email"
+        required
+        maxlength="200"
+      />
+    </label>
+    <label>
+      <span>Téléphone</span>
+      <input name="phone" type="tel" autocomplete="tel" maxlength="30" />
+    </label>
+    <label>
+      <span>Tranche d’âge *</span>
+      <select name="ageRange" required>
+        <option value="">Choisir</option>
+        <option value="under-16">Moins de 16 ans</option>
+        <option value="16-17">16–17 ans</option>
+        <option value="18-24">18–24 ans</option>
+        <option value="25-39">25–39 ans</option>
+        <option value="40-plus">40 ans et plus</option>
+      </select>
+    </label>
+    <label>
+      <span>Votre projet *</span>
+      <select name="goal" required>
+        <option value="">Choisir</option>
+        <option value="unsure">Je souhaite être conseillé</option>
+        <option value="ppl">Licence PPL</option>
+        <option value="lapl">Licence LAPL</option>
+        <option value="night">Qualification vol de nuit</option>
+        <option value="initiation">Pack initiation</option>
+      </select>
+    </label>
+    <label>
+      <span>Expérience aéronautique</span>
+      <select name="experience">
+        <option value="none">Aucune</option>
+        <option value="discovery">Un ou plusieurs vols découverte</option>
+        <option value="bia">BIA obtenu ou en préparation</option>
+        <option value="student">Déjà élève-pilote</option>
+        <option value="pilot">Déjà pilote breveté</option>
+      </select>
+    </label>
+  </div>
+  <label>
+    <span>Disponibilités habituelles</span>
+    <input
+      name="availability"
+      type="text"
+      maxlength="200"
+      placeholder="Ex. samedi matin, deux fois par mois"
+    />
+  </label>
+  <label>
+    <span>Votre message</span>
+    <textarea name="message" rows="5" maxlength="2000"></textarea>
+  </label>
+  <label class="honeypot" aria-hidden="true">
+    <span>Site web</span>
+    <input name="website" type="text" tabindex="-1" autocomplete="off" />
+  </label>
+  <label class="consent">
+    <input name="consent" type="checkbox" value="accepted" required />
+    <span>
+      J’accepte que le club utilise ces informations pour répondre à ma demande.
+      Elles ne sont pas conservées dans une base prospects. *
+    </span>
+  </label>
+  {
+    turnstileSiteKey && (
+      <div
+        class="cf-turnstile"
+        data-sitekey={turnstileSiteKey}
+        data-theme="light"
+      />
+    )
+  }
+  <div class="form-actions">
+    <button class="button" type="submit">Envoyer ma demande</button>
+    <p class="form-status" role="status" aria-live="polite"></p>
+  </div>
+</form>
+
+{
+  turnstileSiteKey && (
+    <script
+      is:inline
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      async
+      defer
+    />
+  )
+}
+
+<script>
+  const initializeTrainingForm = () => {
+    const form = document.querySelector<HTMLFormElement>(
+      "[data-training-form]",
+    );
+    if (!form || form.dataset.initialized === "true") return;
+
+    const status = form.querySelector<HTMLElement>(".form-status");
+    const submit = form.querySelector<HTMLButtonElement>(
+      'button[type="submit"]',
+    );
+    let started = false;
+    form.dataset.initialized = "true";
+
+    form.addEventListener("input", () => {
+      if (started) return;
+      started = true;
+      window.dispatchEvent(
+        new CustomEvent("conversion", {
+          detail: { name: "training_form_start" },
+        }),
+      );
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity() || !status || !submit) return;
+
+      status.textContent = "Envoi en cours…";
+      submit.disabled = true;
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+        const payload = (await response.json()) as { message?: string };
+
+        if (!response.ok) {
+          throw new Error(
+            payload.message ?? "Impossible d’envoyer la demande.",
+          );
+        }
+
+        form.reset();
+        status.textContent =
+          "Merci. Votre demande a bien été envoyée à l’équipe formation.";
+        window.dispatchEvent(
+          new CustomEvent("conversion", {
+            detail: { name: "training_form_submit" },
+          }),
+        );
+      } catch (error) {
+        status.textContent =
+          error instanceof Error
+            ? error.message
+            : "Une erreur est survenue. Réessayez ou contactez-nous par téléphone.";
+      } finally {
+        submit.disabled = false;
+      }
+    });
+  };
+
+  document.addEventListener("astro:page-load", initializeTrainingForm);
+</script>
+
+<style>
+  .training-form {
+    display: grid;
+    gap: 1.25rem;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .form-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  label {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  label > span {
+    color: var(--navy-950);
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    min-height: 3.2rem;
+    padding: 0.75rem 0.9rem;
+    color: var(--ink);
+    background: #fbfcfd;
+    border: 1px solid #b8c0cc;
+    border-radius: 0.6rem;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--navy-800);
+    outline: 3px solid rgb(91 168 212 / 0.3);
+  }
+
+  .consent {
+    align-items: start;
+    grid-template-columns: auto 1fr;
+  }
+
+  .consent input {
+    width: 1.2rem;
+    min-height: auto;
+    height: 1.2rem;
+    margin-top: 0.1rem;
+  }
+
+  .consent span {
+    color: var(--muted);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .honeypot {
+    position: absolute;
+    left: -10000px;
+  }
+
+  .form-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .form-status {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.84rem;
+  }
+
+  button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+  }
+
+  @media (max-width: 42rem) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

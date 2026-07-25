@@ -1,0 +1,258 @@
+---
+const pathname = Astro.url.pathname;
+
+const navigation = [
+  { href: "/decouvrir/", label: "Découvrir" },
+  { href: "/apprendre/", label: "Apprendre" },
+  { href: "/flotte/", label: "Flotte" },
+  { href: "/tarifs/", label: "Tarifs" },
+  { href: "/vie-du-club/", label: "Vie du club" },
+  { href: "/contact/", label: "Contact" },
+];
+
+const isCurrent = (href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="navigation">
+    <div class="container navigation__inner">
+      <a class="brand" href="/" aria-label="Les Ailes Lyonnaises — accueil">
+        <img
+          class="brand__mark"
+          src="/images/brand/logo.png"
+          width="68"
+          height="68"
+          alt=""
+        />
+        <span class="brand__text">
+          <strong>Les Ailes Lyonnaises</strong>
+          <small>Aéroclub · Lyon-Bron</small>
+        </span>
+      </a>
+      <button
+        class="menu-button"
+        type="button"
+        aria-expanded="false"
+        aria-controls="main-navigation"
+      >
+        <span class="sr-only">Ouvrir le menu</span>
+        <span></span><span></span><span></span>
+      </button>
+      <nav
+        id="main-navigation"
+        class="main-navigation"
+        aria-label="Navigation principale"
+      >
+        <ul>
+          {
+            navigation.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={isCurrent(item.href) ? "page" : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <a class="button navigation__cta" href="/contact/#formation">
+          Parler de ma formation
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const initializeMenu = () => {
+    const button = document.querySelector<HTMLButtonElement>(".menu-button");
+    const navigation = document.querySelector<HTMLElement>(".main-navigation");
+    if (!button || !navigation) return;
+
+    document.body.classList.remove("menu-open");
+    button.addEventListener("click", () => {
+      const isOpen = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", String(!isOpen));
+      navigation.classList.toggle("main-navigation--open", !isOpen);
+      document.body.classList.toggle("menu-open", !isOpen);
+    });
+  };
+
+  document.addEventListener("astro:page-load", initializeMenu);
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    z-index: 500;
+    top: 0;
+    color: var(--white);
+    background: var(--navy-950);
+    box-shadow: 0 6px 24px rgb(2 9 20 / 0.16);
+  }
+
+  .navigation__inner,
+  .brand,
+  .main-navigation,
+  .main-navigation ul {
+    display: flex;
+    align-items: center;
+  }
+
+  .navigation {
+    min-height: var(--header-height);
+  }
+
+  .navigation__inner {
+    min-height: inherit;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .brand {
+    flex: 0 0 auto;
+    gap: 0.8rem;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .brand__mark {
+    width: 3.7rem;
+    height: 3.7rem;
+    object-fit: contain;
+    background: var(--white);
+    border: 2px solid var(--yellow-500);
+    border-radius: 50%;
+  }
+
+  .brand__text {
+    display: grid;
+    line-height: 1.15;
+  }
+
+  .brand__text strong {
+    font-size: 1rem;
+  }
+
+  .brand__text small {
+    margin-top: 0.25rem;
+    color: rgb(255 255 255 / 0.58);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .main-navigation {
+    gap: 1.5rem;
+  }
+
+  .main-navigation ul {
+    gap: clamp(0.75rem, 1.5vw, 1.35rem);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .main-navigation ul a {
+    position: relative;
+    padding-block: 1rem;
+    color: rgb(255 255 255 / 0.72);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .main-navigation ul a:hover,
+  .main-navigation ul a[aria-current="page"] {
+    color: var(--white);
+  }
+
+  .main-navigation ul a[aria-current="page"]::after {
+    position: absolute;
+    right: 0;
+    bottom: 0.6rem;
+    left: 0;
+    height: 2px;
+    background: var(--yellow-500);
+    content: "";
+  }
+
+  .navigation__cta {
+    min-height: 2.75rem;
+    padding: 0.65rem 1rem;
+    font-size: 0.76rem;
+  }
+
+  .menu-button {
+    display: none;
+    width: 3rem;
+    height: 3rem;
+    padding: 0.65rem;
+    background: transparent;
+    border: 1px solid rgb(255 255 255 / 0.25);
+    border-radius: 50%;
+  }
+
+  .menu-button span:not(.sr-only) {
+    display: block;
+    height: 2px;
+    margin: 0.28rem 0;
+    background: var(--white);
+  }
+
+  @media (max-width: 58rem) {
+    .menu-button {
+      display: block;
+    }
+
+    .main-navigation {
+      position: fixed;
+      inset: var(--header-height) 0 0;
+      display: none;
+      align-items: stretch;
+      flex-direction: column;
+      padding: 2rem 1rem;
+      background: var(--navy-950);
+    }
+
+    .main-navigation--open {
+      display: flex;
+    }
+
+    .main-navigation ul {
+      align-items: stretch;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .main-navigation ul a {
+      display: block;
+      padding: 1rem;
+      font-size: 1.2rem;
+      border-bottom: 1px solid rgb(255 255 255 / 0.1);
+    }
+
+    .main-navigation ul a[aria-current="page"]::after {
+      display: none;
+    }
+  }
+
+  @media (max-width: 36rem) {
+    .brand__mark {
+      width: 3rem;
+      height: 3rem;
+    }
+
+    .brand__text strong {
+      font-size: 0.88rem;
+    }
+
+    .brand__text small {
+      font-size: 0.56rem;
+    }
+  }
+</style>

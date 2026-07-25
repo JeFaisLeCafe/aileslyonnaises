@@ -1,0 +1,211 @@
+---
+import CtaBand from "@/components/CtaBand.astro";
+import PageHero from "@/components/PageHero.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Découvrir le vol"
+  description="Vol découverte et pack initiation au départ de Lyon-Bron : survolez la région lyonnaise ou prenez les commandes avec un instructeur."
+>
+  <PageHero
+    eyebrow="Premières expériences"
+    title="Et si le pilote, c’était vous ?"
+    introduction="Offrez-vous le ciel, partagez-le avec vos proches ou prenez les commandes pour une première leçon."
+    image="/images/landscapes/dombes.webp"
+    imageAlt="Les étangs de la Dombes vus depuis un avion"
+  >
+    <div class="button-row">
+      <a class="button" href="#formules">Voir les formules</a>
+      <a class="button button--ghost" href="/contact/">Poser une question</a>
+    </div>
+  </PageHero>
+
+  <section id="formules" class="section section--white">
+    <div class="container">
+      <p class="eyebrow">Deux façons de commencer</p>
+      <h2>Regarder le paysage ou apprendre à tenir le cap.</h2>
+      <div class="grid grid--2 offers">
+        <article class="offer">
+          <div class="offer__number">01</div>
+          <div>
+            <span class="tag">30 min · 2 passagers maximum</span>
+            <h3>Vol découverte</h3>
+            <p>
+              Un pilote expérimenté vous emmène au nord, au sud ou à l’ouest de
+              Lyon. Vous profitez du paysage et découvrez l’environnement du vol
+              léger depuis la meilleure place.
+            </p>
+            <p class="offer__note">
+              Le parcours exact dépend des conditions météorologiques et des
+              contraintes aéronautiques du jour.
+            </p>
+            <a class="text-link" href="/contact/">Demander les disponibilités</a
+            >
+          </div>
+        </article>
+        <article class="offer">
+          <div class="offer__number">02</div>
+          <div>
+            <span class="tag">Avec un instructeur</span>
+            <h3>Pack initiation</h3>
+            <p>
+              Vous préparez le vol, découvrez les commandes et réalisez vos
+              premières manœuvres avec un instructeur. Une expérience pensée
+              pour ressentir concrètement ce qu’est une leçon de pilotage.
+            </p>
+            <p class="offer__note">
+              Les vols réalisés dans un cadre d’instruction peuvent être
+              inscrits dans votre carnet selon les conditions applicables.
+            </p>
+            <a class="text-link" href="/contact/#formation"
+              >Parler de l’initiation</a
+            >
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Au départ de Lyon-Bron</p>
+      <h2>Trois directions, une région spectaculaire.</h2>
+      <div class="grid grid--3">
+        <article class="route-card">
+          <span>Nord</span>
+          <h3>La Dombes</h3>
+          <p>Un paysage d’étangs, de bocage et de villages au nord de Lyon.</p>
+        </article>
+        <article class="route-card">
+          <span>Sud</span>
+          <h3>Vallée du Rhône</h3>
+          <p>Les reliefs et les grands axes naturels qui s’ouvrent au sud.</p>
+        </article>
+        <article class="route-card">
+          <span>Ouest</span>
+          <h3>Lyon et ses reliefs</h3>
+          <p>Une lecture aérienne de la métropole et de l’ouest lyonnais.</p>
+        </article>
+      </div>
+      <p class="route-disclaimer">
+        Les descriptifs détaillés et liens d’achat seront publiés après
+        validation par le club et configuration Aérogest FirstFlight.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="container split">
+      <img
+        class="split__image"
+        src="/images/landscapes/lyon-tete-or.webp"
+        alt="Lyon et le parc de la Tête d’Or vus du ciel"
+        width="2048"
+        height="1365"
+        loading="lazy"
+      />
+      <div>
+        <p class="eyebrow">Offrir un vol</p>
+        <h2>Un cadeau qui ne reste pas dans un tiroir.</h2>
+        <p class="lede">
+          Les bons cadeaux seront proposés avec leurs conditions de validité et
+          leur parcours de réservation dès que l’intégration Aérogest sera
+          confirmée.
+        </p>
+        <a class="button" href="/contact/">Être informé</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Vous hésitez entre découverte et initiation ?"
+    text="Dites-nous si vous voulez surtout profiter du paysage ou commencer à apprendre : nous vous orienterons vers la bonne formule."
+    href="/contact/"
+    label="Contacter le club"
+  />
+</BaseLayout>
+
+<style>
+  .offers {
+    margin-top: 3rem;
+  }
+
+  .offer {
+    display: grid;
+    align-items: start;
+    gap: 1.5rem;
+    grid-template-columns: auto 1fr;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    background: var(--paper);
+    border-radius: var(--radius-lg);
+  }
+
+  .offer__number {
+    color: var(--navy-800);
+    font-size: 0.8rem;
+    font-weight: 900;
+  }
+
+  .offer h3 {
+    margin: 1.25rem 0;
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+
+  .offer p {
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .offer__note {
+    padding-top: 1rem;
+    font-size: 0.82rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .route-card {
+    min-height: 20rem;
+    padding: 2rem;
+    color: var(--white);
+    background:
+      linear-gradient(rgb(3 23 53 / 0.7), rgb(3 23 53 / 0.96)),
+      url("/images/landscapes/dombes.webp") center / cover;
+    border-radius: var(--radius-md);
+  }
+
+  .route-card:nth-child(2) {
+    background:
+      linear-gradient(rgb(3 23 53 / 0.7), rgb(3 23 53 / 0.96)),
+      url("/images/landscapes/aiguille-midi.webp") center / cover;
+  }
+
+  .route-card:nth-child(3) {
+    background:
+      linear-gradient(rgb(3 23 53 / 0.7), rgb(3 23 53 / 0.96)),
+      url("/images/landscapes/lyon-tete-or.webp") center / cover;
+  }
+
+  .route-card span {
+    color: var(--yellow-400);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .route-card h3 {
+    margin-top: 8rem;
+    color: var(--white);
+  }
+
+  .route-card p {
+    color: rgb(255 255 255 / 0.72);
+  }
+
+  .route-disclaimer {
+    max-width: 48rem;
+    margin-top: 1.5rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+import PageHero from "@/components/PageHero.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Confidentialité"
+  description="Politique de confidentialité du site des Ailes Lyonnaises."
+>
+  <PageHero
+    eyebrow="Vos données"
+    title="Politique de confidentialité"
+    introduction="Nous limitons la collecte aux informations nécessaires pour répondre à vos demandes."
+  />
+  <section class="section section--white">
+    <div class="narrow prose">
+      <h2>Demande de formation</h2>
+      <p>
+        Le formulaire transmet vos coordonnées, votre projet, votre tranche
+        d’âge, votre expérience et vos disponibilités à l’équipe formation par
+        email. Ces informations servent uniquement à répondre à votre demande et
+        ne sont pas enregistrées dans une base de prospection par le site.
+      </p>
+      <p>
+        Les messages restent soumis aux règles de conservation de la messagerie
+        du club. Vous pouvez demander leur suppression à
+        <a href="mailto:info2@aileslyonnaises.com">info2@aileslyonnaises.com</a
+        >.
+      </p>
+      <h2>Sous-traitants techniques</h2>
+      <ul>
+        <li>
+          l’hébergeur du site pour la livraison des pages et la sécurité ;
+        </li>
+        <li>
+          Cloudflare Turnstile pour la protection contre les envois automatisés
+          ;
+        </li>
+        <li>
+          le prestataire d’envoi d’email configuré lors de la mise en production
+          ;
+        </li>
+        <li>Sanity pour les contenus publics administrés par le club.</li>
+      </ul>
+      <h2>Mesure d’audience</h2>
+      <p>
+        Le site prévoit une mesure d’audience agrégée et sans cookie. Elle sert
+        à comprendre les pages consultées et les actions principales, sans
+        profilage publicitaire.
+      </p>
+      <h2>Vos droits</h2>
+      <p>
+        Vous pouvez demander l’accès, la rectification ou l’effacement des
+        données liées à votre demande en contactant le club. Si nécessaire, vous
+        pouvez également saisir la CNIL.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,152 @@
+---
+import CtaBand from "@/components/CtaBand.astro";
+import PageHero from "@/components/PageHero.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Brevet d’Initiation Aéronautique"
+  description="Les Ailes Lyonnaises accompagnent les établissements partenaires dans la préparation au BIA et les vols de découverte à Lyon-Bron."
+>
+  <PageHero
+    eyebrow="Programme jeunes"
+    title="Brevet d’Initiation Aéronautique"
+    introduction="Un diplôme national pour comprendre l’aéronautique, rencontrer ses métiers et transformer une curiosité en projet."
+    image="/images/landscapes/lyon-tete-or.webp"
+    imageAlt="La métropole de Lyon vue du ciel"
+  />
+
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Qu’est-ce que le BIA ?</p>
+        <h2>Une culture aéronautique reconnue par un diplôme.</h2>
+      </div>
+      <div>
+        <p class="lede">
+          Le BIA est un diplôme de l’Éducation nationale mis en œuvre avec la
+          Direction générale de l’aviation civile et les fédérations
+          aéronautiques. Il relie connaissances, métiers et pratique.
+        </p>
+        <a
+          class="text-link"
+          href="https://www.education.gouv.fr/le-brevet-d-initiation-aeronautique-bia-6250"
+          rel="external"
+        >
+          Consulter la présentation officielle
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Le programme</p>
+      <h2>Cinq domaines pour comprendre comment et pourquoi on vole.</h2>
+      <div class="grid grid--3 topics">
+        <article class="card">
+          <span>01</span><h3>Météorologie et aérologie</h3>
+        </article>
+        <article class="card">
+          <span>02</span><h3>Aérodynamique et principes du vol</h3>
+        </article>
+        <article class="card">
+          <span>03</span><h3>Étude des aéronefs et engins spatiaux</h3>
+        </article>
+        <article class="card">
+          <span>04</span><h3>Navigation, réglementation et sécurité</h3>
+        </article>
+        <article class="card">
+          <span>05</span><h3>Histoire et culture aéronautique</h3>
+        </article>
+        <article class="card topic-highlight">
+          <strong>BIA</strong>
+          <p>Un examen national à l’issue de la préparation.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Le rôle des Ailes Lyonnaises</p>
+        <h2>Relier la salle de cours à l’aérodrome.</h2>
+        <p class="lede">
+          Des membres du club titulaires du CAEA interviennent auprès
+          d’établissements partenaires. Le club participe également aux vols de
+          découverte qui donnent une réalité concrète aux notions étudiées.
+        </p>
+      </div>
+      <div class="grid">
+        <article class="card card--navy">
+          <h3>Cours théoriques</h3>
+          <p>Des intervenants issus du club et du monde aéronautique.</p>
+        </article>
+        <article class="card card--navy">
+          <h3>Vols de découverte</h3>
+          <p>Une mise en perspective du programme depuis le cockpit.</p>
+        </article>
+        <article class="card card--navy">
+          <h3>Poursuite vers le pilotage</h3>
+          <p>Des aides fédérales peuvent accompagner les jeunes lauréats.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="narrow prose">
+      <p class="eyebrow">Établissements partenaires</p>
+      <h2>Comment rejoindre une préparation ?</h2>
+      <p>
+        L’inscription et l’organisation dépendent de chaque établissement. Le
+        club publiera la liste de ses partenaires après validation. Pour trouver
+        une formation, vous pouvez également consulter l’annuaire national.
+      </p>
+      <a
+        class="button button--ghost"
+        href="https://www.onisep.fr/ressources/univers-formation/formations/lycees/brevet-d-initiation-aeronautique"
+        rel="external"
+      >
+        Rechercher une préparation BIA
+      </a>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Un établissement souhaite travailler avec le club ?"
+    text="Présentez-nous votre projet, le nombre d’élèves et votre calendrier afin d’étudier un partenariat."
+    href="/contact/"
+    label="Contacter le club"
+  />
+</BaseLayout>
+
+<style>
+  .topics {
+    margin-top: 2.5rem;
+  }
+
+  .topics .card > span {
+    color: var(--navy-800);
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+
+  .topics h3 {
+    margin-top: 2rem;
+  }
+
+  .topic-highlight {
+    display: grid;
+    color: var(--navy-950);
+    background: var(--yellow-500);
+    border-color: var(--yellow-500);
+  }
+
+  .topic-highlight strong {
+    font-size: clamp(4rem, 8vw, 7rem);
+    letter-spacing: -0.08em;
+    line-height: 0.9;
+  }
+</style>

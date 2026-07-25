@@ -1,0 +1,46 @@
+---
+import PageHero from "@/components/PageHero.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Mentions légales"
+  description="Mentions légales du site de l’Aéroclub Les Ailes Lyonnaises."
+  noindex
+>
+  <PageHero
+    eyebrow="Informations légales"
+    title="Mentions légales"
+    introduction="Les informations d’identification définitives doivent être validées par le bureau avant la mise en production."
+  />
+  <section class="section section--white">
+    <div class="narrow prose">
+      <div class="notice">
+        Page de préproduction : le responsable de publication, l’identifiant de
+        l’association et les coordonnées complètes de l’hébergeur restent à
+        confirmer.
+      </div>
+      <h2>Éditeur</h2>
+      <p>
+        Aéroclub Les Ailes Lyonnaises, association loi 1901<br />
+        305 rue Albert Kimmerling, 69680 Chassieu<br />
+        Email : info2@aileslyonnaises.com<br />
+        Téléphone : 06 40 36 92 29
+      </p>
+      <h2>Responsable de publication</h2>
+      <p>À compléter après validation par le bureau de l’association.</p>
+      <h2>Hébergement</h2>
+      <p>
+        Hébergement provisoire prévu sur l’infrastructure Cloudflare Pages. La
+        mention définitive dépendra de l’audit du contrat OVH et du choix de
+        production.
+      </p>
+      <h2>Propriété intellectuelle</h2>
+      <p>
+        Les textes, photographies, marques et éléments graphiques de ce site
+        sont protégés. Toute réutilisation nécessite l’autorisation de leurs
+        titulaires respectifs.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

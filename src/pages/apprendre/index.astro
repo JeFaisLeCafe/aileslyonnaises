@@ -1,0 +1,259 @@
+---
+import CtaBand from "@/components/CtaBand.astro";
+import PageHero from "@/components/PageHero.astro";
+import { getPeople } from "@/lib/cms";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const instructors = (await getPeople()).filter((person) =>
+  person.roles.includes("instructor"),
+);
+const courses = [
+  {
+    href: "/apprendre/ppl/",
+    code: "PPL(A)",
+    title: "Licence de pilote privé",
+    text: "La licence de référence pour voler en VFR de jour, emmener des passagers et voyager en Europe.",
+    facts: ["45 h minimum", "Dès 17 ans", "Classe médicale 2"],
+  },
+  {
+    href: "/apprendre/lapl/",
+    code: "LAPL(A)",
+    title: "Licence de pilote d’avion léger",
+    text: "Un parcours européen plus court pour piloter un monomoteur avec jusqu’à trois passagers.",
+    facts: ["30 h minimum", "Dès 17 ans", "Certificat médical LAPL"],
+  },
+  {
+    href: "/apprendre/vol-de-nuit/",
+    code: "VFR-N",
+    title: "Qualification vol de nuit",
+    text: "Une qualification complémentaire pour prolonger vos privilèges après la nuit aéronautique.",
+    facts: ["5 h minimum", "Après PPL ou LAPL", "Formation pratique"],
+  },
+];
+---
+
+<BaseLayout
+  title="Apprendre à piloter"
+  description="Formations PPL, LAPL et vol de nuit à Lyon-Bron au sein de l’école de pilotage approuvée ATO des Ailes Lyonnaises."
+>
+  <PageHero
+    eyebrow="École de pilotage FR.ATO.0078"
+    title="Apprendre à piloter"
+    introduction="Une formation structurée, un accompagnement personnel et une flotte adaptée pour transformer un projet en compétences durables."
+    image="/images/aircraft/dr400-gxge.webp"
+    imageAlt="Robin DR400 utilisé pour l’école de pilotage"
+  >
+    <div class="button-row">
+      <a class="button" href="/contact/#formation">Parler de mon projet</a>
+      <a class="button button--ghost" href="#parcours">Comparer les parcours</a>
+    </div>
+  </PageHero>
+
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Comment se former ?</p>
+        <h2>Vous progressez à votre rythme, avec un cadre clair.</h2>
+      </div>
+      <div>
+        <p class="lede">
+          Chaque leçon comprend un briefing, le vol et un débriefing. La
+          pratique est complétée par une préparation théorique en ligne et par
+          l’accompagnement de votre instructeur.
+        </p>
+        <p>
+          Nous accueillons les élèves selon la disponibilité de l’équipe
+          pédagogique afin de garantir une formation suivie jusqu’au test.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="parcours" class="section">
+    <div class="container">
+      <p class="eyebrow">Les parcours actifs</p>
+      <h2>Choisissez selon votre projet de vol.</h2>
+      <div class="course-list">
+        {
+          courses.map((course) => (
+            <a class="course" href={course.href}>
+              <span class="course__code">{course.code}</span>
+              <div>
+                <h3>{course.title}</h3>
+                <p>{course.text}</p>
+                <ul aria-label="Repères">
+                  {course.facts.map((fact) => (
+                    <li>{fact}</li>
+                  ))}
+                </ul>
+              </div>
+              <span class="course__arrow" aria-hidden="true">
+                →
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    instructors.length > 0 && (
+      <section class="section section--white">
+        <div class="container">
+          <p class="eyebrow">L’équipe pédagogique</p>
+          <h2>Les instructeurs qui vous accompagnent.</h2>
+          <div class="grid grid--3 instructor-grid">
+            {instructors.map((instructor) => (
+              <article class="card">
+                {instructor.image && (
+                  <img
+                    class="instructor-image"
+                    src={instructor.image.url}
+                    alt={instructor.image.alt}
+                    loading="lazy"
+                  />
+                )}
+                <h3>{instructor.name}</h3>
+                <p>{instructor.summary}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section section--navy">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Avant de commencer</p>
+        <h2>La visite médicale fait partie du parcours.</h2>
+        <p class="lede">
+          Le certificat demandé dépend de la licence visée. Anticipez la visite
+          avant les premières étapes importantes de la formation.
+        </p>
+        <a
+          class="button"
+          href="https://www.ecologie.gouv.fr/politiques-publiques/aptitude-medicale-personnels-navigants"
+          rel="external"
+        >
+          Consulter les informations officielles
+        </a>
+      </div>
+      <div class="card card--navy">
+        <p class="eyebrow">Programme jeunes</p>
+        <h3>
+          Des aides existent pour les moins de 21 ans et les titulaires du BIA.
+        </h3>
+        <p>
+          Licences jeunes, primes d’objectifs et dispositifs fédéraux peuvent
+          réduire le coût du parcours selon votre situation.
+        </p>
+        <a class="text-link" href="/bia/">Découvrir le BIA</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Quel parcours correspond à votre projet ?"
+    text="Quelques informations sur votre âge, votre expérience et vos disponibilités nous permettront de vous orienter."
+    href="/contact/#formation"
+    label="Parler à l’équipe formation"
+  />
+</BaseLayout>
+
+<style>
+  .course-list {
+    margin-top: 2.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .course {
+    display: grid;
+    align-items: start;
+    gap: clamp(1rem, 4vw, 3rem);
+    grid-template-columns: 7rem minmax(0, 1fr) auto;
+    padding-block: 2rem;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+
+  .course:hover h3,
+  .course:hover .course__arrow {
+    color: var(--navy-800);
+  }
+
+  .course__code {
+    color: var(--navy-900);
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+
+  .course h3 {
+    margin-bottom: 0.5rem;
+    transition: color 180ms ease;
+  }
+
+  .course p {
+    max-width: 44rem;
+    color: var(--muted);
+  }
+
+  .course ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 1rem 0 0;
+    list-style: none;
+  }
+
+  .course li {
+    padding: 0.35rem 0.6rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 700;
+  }
+
+  .course__arrow {
+    color: var(--muted);
+    font-size: 1.7rem;
+    transition:
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .course:hover .course__arrow {
+    transform: translateX(0.25rem);
+  }
+
+  .card .text-link {
+    color: var(--yellow-400);
+  }
+
+  .instructor-grid {
+    margin-top: 2.5rem;
+  }
+
+  .instructor-image {
+    width: calc(100% + clamp(3rem, 6vw, 4.5rem));
+    max-width: none;
+    height: 18rem;
+    margin: calc(clamp(1.5rem, 3vw, 2.25rem) * -1)
+      calc(clamp(1.5rem, 3vw, 2.25rem) * -1) 1.5rem;
+    object-fit: cover;
+  }
+
+  @media (max-width: 40rem) {
+    .course {
+      grid-template-columns: 1fr auto;
+    }
+
+    .course__code {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

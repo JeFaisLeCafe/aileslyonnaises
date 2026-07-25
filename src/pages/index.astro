@@ -1,0 +1,469 @@
+---
+import CtaBand from "@/components/CtaBand.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Les Ailes Lyonnaises"
+  description="Aéroclub et école de pilotage approuvée ATO à Lyon-Bron. Découvrez le vol, préparez votre PPL ou LAPL et rejoignez une communauté de pilotes."
+>
+  <section class="home-hero">
+    <img
+      class="home-hero__image"
+      src="/images/landscapes/lyon-tete-or.webp"
+      alt="Lyon, le parc de la Tête d’Or et le Rhône vus du ciel"
+      width="2048"
+      height="1365"
+      fetchpriority="high"
+    />
+    <div class="home-hero__overlay"></div>
+    <div class="container home-hero__content">
+      <p class="eyebrow">Aéroport de Lyon-Bron</p>
+      <h1>
+        Bienvenue à l’Aéroclub
+        <span class="display-serif">Les Ailes Lyonnaises</span>
+      </h1>
+      <p class="lede">
+        École de pilotage approuvée ATO depuis 1978. Rejoignez une communauté
+        d’élèves et de pilotes passionnés et découvrez la liberté du vol.
+      </p>
+      <div class="button-row">
+        <a class="button" href="/apprendre/">Apprendre à piloter</a>
+        <a class="button button--ghost" href="/decouvrir/">Vol découverte</a>
+      </div>
+    </div>
+    <a class="home-hero__scroll" href="#commencer">Explorer <span>↓</span></a>
+  </section>
+
+  <section id="commencer" class="section section--white">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Découvrir</p>
+        <h2>Et si le pilote, c’était vous ?</h2>
+      </div>
+      <div>
+        <p class="lede">
+          Offrez-vous ou offrez un vol en avion. Une expérience unique et
+          accessible à tous.
+        </p>
+        <a class="text-link" href="/decouvrir/"
+          >Choisir une première expérience</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Deux portes d’entrée</p>
+      <h2>Vivez le vol à votre rythme.</h2>
+      <div class="grid grid--2 experience-grid">
+        <a class="experience" href="/decouvrir/">
+          <img
+            src="/images/landscapes/dombes.webp"
+            alt="Les étangs de la Dombes vus depuis un avion"
+            width="2048"
+            height="1365"
+            loading="lazy"
+          />
+          <div class="experience__content">
+            <span class="tag">30 minutes · jusqu’à 2 passagers</span>
+            <h3>Découvrir la région vue du ciel</h3>
+            <p>
+              Un survol accompagné au nord, au sud ou à l’ouest de Lyon avec un
+              pilote expérimenté.
+            </p>
+            <span class="text-link">Découvrir les parcours</span>
+          </div>
+        </a>
+        <a class="experience" href="/apprendre/">
+          <img
+            src="/images/aircraft/bristell-cockpit.webp"
+            alt="Glass cockpit du Bristell B23 des Ailes Lyonnaises"
+            width="2200"
+            height="1466"
+            loading="lazy"
+          />
+          <div class="experience__content">
+            <span class="tag">PPL · LAPL · Vol de nuit</span>
+            <h3>Prendre les commandes</h3>
+            <p>
+              Un premier cours avec un instructeur, puis une formation
+              construite autour de votre projet.
+            </p>
+            <span class="text-link">Comprendre les formations</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">École de pilotage FR.ATO.0078</p>
+        <h2>Apprendre à piloter</h2>
+        <p class="lede">
+          Notre école de pilotage agréée ATO forme des pilotes depuis 1978.
+          Choisissez la formation adaptée à vos ambitions : PPL, LAPL ou vol de
+          nuit.
+        </p>
+        <div class="stats">
+          <div class="stat"><strong>45 h</strong><span>minimum PPL</span></div>
+          <div class="stat"><strong>30 h</strong><span>minimum LAPL</span></div>
+          <div class="stat"><strong>5</strong><span>avions au club</span></div>
+        </div>
+        <div class="button-row">
+          <a class="button" href="/apprendre/">Voir les parcours</a>
+          <a class="button button--ghost" href="/tarifs/"
+            >Comprendre les coûts</a
+          >
+        </div>
+      </div>
+      <img
+        class="split__image"
+        src="/images/aircraft/dr401-side.webp"
+        alt="Robin DR401 F-HLYO de profil sur le tarmac"
+        width="2200"
+        height="1466"
+        loading="lazy"
+      />
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container">
+      <div class="split section-heading">
+        <div>
+          <p class="eyebrow">La flotte</p>
+          <h2>Cinq avions, du premier tour de piste au voyage.</h2>
+        </div>
+        <p class="lede">
+          Des avions adaptés à l’école, aux navigations et aux voyages, avec des
+          équipements modernes et des tarifs associatifs transparents.
+        </p>
+      </div>
+      <div class="grid grid--3">
+        <article class="card fleet-card">
+          <img
+            src="/images/aircraft/dr400-gxge.webp"
+            alt="Robin DR400-120 des Ailes Lyonnaises"
+            width="1466"
+            height="2200"
+            loading="lazy"
+          />
+          <div class="fleet-card__content">
+            <span class="tag">École</span>
+            <h3>2 × Robin DR400-120</h3>
+            <p>Des références éprouvées pour apprendre et naviguer.</p>
+          </div>
+        </article>
+        <article class="card fleet-card">
+          <img
+            src="/images/aircraft/bristell-b23.webp"
+            alt="Bristell B23 des Ailes Lyonnaises"
+            width="1466"
+            height="2200"
+            loading="lazy"
+          />
+          <div class="fleet-card__content">
+            <span class="tag">Glass cockpit</span>
+            <h3>Bristell B23</h3>
+            <p>Un avion de nouvelle génération pour l’école et le voyage.</p>
+          </div>
+        </article>
+        <article class="card fleet-card">
+          <img
+            src="/images/aircraft/dr401-three-quarter.webp"
+            alt="Robin DR401-160 des Ailes Lyonnaises vu de trois quarts"
+            width="1466"
+            height="2200"
+            loading="lazy"
+          />
+          <div class="fleet-card__content">
+            <span class="tag">Voyage</span>
+            <h3>DR400 & DR401-160</h3>
+            <p>Plus de puissance et d’autonomie pour aller plus loin.</p>
+          </div>
+        </article>
+      </div>
+      <div class="button-row">
+        <a class="button button--ghost" href="/flotte/">Voir toute la flotte</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split split--reverse">
+      <img
+        class="split__image"
+        src="/images/landscapes/aiguille-midi.webp"
+        alt="L’Aiguille du Midi et le massif du Mont-Blanc vus en vol"
+        width="2048"
+        height="1365"
+        loading="eager"
+      />
+      <div>
+        <p class="eyebrow">Vie du club</p>
+        <h2>On apprend seul aux commandes, jamais seul au club.</h2>
+        <p class="lede">
+          Navigations, voyages, partage d’expérience et projets collectifs : les
+          Ailes Lyonnaises sont d’abord une association où élèves et pilotes
+          font vivre la même passion.
+        </p>
+        <a class="text-link" href="/vie-du-club/">Découvrir la communauté</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Programme jeunes</p>
+        <h2>Le BIA, une première porte vers l’aéronautique.</h2>
+        <p class="lede">
+          Nos pilotes titulaires du CAEA interviennent auprès d’établissements
+          partenaires et accompagnent les vols de découverte liés au Brevet
+          d’Initiation Aéronautique.
+        </p>
+        <a class="text-link" href="/bia/">Comprendre le programme BIA</a>
+      </div>
+      <div class="bia-card">
+        <span>BIA</span>
+        <strong>Théorie, culture aéronautique et découverte du vol</strong>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Votre projet de pilote commence par une conversation."
+    text="Parlez-nous de votre objectif, de vos disponibilités et de votre expérience. L’équipe formation vous aidera à choisir le bon parcours."
+    href="/contact/#formation"
+    label="Parler de ma formation"
+  />
+</BaseLayout>
+
+<style>
+  .home-hero {
+    position: relative;
+    display: grid;
+    min-height: min(80rem, calc(100svh - var(--header-height)));
+    align-items: center;
+    overflow: hidden;
+    color: var(--white);
+    background: var(--navy-950);
+  }
+
+  .home-hero__image,
+  .home-hero__overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .home-hero__image {
+    object-fit: cover;
+  }
+
+  .home-hero__overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgb(2 9 20 / 0.72),
+        rgb(2 9 20 / 0.38) 55%,
+        rgb(2 9 20 / 0.18)
+      ),
+      linear-gradient(0deg, rgb(2 9 20 / 0.42), transparent 50%);
+  }
+
+  .home-hero__content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    justify-items: center;
+    padding-block: clamp(2.5rem, 6vh, 4rem) clamp(5rem, 10vh, 6rem);
+    text-align: center;
+  }
+
+  .home-hero h1 {
+    max-width: 18ch;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+  }
+
+  .home-hero .eyebrow {
+    color: var(--yellow-400);
+  }
+
+  .home-hero .lede {
+    max-width: 42rem;
+    color: rgb(255 255 255 / 0.9);
+  }
+
+  .home-hero .button-row {
+    justify-content: center;
+  }
+
+  .home-hero .button--ghost {
+    color: var(--white);
+    border-color: rgb(255 255 255 / 0.72);
+  }
+
+  .home-hero__scroll {
+    position: absolute;
+    z-index: 1;
+    bottom: 2rem;
+    left: 50%;
+    display: grid;
+    justify-items: center;
+    gap: 0.25rem;
+    color: rgb(255 255 255 / 0.72);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transform: translateX(-50%);
+  }
+
+  .home-hero__scroll span {
+    font-size: 1.2rem;
+  }
+
+  .experience-grid {
+    margin-top: 2.5rem;
+  }
+
+  .experience {
+    position: relative;
+    min-height: 42rem;
+    overflow: hidden;
+    color: var(--white);
+    background: var(--navy-950);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    text-decoration: none;
+  }
+
+  .experience::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgb(3 23 53 / 0.98), transparent 75%);
+    content: "";
+  }
+
+  .experience img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 600ms ease;
+  }
+
+  .experience:hover img {
+    transform: scale(1.03);
+  }
+
+  .experience__content {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: clamp(1.5rem, 5vw, 3rem);
+  }
+
+  .experience h3 {
+    max-width: 15ch;
+    margin: 1rem 0;
+    color: var(--white);
+    font-size: clamp(2rem, 4vw, 3.4rem);
+  }
+
+  .experience p {
+    max-width: 34rem;
+    color: rgb(255 255 255 / 0.76);
+    line-height: 1.6;
+  }
+
+  .experience .text-link {
+    color: var(--yellow-400);
+  }
+
+  .section-heading {
+    margin-bottom: 2.5rem;
+  }
+
+  .card .tag {
+    margin-bottom: 2rem;
+  }
+
+  .fleet-card {
+    padding: 0;
+  }
+
+  .fleet-card img {
+    width: 100%;
+    height: 17rem;
+    object-fit: cover;
+  }
+
+  .fleet-card__content {
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .fleet-card__content .tag {
+    margin-bottom: 1.5rem;
+  }
+
+  .bia-card {
+    display: grid;
+    min-height: 26rem;
+    align-content: space-between;
+    padding: clamp(2rem, 6vw, 4rem);
+    color: var(--navy-950);
+    background: var(--yellow-500);
+    border-radius: var(--radius-lg);
+    transform: rotate(1.5deg);
+  }
+
+  .bia-card span {
+    font-size: clamp(5rem, 12vw, 10rem);
+    font-weight: 900;
+    letter-spacing: -0.08em;
+    line-height: 0.8;
+  }
+
+  .bia-card strong {
+    max-width: 24rem;
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+  }
+
+  @media (max-width: 48rem) {
+    .home-hero {
+      min-height: calc(100svh - var(--header-height));
+    }
+
+    .home-hero__overlay {
+      background: linear-gradient(0deg, rgb(2 9 20 / 0.78), rgb(2 9 20 / 0.2));
+    }
+
+    .home-hero__content {
+      align-self: end;
+    }
+
+    .home-hero .button-row {
+      width: 100%;
+    }
+
+    .home-hero .button {
+      width: min(100%, 19rem);
+    }
+
+    .experience {
+      min-height: 34rem;
+    }
+  }
+</style>

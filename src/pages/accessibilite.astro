@@ -1,0 +1,41 @@
+---
+import PageHero from "@/components/PageHero.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Accessibilité"
+  description="Démarche d’accessibilité numérique du site des Ailes Lyonnaises."
+>
+  <PageHero
+    eyebrow="Accessibilité numérique"
+    title="Un site utilisable par le plus grand nombre"
+    introduction="Nous intégrons l’accessibilité dans la conception, le contenu et les tests du site."
+  />
+  <section class="section section--white">
+    <div class="narrow prose">
+      <h2>État de conformité</h2>
+      <p>
+        Cette version est en préproduction. Une déclaration de conformité
+        complète sera publiée après l’audit final du site et de ses contenus
+        administrés.
+      </p>
+      <h2>Mesures mises en œuvre</h2>
+      <ul>
+        <li>navigation au clavier et lien d’évitement ;</li>
+        <li>structure sémantique et titres hiérarchisés ;</li>
+        <li>contrastes et états de focus visibles ;</li>
+        <li>prise en compte de la réduction des animations ;</li>
+        <li>textes alternatifs requis pour les images administrées ;</li>
+        <li>tests automatiques et parcours manuels avant publication.</li>
+      </ul>
+      <h2>Signaler un problème</h2>
+      <p>
+        Si un contenu ou une fonctionnalité vous empêche d’accéder à une
+        information, écrivez à
+        <a href="mailto:info2@aileslyonnaises.com">info2@aileslyonnaises.com</a>
+        en précisant la page et la difficulté rencontrée.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

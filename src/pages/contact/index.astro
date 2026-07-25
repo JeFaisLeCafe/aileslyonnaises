@@ -1,0 +1,181 @@
+---
+import PageHero from "@/components/PageHero.astro";
+import TrainingForm from "@/components/TrainingForm.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Contact et accès"
+  description="Contactez l’Aéroclub Les Ailes Lyonnaises et préparez votre visite à l’aéroport de Lyon-Bron, 305 rue Albert Kimmerling à Chassieu."
+>
+  <PageHero
+    eyebrow="Nous rencontrer"
+    title="Venez parler aviation à Lyon-Bron"
+    introduction="Une question, un projet de formation ou simplement l’envie de découvrir le club ? Choisissez le moyen le plus direct."
+    image="/images/aircraft/dr401-side.webp"
+    imageAlt="Robin DR401 des Ailes Lyonnaises sur le tarmac de Lyon-Bron"
+  />
+
+  <section class="section section--white">
+    <div class="container contact-grid">
+      <div>
+        <p class="eyebrow">Informations pratiques</p>
+        <h2>Le club est sur l’aéroport de Lyon-Bron.</h2>
+        <div class="contact-list">
+          <div>
+            <span>Adresse</span>
+            <strong>305 rue Albert Kimmerling<br />69680 Chassieu</strong>
+          </div>
+          <div>
+            <span>Téléphone</span>
+            <strong><a href="tel:+33640369229">06 40 36 92 29</a></strong>
+          </div>
+          <div>
+            <span>Email</span>
+            <strong>
+              <a href="mailto:info2@aileslyonnaises.com">
+                info2@aileslyonnaises.com
+              </a>
+            </strong>
+          </div>
+        </div>
+        <div class="button-row">
+          <a
+            class="button button--ghost"
+            href="https://www.google.com/maps/search/?api=1&query=305+rue+Albert+Kimmerling+69680+Chassieu"
+            rel="external"
+          >
+            Ouvrir dans Google Maps
+          </a>
+        </div>
+      </div>
+      <div class="access-card">
+        <p class="eyebrow">Avant de venir</p>
+        <h3>Un aérodrome n’est pas une rue comme les autres.</h3>
+        <p>
+          L’accès exact au bâtiment des aéroclubs et les consignes de visite
+          seront complétés après validation par le club. Appelez avant une
+          première visite pour être accueilli dans de bonnes conditions.
+        </p>
+        <ul>
+          <li>Accès routier depuis l’A43, sortie 4b</li>
+          <li>Transports en commun à proximité</li>
+          <li>Respectez la signalisation et les zones réservées</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="formation" class="section">
+    <div class="container form-layout">
+      <div>
+        <p class="eyebrow">Projet de formation</p>
+        <h2>Parlez-nous de votre objectif.</h2>
+        <p class="lede">
+          Ces quelques informations aideront l’équipe formation à vous répondre
+          utilement dès le premier échange.
+        </p>
+        <p class="form-note">
+          Les informations sont envoyées par email au club et ne sont pas
+          conservées dans une base de prospection.
+        </p>
+      </div>
+      <TrainingForm />
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Une autre demande ?</p>
+        <h2>Privilégiez l’email pour les demandes générales.</h2>
+      </div>
+      <div>
+        <p class="lede">
+          BIA, partenariat, vie associative, passage au club ou question
+          administrative : indiquez un objet précis pour faciliter la réponse
+          des bénévoles.
+        </p>
+        <a class="button" href="mailto:info2@aileslyonnaises.com">
+          Écrire au club
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    display: grid;
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.85fr);
+  }
+
+  .contact-list {
+    margin-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .contact-list div {
+    display: grid;
+    gap: 0.4rem;
+    padding-block: 1.2rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .contact-list span {
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .contact-list strong {
+    color: var(--navy-950);
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  .access-card {
+    padding: clamp(1.5rem, 5vw, 3rem);
+    background: var(--yellow-500);
+    border-radius: var(--radius-lg);
+    transform: rotate(1deg);
+  }
+
+  .access-card p,
+  .access-card li {
+    line-height: 1.65;
+  }
+
+  .form-layout {
+    display: grid;
+    align-items: start;
+    gap: clamp(2rem, 6vw, 5rem);
+    grid-template-columns: minmax(18rem, 0.7fr) minmax(0, 1.3fr);
+  }
+
+  .form-layout > div:first-child {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .form-note {
+    margin-top: 2rem;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 52rem) {
+    .contact-grid,
+    .form-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .form-layout > div:first-child {
+      position: static;
+    }
+  }
+</style>

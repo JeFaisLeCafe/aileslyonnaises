@@ -1,0 +1,285 @@
+---
+import CtaBand from "@/components/CtaBand.astro";
+import PageHero from "@/components/PageHero.astro";
+import { getPriceGroups } from "@/lib/cms";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const priceGroups = await getPriceGroups();
+const membership = priceGroups.find(
+  (group) =>
+    group.id.includes("membership") ||
+    group.title.toLocaleLowerCase("fr").includes("adhésion"),
+);
+const ffa = priceGroups.find(
+  (group) =>
+    group.id.includes("ffa") ||
+    group.title.toLocaleLowerCase("fr").includes("ffa"),
+);
+const instruction = priceGroups.find(
+  (group) =>
+    group.id.includes("instruction") ||
+    group.title.toLocaleLowerCase("fr").includes("instruction"),
+);
+const aircraftRates = priceGroups.find(
+  (group) =>
+    group.id.includes("aircraft-rates") ||
+    group.title.toLocaleLowerCase("fr").includes("avion"),
+);
+const amount = (id: string, group = membership) =>
+  group?.items.find((item) => item.id === id)?.amount;
+const euros = (value: number | undefined) =>
+  value === undefined
+    ? "Nous consulter"
+    : new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR",
+      }).format(value);
+
+interface FlightRate {
+  model: string;
+  registration: string;
+  normal?: number;
+  reduced?: number;
+}
+
+const rates = new Map<string, FlightRate>();
+for (const item of aircraftRates?.items ?? []) {
+  const registration = item.label.match(/F-[A-Z]{4}/)?.[0];
+  if (!registration) continue;
+  const current = rates.get(registration) ?? {
+    model: item.label.split(registration)[0]?.trim() ?? "Avion",
+    registration,
+  };
+  if (item.amount !== undefined) {
+    if (item.label.toLocaleLowerCase("fr").includes("réduit")) {
+      current.reduced = item.amount;
+    } else {
+      current.normal = item.amount;
+    }
+  }
+  rates.set(registration, current);
+}
+const flightPrices = [...rates.values()];
+---
+
+<BaseLayout
+  title="Tarifs"
+  description="Cotisation, licence FFA, tarifs horaires des avions et repères sur le coût d’une formation PPL ou LAPL aux Ailes Lyonnaises."
+>
+  <PageHero
+    eyebrow="Tarifs associatifs"
+    title="Comprendre le coût avant de s’engager"
+    introduction="Cotisation, licence fédérale, heures de vol et instruction : nous détaillons les éléments qui composent votre budget."
+    image="/images/aircraft/bristell-cockpit.webp"
+    imageAlt="Poste de pilotage du Bristell B23 des Ailes Lyonnaises"
+  >
+    <div class="button-row">
+      <a class="button" href="#avions">Tarifs avions</a>
+      <a class="button button--ghost" href="#formation">Coût d’une formation</a>
+    </div>
+  </PageHero>
+
+  <section class="section section--white">
+    <div class="container">
+      <p class="eyebrow">Adhérer au club</p>
+      <h2>Une structure associative, plusieurs composantes.</h2>
+      <div class="grid grid--3 price-cards">
+        <article class="card price-card">
+          <span>01</span>
+          <h3>Cotisation annuelle</h3>
+          <strong>{euros(amount("membership"))}</strong>
+          <p>Obligatoire pour les membres du club.</p>
+        </article>
+        <article class="card price-card">
+          <span>02</span>
+          <h3>Participation aux frais</h3>
+          <strong>
+            {euros(amount("participation-under-25"))} /
+            {euros(amount("participation-standard"))}
+          </strong>
+          <p>
+            Moins de 25 ans / cas général. Conditions réduites de septembre à
+            décembre.
+          </p>
+        </article>
+        <article class="card price-card">
+          <span>03</span>
+          <h3>Licence FFA + base</h3>
+          <strong>
+            {
+              euros(
+                (amount("ffa-license", ffa) ?? 0) +
+                  (amount("base-insurance", ffa) ?? 0),
+              )
+            }
+          </strong>
+          <p>Licence 80 € et assurance individuelle accident de base 16 €.</p>
+        </article>
+      </div>
+      <p class="notice pricing-notice">
+        Les options d’assurance complémentaires et l’abonnement Info-Pilote sont
+        facultatifs. Des aides FFA peuvent s’appliquer aux moins de 21 ans et
+        aux titulaires du BIA selon les conditions en vigueur.
+      </p>
+    </div>
+  </section>
+
+  <section id="avions" class="section">
+    <div class="container">
+      <p class="eyebrow">Heures de vol</p>
+      <h2>Tarifs de la flotte</h2>
+      <p class="lede">
+        Le forfait annuel de 450 € ouvre l’accès au tarif réduit. Les tarifs
+        sont publiés à titre indicatif et peuvent évoluer avec le prix du
+        carburant.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <caption class="sr-only">
+            Tarifs horaires des avions des Ailes Lyonnaises
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Avion</th>
+              <th scope="col">Immatriculation</th>
+              <th scope="col">Tarif normal</th>
+              <th scope="col">Tarif réduit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              flightPrices.map((price) => (
+                <tr>
+                  <td>{price.model}</td>
+                  <td>{price.registration}</td>
+                  <td>{euros(price.normal)} / h</td>
+                  <td>{euros(price.reduced)} / h</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="updated">Base tarifaire fournie : avril 2026.</p>
+    </div>
+  </section>
+
+  <section id="formation" class="section section--navy">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Budget de formation</p>
+        <h2>Un minimum réglementaire n’est pas un prix forfaitaire.</h2>
+        <p class="lede">
+          Le coût final dépend du nombre d’heures nécessaires avant le test, de
+          l’avion utilisé, de votre régularité et de votre progression.
+        </p>
+      </div>
+      <div class="card card--navy budget-card">
+        <div>
+          <strong>45 h</strong>
+          <span>minimum réglementaire PPL</span>
+        </div>
+        <div>
+          <strong>30 h</strong>
+          <span>minimum réglementaire LAPL</span>
+        </div>
+        <div>
+          <strong>{euros(amount("instruction-hour", instruction))} / h</strong>
+          <span>instruction, briefing et débriefing selon le besoin</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="narrow prose">
+      <p class="eyebrow">À prévoir également</p>
+      <h2>Les frais annexes</h2>
+      <ul>
+        <li>la visite médicale aéronautique ;</li>
+        <li>la préparation à l’examen théorique en ligne ;</li>
+        <li>le matériel personnel selon les besoins ;</li>
+        <li>les frais d’examen et évolutions tarifaires éventuelles.</li>
+      </ul>
+      <p>
+        Le club fournit du matériel en début de formation selon les modalités en
+        vigueur. Demandez une estimation personnalisée avant de vous engager.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Construisons une estimation autour de votre projet."
+    text="Le bon budget tient compte de votre disponibilité, de votre parcours et de l’avion utilisé, pas seulement du minimum réglementaire."
+    href="/contact/#formation"
+    label="Demander une estimation"
+  />
+</BaseLayout>
+
+<style>
+  .price-cards {
+    margin-top: 2.5rem;
+  }
+
+  .price-card > span {
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+
+  .price-card h3 {
+    min-height: 3rem;
+    margin-top: 2rem;
+  }
+
+  .price-card strong {
+    display: block;
+    margin-block: 1.5rem 0.5rem;
+    color: var(--navy-900);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    letter-spacing: -0.05em;
+  }
+
+  .price-card p {
+    color: var(--muted);
+  }
+
+  .pricing-notice {
+    margin-top: 2rem;
+  }
+
+  .table-wrap {
+    margin-top: 2.5rem;
+  }
+
+  .updated {
+    margin-top: 0.8rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+
+  .budget-card {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .budget-card div {
+    display: grid;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgb(255 255 255 / 0.16);
+  }
+
+  .budget-card div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .budget-card strong {
+    color: var(--yellow-400);
+    font-size: clamp(2rem, 4vw, 3.4rem);
+  }
+
+  .budget-card span {
+    margin-top: 0.25rem;
+  }
+</style>

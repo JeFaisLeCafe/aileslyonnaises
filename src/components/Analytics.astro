@@ -1,0 +1,45 @@
+---
+const token = import.meta.env.PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN;
+---
+
+{
+  token && (
+    <script
+      is:inline
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon={JSON.stringify({ token })}
+    />
+  )
+}
+
+<script>
+  interface ConversionDetail {
+    name: string;
+  }
+
+  const sendEvent = (name: string) => {
+    const payload = JSON.stringify({
+      name,
+      path: window.location.pathname,
+    });
+    navigator.sendBeacon(
+      "/api/event",
+      new Blob([payload], { type: "application/json" }),
+    );
+  };
+
+  window.addEventListener("conversion", (event) => {
+    const detail = (event as CustomEvent<ConversionDetail>).detail;
+    if (detail?.name) sendEvent(detail.name);
+  });
+
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    const element = target.closest<HTMLElement>("[data-track]");
+    const name = element?.dataset.track;
+    if (name) sendEvent(name);
+  });
+</script>

@@ -1,0 +1,42 @@
+---
+import TrainingLayout from "@/layouts/TrainingLayout.astro";
+
+const facts = [
+  { value: "5 h", label: "minimum de vol de nuit" },
+  { value: "3 h", label: "au moins en double commande" },
+  { value: "50 km", label: "navigation de nuit en double commande" },
+];
+
+const sections = [
+  {
+    title: "Étendre vos privilèges après le coucher du soleil",
+    content: [
+      "La qualification de vol de nuit permet aux titulaires d’une licence PPL(A) ou LAPL(A) d’exercer leurs privilèges en conditions VFR de nuit. Elle développe la précision, l’anticipation et la maîtrise des repères visuels réduits.",
+      "Elle ne constitue pas une qualification de vol aux instruments : les vols restent conduits selon les règles VFR et dans les conditions prévues par la réglementation.",
+    ],
+  },
+  {
+    title: "Une formation concentrée et concrète",
+    content: [
+      "Le programme réglementaire comporte au moins 5 heures de vol de nuit, dont au moins 3 heures en double commande. Il inclut une navigation d’au moins 50 km en double commande ainsi que cinq décollages solo et cinq atterrissages solo avec arrêt complet.",
+      "Les briefings abordent notamment les illusions visuelles, la préparation du vol, les pannes, les particularités de l’aérodrome et la gestion de la visibilité nocturne.",
+    ],
+  },
+  {
+    title: "Prérequis",
+    content: [
+      "Il faut détenir une licence PPL(A) ou LAPL(A) valide et le certificat médical correspondant. Des exigences complémentaires d’entraînement au vol aux instruments s’appliquent au titulaire d’un LAPL avant l’achèvement de la qualification.",
+      "La formation doit être réalisée dans une période de six mois au sein d’un organisme habilité.",
+    ],
+  },
+];
+---
+
+<TrainingLayout
+  eyebrow="Qualification VFR de nuit"
+  title="Vol de nuit"
+  introduction="Une autre lecture du ciel, des repères plus exigeants et une qualification qui élargit votre pratique."
+  description="Préparez la qualification VFR de nuit à Lyon-Bron avec l’école approuvée ATO des Ailes Lyonnaises."
+  {facts}
+  {sections}
+/>

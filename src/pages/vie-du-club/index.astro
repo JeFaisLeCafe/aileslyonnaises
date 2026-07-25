@@ -1,0 +1,230 @@
+---
+import CtaBand from "@/components/CtaBand.astro";
+import PageHero from "@/components/PageHero.astro";
+import { getPeople, getStories } from "@/lib/cms";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const stories = await getStories();
+const governance = (await getPeople()).filter((person) =>
+  person.roles.some((role) => role !== "instructor"),
+);
+const categoryLabels = {
+  history: "Histoire",
+  clubLife: "Vie du club",
+  trip: "Voyage",
+} as const;
+const storyFallbacks = {
+  history: "/images/landscapes/lyon-tete-or.webp",
+  clubLife: "/images/landscapes/dombes.webp",
+  trip: "/images/landscapes/aiguille-midi.webp",
+} as const;
+
+const partners = [
+  ["Fédération Française Aéronautique", "https://ffa-aero.fr/"],
+  [
+    "Comité Régional Aéronautique Auvergne-Rhône-Alpes",
+    "https://www.cra01ffa.fr/",
+  ],
+  ["ALYBRA", "https://alybra.fr/"],
+  ["Musée de l’aviation de Lyon-Corbas", "https://museeaviationlyon.fr/"],
+  ["SLHADA", "https://www.slhada.fr/"],
+];
+---
+
+<BaseLayout
+  title="Vie du club"
+  description="Découvrez l’histoire, les voyages, la communauté et le réseau de l’Aéroclub Les Ailes Lyonnaises à Lyon-Bron."
+>
+  <PageHero
+    eyebrow="Plus qu’une école"
+    title="Une communauté qui partage le ciel"
+    introduction="Élèves, pilotes, instructeurs et bénévoles font vivre une association où l’expérience circule et les projets se construisent ensemble."
+    image="/images/landscapes/aiguille-midi.webp"
+    imageAlt="Le massif du Mont-Blanc vu lors d’un vol"
+  />
+
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">L’esprit du club</p>
+        <h2>Voler ensemble, progresser ensemble.</h2>
+      </div>
+      <p class="lede">
+        La vie associative ne s’arrête pas après l’atterrissage. Préparation de
+        voyages, retours d’expérience, rencontres et projets collectifs donnent
+        aux membres de nouvelles raisons de venir au terrain.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Récits du club</p>
+      <h2>Des destinations qui deviennent des expériences partagées.</h2>
+      <div class="grid grid--3 story-grid">
+        {
+          stories.map((story) => (
+            <article class="media-card">
+              <img
+                class="media-card__image"
+                src={story.image?.url ?? storyFallbacks[story.category]}
+                alt={story.image?.alt ?? ""}
+                width="2048"
+                height="1365"
+                loading="lazy"
+              />
+              <div class="media-card__body">
+                <span class="tag">{categoryLabels[story.category]}</span>
+                <h3>{story.title}</h3>
+                <p>{story.excerpt}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    governance.length > 0 && (
+      <section class="section">
+        <div class="container">
+          <p class="eyebrow">Gouvernance</p>
+          <h2>Les bénévoles au service de l’association.</h2>
+          <div class="grid grid--3 governance-grid">
+            {governance.map((person) => (
+              <article class="card">
+                {person.image && (
+                  <img
+                    class="person-image"
+                    src={person.image.url}
+                    alt={person.image.alt}
+                    loading="lazy"
+                  />
+                )}
+                <h3>{person.name}</h3>
+                <p>{person.summary}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section section--navy">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Depuis 1965</p>
+        <h2>Un club né pour démocratiser les sports aériens.</h2>
+        <p class="lede">
+          L’Aéro-club des Jeunes de Monplaisir-Lumière développe d’abord ses
+          activités à Satolas. Au début de la construction du futur aéroport
+          Lyon-Saint-Exupéry, il rejoint Bron.
+        </p>
+      </div>
+      <div class="history">
+        <div><strong>1965</strong><span>Création du club à Lyon</span></div>
+        <div>
+          <strong>Bron</strong><span
+            >Installation sur la plateforme historique</span
+          >
+        </div>
+        <div>
+          <strong>1978</strong><span
+            >Le club devient « Les Ailes Lyonnaises »</span
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Notre réseau</p>
+        <h2>Une association inscrite dans son territoire.</h2>
+      </div>
+      <ul class="partner-list">
+        {
+          partners.map(([label, href]) => (
+            <li>
+              <a href={href} rel="external">
+                {label}
+                <span aria-hidden="true">↗</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand
+    title="La meilleure façon de comprendre le club est de venir."
+    text="Passez nous rencontrer à Lyon-Bron, voir les avions et échanger avec les membres présents."
+    href="/contact/"
+    label="Préparer ma visite"
+  />
+</BaseLayout>
+
+<style>
+  .story-grid {
+    margin-top: 2.5rem;
+  }
+
+  .governance-grid {
+    margin-top: 2.5rem;
+  }
+
+  .person-image {
+    width: calc(100% + clamp(3rem, 6vw, 4.5rem));
+    max-width: none;
+    height: 18rem;
+    margin: calc(clamp(1.5rem, 3vw, 2.25rem) * -1)
+      calc(clamp(1.5rem, 3vw, 2.25rem) * -1) 1.5rem;
+    object-fit: cover;
+  }
+
+  .history {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .history div {
+    display: grid;
+    padding: 1.4rem 0;
+    border-top: 1px solid rgb(255 255 255 / 0.2);
+  }
+
+  .history strong {
+    color: var(--yellow-400);
+    font-size: clamp(2rem, 5vw, 4rem);
+  }
+
+  .history span {
+    color: rgb(255 255 255 / 0.68);
+  }
+
+  .partner-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .partner-list a {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1rem;
+    color: var(--navy-900);
+    font-weight: 800;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+
+  .partner-list a:hover {
+    color: var(--navy-800);
+  }
+</style>

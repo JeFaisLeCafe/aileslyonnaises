@@ -1,0 +1,48 @@
+---
+import TrainingLayout from "@/layouts/TrainingLayout.astro";
+
+const facts = [
+  { value: "30 h", label: "minimum réglementaire de formation en vol" },
+  { value: "3", label: "passagers au maximum" },
+  { value: "2 000 kg", label: "masse maximale de l’avion" },
+];
+
+const sections = [
+  {
+    title: "Une licence européenne pour l’aviation légère",
+    content: [
+      "Le LAPL(A), Light Aircraft Pilot Licence, permet de piloter en Europe un avion monomoteur à pistons d’une masse maximale certifiée au décollage de 2 000 kg, avec trois passagers au maximum et quatre personnes à bord.",
+      "Son périmètre plus ciblé et son minimum réglementaire réduit en font une voie adaptée aux pilotes qui souhaitent pratiquer le vol de loisir en Europe.",
+    ],
+  },
+  {
+    title: "Un programme complet en 30 heures minimum",
+    content: [
+      "La formation comprend au moins 30 heures de vol, dont 15 heures en double commande et 6 heures en solo supervisé. Elle couvre le pilotage de base, les procédures d’urgence, la navigation et la préparation au test pratique.",
+      "Le programme théorique porte sur les mêmes neuf matières aéronautiques que le PPL. La licence peut ensuite évoluer selon votre expérience et votre projet.",
+    ],
+  },
+  {
+    title: "Prérequis et premiers passagers",
+    content: [
+      "La licence est délivrée à partir de 17 ans avec un certificat médical LAPL valide et après réussite des examens théorique et pratique.",
+      "Après la délivrance, dix heures de vol comme commandant de bord sont nécessaires avant d’emmener des passagers, sauf si cette expérience a été acquise dans le cadre d’un parcours répondant aux conditions réglementaires.",
+    ],
+  },
+];
+---
+
+<TrainingLayout
+  eyebrow="Formation LAPL(A)"
+  title="Licence de pilote d’avion léger"
+  introduction="Un parcours européen exigeant et plus court pour pratiquer l’aviation légère en loisir."
+  description="Préparez votre licence LAPL(A) à Lyon-Bron avec l’école de pilotage approuvée ATO des Ailes Lyonnaises."
+  {facts}
+  {sections}
+>
+  <div class="notice">
+    Le choix entre LAPL et PPL dépend surtout de votre projet à moyen terme.
+    L’équipe formation peut vous aider à éviter un choix uniquement fondé sur le
+    minimum d’heures.
+  </div>
+</TrainingLayout>
