@@ -236,7 +236,9 @@ h3 {
   border-color: rgb(255 255 255 / 0.55);
 }
 
-.button--ghost:hover {
+.button--ghost:hover,
+.section--navy .button--ghost:hover,
+.hero .button--ghost:hover {
   color: var(--navy-950);
   background: var(--white);
 }
