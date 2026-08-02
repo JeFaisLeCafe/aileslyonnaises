@@ -186,8 +186,8 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 <style>
   .training-form {
     display: grid;
-    gap: 1.25rem;
-    padding: clamp(1.5rem, 4vw, 3rem);
+    gap: 0.85rem;
+    padding: clamp(1.1rem, 2.5vw, 1.75rem);
     background: var(--white);
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
@@ -196,18 +196,18 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
   .form-grid {
     display: grid;
-    gap: 1.25rem;
+    gap: 0.85rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   label {
     display: grid;
-    gap: 0.45rem;
+    gap: 0.3rem;
   }
 
   label > span {
     color: var(--navy-950);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 800;
   }
 
@@ -215,8 +215,8 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
   select,
   textarea {
     width: 100%;
-    min-height: 3.2rem;
-    padding: 0.75rem 0.9rem;
+    min-height: 2.7rem;
+    padding: 0.55rem 0.8rem;
     color: var(--ink);
     background: #fbfcfd;
     border: 1px solid #b8c0cc;
@@ -224,7 +224,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
   }
 
   textarea {
+    min-height: 5.5rem;
     resize: vertical;
+  }
+
+  :global(.cf-turnstile) {
+    margin-block: 0.15rem;
   }
 
   input:focus,

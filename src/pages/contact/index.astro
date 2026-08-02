@@ -67,7 +67,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     </div>
   </section>
 
-  <section id="formation" class="section">
+  <section id="formation" class="section section--formation">
     <div class="container form-layout">
       <div>
         <p class="eyebrow">Projet de formation</p>
@@ -150,23 +150,36 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     line-height: 1.65;
   }
 
+  .section--formation {
+    padding-block: clamp(2rem, 4vw, 3.25rem);
+  }
+
+  .section--formation h2 {
+    margin-bottom: 0.75rem;
+    font-size: clamp(2rem, 4vw, 3.1rem);
+  }
+
+  .section--formation .lede {
+    margin-bottom: 0;
+  }
+
   .form-layout {
     display: grid;
     align-items: start;
-    gap: clamp(2rem, 6vw, 5rem);
-    grid-template-columns: minmax(18rem, 0.7fr) minmax(0, 1.3fr);
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    grid-template-columns: minmax(16rem, 0.65fr) minmax(0, 1.35fr);
   }
 
   .form-layout > div:first-child {
     position: sticky;
-    top: 2rem;
+    top: calc(var(--header-height) + 1rem);
   }
 
   .form-note {
-    margin-top: 2rem;
+    margin-top: 1rem;
     color: var(--muted);
     font-size: 0.82rem;
-    line-height: 1.6;
+    line-height: 1.5;
   }
 
   @media (max-width: 52rem) {

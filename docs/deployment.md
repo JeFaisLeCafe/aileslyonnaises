@@ -39,39 +39,77 @@ Sans **Build command**, Cloudflare saute `npm install` / le build Astro, puis
 
 #### Variables d’environnement (Pages → Settings → Environment variables)
 
-Production **et** Preview :
+Projet : [aileslyonnaises](https://dash.cloudflare.com/a65e979c4b1932a343772154116fbfdd/pages/view/aileslyonnaises/settings/environment-variables)
 
-- `PUBLIC_SANITY_PROJECT_ID=v6vpuuua`
-- `PUBLIC_SANITY_DATASET=production`
-- `SANITY_PREVIEW_DRAFTS=false`
+Ajouter en **Production** et **Preview**, puis **Retry deployment** :
 
-Plus tard (formulaire) : `PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`,
-`RESEND_API_KEY`, `TRAINING_RECIPIENT_EMAIL`, `TRAINING_SENDER_EMAIL`.
+| Variable | Valeur | Secret ? |
+| --- | --- | --- |
+| `PUBLIC_SANITY_PROJECT_ID` | `v6vpuuua` | non |
+| `PUBLIC_SANITY_DATASET` | `production` | non |
+| `SANITY_PREVIEW_DRAFTS` | `false` | non |
+| `PUBLIC_TURNSTILE_SITE_KEY` | (clé publique Turnstile) | non |
+| `TURNSTILE_SECRET_KEY` | (clé secrète Turnstile) | **oui** |
+| `RESEND_API_KEY` | `re_…` | **oui** |
+| `TRAINING_RECIPIENT_EMAIL` | `info2@aileslyonnaises.com` | non |
+| `TRAINING_SENDER_EMAIL` | `site@send.aileslyonnaises.com` | non |
 
-Analytics Engine n’est **pas** requis pour publier le site. Le binding
-`ANALYTICS` est volontairement absent de `wrangler.jsonc` tant que le produit
-n’est pas activé sur le compte. Pour le réactiver plus tard :
-[Analytics Engine](https://dash.cloudflare.com/?to=/:account/workers/analytics-engine).
+`PUBLIC_*` est lu **au build** Astro : après ajout/modif, il faut redéployer.
+Les autres variables sont lues par les Pages Functions au runtime.
+
+Analytics Engine n’est **pas** requis pour publier le site.
 
 Variables GitHub (optionnel, pour le workflow CI) :
 
 - `PUBLIC_SANITY_PROJECT_ID=v6vpuuua`
 - `PUBLIC_SANITY_DATASET=production`
 
-### Webhook Sanity → rebuild
+### Checklist 1 — Sanity CMS → rebuild
 
-Pour qu’une publication Studio redéploie le site :
+1. **Env Sanity** dans Pages (tableau ci-dessus) + Retry deployment.
+2. **Deploy Hook** Cloudflare : Settings → Builds → Deploy hooks → Add  
+   Name `sanity-publish`, branch `main` → copier l’URL (secret).
+3. **Webhook Sanity** : [manage.sanity.io](https://www.sanity.io/manage/project/v6vpuuua/api)  
+   → API → Webhooks → Create :
+   - Name : `Cloudflare Pages`
+   - URL : le Deploy Hook
+   - Dataset : `production`
+   - Trigger : Create, Update, Delete
+   - Drafts : **off** (publications seulement)
+4. Test : modifier un avion dans le Studio → Publish → un nouveau déploiement
+   Pages doit apparaître sous 1–2 minutes.
+5. **CORS Studio** (si besoin) : Sanity → API → CORS origins → ajouter
+   `https://v2.aileslyonnaises.com` et `https://aileslyonnaises.pages.dev`.
 
-1. Cloudflare Pages → projet → Settings → Builds → Deploy hooks → Create.
-2. Sanity → projet `v6vpuuua` → API → Webhooks → Create.
-3. URL = le Deploy Hook Cloudflare.
-4. Trigger : Create / Update / Delete sur le dataset `production`.
+### Checklist 3 — Formulaire (Turnstile + Resend)
 
-### Sous-domaine de préproduction
+#### Turnstile
 
-Sur OVH DNS, **remplacer** l’enregistrement `v2` (aujourd’hui `A → 213.186.33.4`)
-par un `CNAME` vers `aileslyonnaises.pages.dev` (ou la cible indiquée par
-Pages → Custom domains), sans toucher à `www`, à l’apex ni aux MX.
+1. [Turnstile](https://dash.cloudflare.com/a65e979c4b1932a343772154116fbfdd/turnstile) → Add widget.
+2. Hostnames : `v2.aileslyonnaises.com`, `aileslyonnaises.pages.dev`
+   (plus `www.aileslyonnaises.com` au cutover).
+3. Copier Site Key → `PUBLIC_TURNSTILE_SITE_KEY`  
+   Secret Key → `TURNSTILE_SECRET_KEY` (secret).
+
+#### Resend
+
+Préférer un **sous-domaine d’envoi** pour ne pas toucher au SPF/MX OVH du mail club.
+
+1. Compte : [resend.com](https://resend.com) → Domains → Add `send.aileslyonnaises.com`.
+2. Ajouter chez OVH **uniquement** les enregistrements DNS que Resend affiche
+   (souvent TXT/CNAME sur `send` / `resend._domainkey.send`, etc.).
+   Ne pas modifier les `MX` ni le SPF `@` existant.
+3. Attendre le statut **Verified**.
+4. API Keys → Create → copier dans `RESEND_API_KEY` (secret).
+5. `TRAINING_SENDER_EMAIL=site@send.aileslyonnaises.com`  
+   `TRAINING_RECIPIENT_EMAIL=info2@aileslyonnaises.com` (ou la boîte formation).
+6. Retry deployment Pages, puis tester le formulaire sur
+   https://v2.aileslyonnaises.com/contact/#formation
+
+### Préproduction `v2` (fait)
+
+`https://v2.aileslyonnaises.com` pointe vers Pages. Ne pas toucher à `www` /
+`@` / MX tant que l’UAT n’est pas validée.
 
 ## Ce dont on a besoin concrètement
 
