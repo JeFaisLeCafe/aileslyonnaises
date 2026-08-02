@@ -38,6 +38,7 @@ export interface Aircraft extends Publication {
 
 export type PersonRole =
   | "instructor"
+  | "chiefInstructor"
   | "president"
   | "vicePresident"
   | "treasurer"
@@ -47,6 +48,7 @@ export type PersonRole =
 export interface Person extends Publication {
   id: string;
   name: string;
+  title?: string | undefined;
   roles: PersonRole[];
   summary: string;
   biography: PortableTextBlock[];

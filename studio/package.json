@@ -1,0 +1,16 @@
+{
+  "name": "aileslyonnaises-studio",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "studio": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "sanity": "^6.6.0",
+    "styled-components": "^6.4.4"
+  }
+}

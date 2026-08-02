@@ -25,7 +25,8 @@ const { eyebrow, title, introduction, image, imageAlt = "" } = Astro.props;
   .page-hero {
     position: relative;
     display: grid;
-    height: clamp(34rem, 70svh, 42rem);
+    height: calc(100svh - var(--header-height));
+    min-height: 34rem;
     align-items: end;
     overflow: hidden;
     color: var(--white);

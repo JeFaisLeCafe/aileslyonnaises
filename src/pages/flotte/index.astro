@@ -8,9 +8,9 @@ const aircraft = await getAircraft();
 const fallbackImages: Record<string, string> = {
   "F-HSMB": "/images/aircraft/bristell-b23.webp",
   "F-GXGE": "/images/aircraft/dr400-gxge.webp",
-  "F-GJQT": "/images/aircraft/dr400-gxge.webp",
+  "F-GJQT": "/images/aircraft/dr400-gjqt.webp",
   "F-HLYO": "/images/aircraft/dr401-hlyo.webp",
-  "F-GYPG": "/images/aircraft/dr401-hlyo.webp",
+  "F-GYPG": "/images/aircraft/dr400-gypg.webp",
 };
 ---
 
@@ -89,12 +89,11 @@ const fallbackImages: Record<string, string> = {
 
   .aircraft {
     display: grid;
-    min-height: 33rem;
     overflow: hidden;
     background: var(--white);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 
   .aircraft:nth-child(even) .aircraft__image-wrap {
@@ -102,7 +101,7 @@ const fallbackImages: Record<string, string> = {
   }
 
   .aircraft__image-wrap {
-    min-height: 28rem;
+    aspect-ratio: 4 / 3;
     overflow: hidden;
     background: #dce7ef;
   }
@@ -116,11 +115,17 @@ const fallbackImages: Record<string, string> = {
   .aircraft__content {
     display: grid;
     align-content: center;
-    padding: clamp(2rem, 6vw, 5rem);
+    gap: 0.75rem;
+    padding: clamp(1.5rem, 4vw, 2.75rem);
+  }
+
+  .aircraft__content .tag {
+    justify-self: start;
+    margin: 0;
   }
 
   .aircraft__registration {
-    margin: 2rem 0 0.4rem;
+    margin: 0;
     color: var(--muted);
     font-size: 0.8rem;
     font-weight: 800;
@@ -128,13 +133,21 @@ const fallbackImages: Record<string, string> = {
   }
 
   .aircraft h2 {
-    margin-bottom: 1.25rem;
-    font-size: clamp(2.3rem, 4vw, 4rem);
+    margin: 0;
+    font-size: clamp(2rem, 3.4vw, 3rem);
+  }
+
+  .aircraft__content .lede {
+    margin: 0;
   }
 
   @media (max-width: 48rem) {
     .aircraft {
       grid-template-columns: 1fr;
+    }
+
+    .aircraft__image-wrap {
+      aspect-ratio: 16 / 10;
     }
 
     .aircraft:nth-child(even) .aircraft__image-wrap {

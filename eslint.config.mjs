@@ -17,11 +17,25 @@ export default tseslint.config(
       "dist/**",
       "node_modules/**",
       "public/**",
+      "scripts/**",
       "studio/dist/**",
+      "studio/.sanity/**",
+      "studio/node_modules/**",
     ],
   },
   eslint.configs.recommended,
   ...typedConfigs,
+  {
+    files: ["studio/**/*.{ts,tsx}"],
+    languageOptions: {
+      parserOptions: {
+        projectService: false,
+      },
+    },
+    rules: {
+      "@typescript-eslint/prefer-nullish-coalescing": "off",
+    },
+  },
   {
     files: [typedFiles],
     languageOptions: {

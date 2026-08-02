@@ -30,6 +30,7 @@ export const aircraftQuery = `*[_type == "aircraft" && ${publicGate}] | order(or
 export const peopleQuery = `*[_type == "person" && ${publicGate}] | order(order asc) {
   "id": _id,
   name,
+  title,
   roles,
   summary,
   biography,

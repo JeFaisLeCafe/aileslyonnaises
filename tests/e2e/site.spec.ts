@@ -106,6 +106,17 @@ test("navbar pages use consistent, readable image heroes", async ({ page }) => {
     const box = await hero.boundingBox();
     expect(box).not.toBeNull();
     heroHeights.push(box?.height ?? 0);
+
+    const viewportFit = await page.evaluate(() => {
+      const header = document.querySelector<HTMLElement>(".site-header");
+      const pageHero = document.querySelector<HTMLElement>(".page-hero");
+      return Math.abs(
+        (header?.getBoundingClientRect().height ?? 0) +
+          (pageHero?.getBoundingClientRect().height ?? 0) -
+          window.innerHeight,
+      );
+    });
+    expect(viewportFit).toBeLessThanOrEqual(2);
   }
 
   expect(

@@ -59,9 +59,14 @@ export const aircraftSchema = publicationSchema.extend({
 export const personSchema = publicationSchema.extend({
   id: z.string(),
   name: z.string(),
+  title: z
+    .string()
+    .nullish()
+    .transform((value) => value ?? undefined),
   roles: z.array(
     z.enum([
       "instructor",
+      "chiefInstructor",
       "president",
       "vicePresident",
       "treasurer",

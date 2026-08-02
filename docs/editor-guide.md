@@ -1,9 +1,19 @@
 # Guide éditeur Sanity
 
+## Accès éditeur
+
+Studio en ligne : https://ailes-lyonnaises.sanity.studio/
+
+1. Ouvrir le Studio et se connecter avec un compte Sanity individuel.
+2. Modifier une entrée, vérifier **Visible** et la **date de publication**, puis publier.
+3. Pour inviter un membre du bureau : [manage.sanity.io](https://manage.sanity.io) → projet `v6vpuuua` → Members → Invite (rôle Editor).
+
+En local : `npm run studio` (http://127.0.0.1:3333).
+
 ## Contenus administrables
 
 - **Avions** : modèle, immatriculation, usage, description, photographie et ordre.
-- **Personnes** : nom, rôle, portrait, biographie courte et ordre.
+- **Personnes** : nom, titre affiché, rôles, portrait, biographie courte et ordre.
 - **Tarifs** : groupes, lignes, montants, unité et date d’effet.
 - **Récits** : titre, résumé, photographie, contenu et mise en avant.
 

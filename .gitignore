@@ -6,6 +6,9 @@ dist/
 .env.*
 !.env.example
 studio/dist/
+studio/.sanity/
+studio/node_modules/
+yarn-error.log
 playwright-report/
 test-results/
 coverage/

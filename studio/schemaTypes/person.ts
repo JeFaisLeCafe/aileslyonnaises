@@ -4,6 +4,7 @@ import { publishingFields } from "./shared";
 
 const roles = [
   { title: "Instructeur ou instructrice", value: "instructor" },
+  { title: "Chef instructeur", value: "chiefInstructor" },
   { title: "Présidence", value: "president" },
   { title: "Vice-présidence", value: "vicePresident" },
   { title: "Trésorerie", value: "treasurer" },
@@ -24,6 +25,13 @@ export const person = defineType({
       validation: (rule) => rule.required().max(100),
     }),
     defineField({
+      name: "title",
+      title: "Titre affiché",
+      type: "string",
+      description: "Ex. Chef instructeur, FI(A), Présidente…",
+      validation: (rule) => rule.max(80),
+    }),
+    defineField({
       name: "roles",
       title: "Rôles",
       type: "array",
@@ -39,7 +47,12 @@ export const person = defineType({
       validation: (rule) => rule.max(260),
     }),
     defineField({ name: "biography", title: "Parcours", type: "portableText" }),
-    defineField({ name: "image", title: "Portrait", type: "accessibleImage" }),
+    defineField({
+      name: "image",
+      title: "Portrait",
+      type: "accessibleImage",
+      description: "Portrait optionnel, avec texte alternatif.",
+    }),
     ...publishingFields,
   ],
   orderings: [
@@ -50,21 +63,30 @@ export const person = defineType({
     },
   ],
   preview: {
-    select: { title: "name", roleValues: "roles", media: "image" },
+    select: {
+      title: "name",
+      subtitle: "title",
+      roleValues: "roles",
+      media: "image",
+    },
     prepare: ({
       title,
+      subtitle,
       roleValues,
     }: {
       title?: string;
+      subtitle?: string;
       roleValues?: string[];
     }) => ({
       title: title ?? "Sans nom",
       subtitle:
+        subtitle ??
         roleValues
           ?.map(
             (role) => roles.find(({ value }) => value === role)?.title ?? role,
           )
-          .join(", ") ?? "",
+          .join(", ") ??
+        "",
     }),
   },
 });

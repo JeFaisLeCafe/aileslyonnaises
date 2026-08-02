@@ -42,4 +42,26 @@ const token = import.meta.env.PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN;
     const name = element?.dataset.track;
     if (name) sendEvent(name);
   });
+
+  const markExternalLinks = () => {
+    document.querySelectorAll<HTMLAnchorElement>("a[href]").forEach((link) => {
+      let url: URL;
+      try {
+        url = new URL(link.href, window.location.href);
+      } catch {
+        return;
+      }
+
+      if (url.origin === window.location.origin) return;
+      if (!/^https?:$/.test(url.protocol)) return;
+
+      link.target = "_blank";
+      const rel = new Set(
+        `${link.rel} noopener noreferrer external`.split(/\s+/).filter(Boolean),
+      );
+      link.rel = [...rel].join(" ");
+    });
+  };
+
+  document.addEventListener("astro:page-load", markExternalLinks);
 </script>
