@@ -18,20 +18,42 @@ Le site a besoin d’un runtime pour :
 Un hébergement mutualisé OVH classique ne couvre pas ces fonctions aussi simplement.
 DNS et boîtes mail restent chez OVH ; seul le trafic web pointe vers Pages.
 
-### CI/CD GitHub → Cloudflare
+### CI/CD : GitHub lié à Cloudflare Pages
 
-Le workflow `.github/workflows/deploy.yml` :
+Le projet Pages `aileslyonnaises` est **connecté au repo GitHub**. Chaque push
+sur `main` déclenche un build Cloudflare. GitHub Actions (`.github/workflows/ci.yml`)
+ne fait que `check` / tests / `build` de validation — pas le déploiement.
 
-1. installe les dépendances ;
-2. lance `check`, tests unitaires et `build` ;
-3. déploie `dist/` sur le projet Pages `ailes-lyonnaises`.
+#### Réglages build (Pages → Settings → Builds)
 
-Secrets GitHub à créer :
+| Champ | Valeur |
+| --- | --- |
+| Framework preset | Astro |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Root directory | `/` (vide) |
+| Node version | `22` (via `.node-version` ou variable `NODE_VERSION=22`) |
 
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ACCOUNT_ID`
+Sans **Build command**, Cloudflare saute `npm install` / le build Astro, puis
+échoue en compilant `functions/` (erreurs `zod` / `resend`).
 
-Variables GitHub :
+#### Variables d’environnement (Pages → Settings → Environment variables)
+
+Production **et** Preview :
+
+- `PUBLIC_SANITY_PROJECT_ID=v6vpuuua`
+- `PUBLIC_SANITY_DATASET=production`
+- `SANITY_PREVIEW_DRAFTS=false`
+
+Plus tard (formulaire) : `PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`,
+`RESEND_API_KEY`, `TRAINING_RECIPIENT_EMAIL`, `TRAINING_SENDER_EMAIL`.
+
+Analytics Engine n’est **pas** requis pour publier le site. Le binding
+`ANALYTICS` est volontairement absent de `wrangler.jsonc` tant que le produit
+n’est pas activé sur le compte. Pour le réactiver plus tard :
+[Analytics Engine](https://dash.cloudflare.com/?to=/:account/workers/analytics-engine).
+
+Variables GitHub (optionnel, pour le workflow CI) :
 
 - `PUBLIC_SANITY_PROJECT_ID=v6vpuuua`
 - `PUBLIC_SANITY_DATASET=production`
@@ -47,8 +69,69 @@ Pour qu’une publication Studio redéploie le site :
 
 ### Sous-domaine de préproduction
 
-Sur OVH DNS, ajouter par exemple `v2.aileslyonnaises.com` (CNAME vers Pages)
-sans toucher à `www`, à l’apex ni aux MX.
+Sur OVH DNS, **remplacer** l’enregistrement `v2` (aujourd’hui `A → 213.186.33.4`)
+par un `CNAME` vers `aileslyonnaises.pages.dev` (ou la cible indiquée par
+Pages → Custom domains), sans toucher à `www`, à l’apex ni aux MX.
+
+## Ce dont on a besoin concrètement
+
+### 1. « Snapshot » DNS OVH (pas un bouton magique)
+
+Il n’y a pas d’export nommé « snapshot » : on veut juste la **liste actuelle**
+des enregistrements pour `aileslyonnaises.com`, afin de ne pas casser l’email
+ni le site en ligne.
+
+Chemin dans l’espace client OVH :
+
+1. Se connecter : [https://www.ovh.com/manager/](https://www.ovh.com/manager/)
+2. `Web Cloud` → `Noms de domaine` → `aileslyonnaises.com`
+3. Onglet `Zone DNS`
+
+Guide officiel : [Éditer une zone DNS OVHcloud](https://docs.ovhcloud.com/fr/guides/web-cloud/domains/dns-zone-edit).
+
+À envoyer (screenshot ou copier-coller du tableau) :
+
+- lignes `A` / `AAAA` / `CNAME` pour `@` et `www`
+- toutes les lignes `MX`
+- lignes `TXT` contenant `SPF`, `DKIM`, `DMARC` (ou équivalent)
+
+Ne rien modifier pour l’instant.
+
+**État relevé (2026-08-02)** : `v2` existe déjà en `A → 213.186.33.4`
+(même IP qu’OVH pour `www`). Pour la préprod Pages, on **remplacera** cet
+`A` par un `CNAME` vers `<projet>.pages.dev` — sans toucher aux `MX` /
+`SPF` / `DKIM` / `www` / `@`.
+
+Astuce : au-dessus du tableau, `Actions sur ma zone` → `Modifier en mode textuel`
+affiche toute la zone en texte (pratique à coller ici).
+
+### 2. Cloudflare Pages (déjà créé via GitHub)
+
+Projet : [`aileslyonnaises`](https://dash.cloudflare.com/a65e979c4b1932a343772154116fbfdd/pages/view/aileslyonnaises).
+
+À faire dans le dashboard si le premier build a échoué :
+
+1. **Settings → Builds** : Build command = `npm run build`, output = `dist`.
+2. **Settings → Environment variables** : ajouter les variables Sanity
+   (voir tableau plus haut).
+3. **Deployments → Retry deployment** (ou push un commit).
+
+Le domaine peut rester chez OVH ; Cloudflare n’héberge que Pages. Pas besoin
+de token GitHub Actions pour déployer tant que le lien Git Pages est actif.
+
+### 3. Turnstile + Resend (plus tard, pour le formulaire)
+
+- **Turnstile** = captcha Cloudflare (case « je ne suis pas un robot », sans
+  Google). Donne une *site key* (publique) et une *secret key*.
+  Dashboard : [https://dash.cloudflare.com/?to=/:account/turnstile](https://dash.cloudflare.com/?to=/:account/turnstile)
+- **Resend** = service d’envoi d’emails transactionnels (API). Le formulaire
+  n’écrit pas en base : il envoie un mail à `TRAINING_RECIPIENT_EMAIL`.
+  Compte : [https://resend.com](https://resend.com)
+
+À configurer ensuite sur Cloudflare Pages (variables d’environnement du projet)
+et/ou en local dans `.env` : `PUBLIC_TURNSTILE_SITE_KEY`,
+`TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `TRAINING_RECIPIENT_EMAIL`,
+`TRAINING_SENDER_EMAIL`.
 
 ## Formulaire (Turnstile + Resend)
 
