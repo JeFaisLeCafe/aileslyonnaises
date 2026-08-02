@@ -35,6 +35,17 @@ const euros = (value: number | undefined) =>
         currency: "EUR",
       }).format(value);
 
+const ffaLicense = amount("ffa-license", ffa);
+const ffaInsurance = amount("base-insurance", ffa);
+const ffaTotal =
+  ffaLicense !== undefined && ffaInsurance !== undefined
+    ? ffaLicense + ffaInsurance
+    : undefined;
+const ffaBreakdown =
+  ffaLicense !== undefined && ffaInsurance !== undefined
+    ? `Licence ${euros(ffaLicense)} et assurance individuelle accident de base ${euros(ffaInsurance)}.`
+    : "Licence fédérale et assurance individuelle accident de base.";
+
 interface FlightRate {
   model: string;
   registration: string;
@@ -105,15 +116,8 @@ const flightPrices = [...rates.values()];
         <article class="card price-card">
           <span>03</span>
           <h3>Licence FFA + base</h3>
-          <strong>
-            {
-              euros(
-                (amount("ffa-license", ffa) ?? 0) +
-                  (amount("base-insurance", ffa) ?? 0),
-              )
-            }
-          </strong>
-          <p>Licence 80 € et assurance individuelle accident de base 16 €.</p>
+          <strong>{euros(ffaTotal)}</strong>
+          <p>{ffaBreakdown}</p>
         </article>
       </div>
       <p class="notice pricing-notice">
