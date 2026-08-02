@@ -16,9 +16,13 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       </p>
       <div class="button-row">
         <a class="button" href="/">Revenir à l’accueil</a>
-        <a class="button button--ghost" href="/contact/">Signaler le problème</a
-        >
+        <a class="button button--ghost" href="/contact/">Signaler le problème</a>
       </div>
+      <ul class="not-found__links">
+        <li><a href="/decouvrir/">Découvrir le vol</a></li>
+        <li><a href="/apprendre/">Apprendre à piloter</a></li>
+        <li><a href="/contact/#formation">Parler de ma formation</a></li>
+      </ul>
     </div>
   </section>
 </BaseLayout>
@@ -35,5 +39,24 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
   .not-found h1 {
     max-width: 12ch;
     color: var(--white);
+  }
+
+  .not-found__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+    padding: 0;
+    margin: 2rem 0 0;
+    list-style: none;
+  }
+
+  .not-found__links a {
+    color: var(--yellow-400);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .not-found__links a:hover {
+    text-decoration: underline;
   }
 </style>

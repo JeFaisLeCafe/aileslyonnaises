@@ -181,11 +181,17 @@ const flightPrices = [...rates.values()];
       <div class="card card--navy budget-card">
         <div>
           <strong>45 h</strong>
-          <span>minimum réglementaire PPL</span>
+          <span>
+            minimum réglementaire
+            <a class="text-link" href="/apprendre/ppl/">PPL</a>
+          </span>
         </div>
         <div>
           <strong>30 h</strong>
-          <span>minimum réglementaire LAPL</span>
+          <span>
+            minimum réglementaire
+            <a class="text-link" href="/apprendre/lapl/">LAPL</a>
+          </span>
         </div>
         <div>
           <strong>{euros(amount("instruction-hour", instruction))} / h</strong>
@@ -285,5 +291,9 @@ const flightPrices = [...rates.values()];
 
   .budget-card span {
     margin-top: 0.25rem;
+  }
+
+  .budget-card .text-link {
+    color: var(--yellow-400);
   }
 </style>

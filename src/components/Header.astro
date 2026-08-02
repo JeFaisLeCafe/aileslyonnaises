@@ -4,6 +4,7 @@ const pathname = Astro.url.pathname;
 const navigation = [
   { href: "/decouvrir/", label: "Découvrir" },
   { href: "/apprendre/", label: "Apprendre" },
+  { href: "/bia/", label: "BIA" },
   { href: "/flotte/", label: "Flotte" },
   { href: "/tarifs/", label: "Tarifs" },
   { href: "/vie-du-club/", label: "Vie du club" },
@@ -204,7 +205,7 @@ const isCurrent = (href: string) =>
     background: var(--white);
   }
 
-  @media (max-width: 58rem) {
+  @media (max-width: 68rem) {
     .menu-button {
       display: block;
     }
