@@ -194,6 +194,9 @@ vérifie le captcha Cloudflare Turnstile, puis **Resend** envoie un email à
 - Pour une prévisualisation privée, définir `SANITY_PREVIEW_DRAFTS=true` et un
   `SANITY_API_READ_TOKEN` en lecture seule uniquement sur le déploiement preview.
   Le build de production conserve `SANITY_PREVIEW_DRAFTS=false`.
+- Après des changements de contenu importants, rafraîchir le repli local avec
+  `npm run cms:dump-fallbacks` (écrit `src/data/cms-fallbacks.json`) et committer
+  le fichier si le site doit rester correct sans Sanity.
 
 ## Audit OVH avant lancement
 

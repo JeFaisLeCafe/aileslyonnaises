@@ -1,5 +1,6 @@
 import {
   fallbackAircraft,
+  fallbackPeople,
   fallbackPriceGroups,
   fallbackSiteData,
   fallbackStories,
@@ -55,7 +56,7 @@ export const getAircraft = (): Promise<Aircraft[]> =>
   fetchOrFallback(aircraftQuery, mapAircraft, fallbackAircraft);
 
 export const getPeople = (): Promise<Person[]> =>
-  fetchOrFallback(peopleQuery, mapPeople, []);
+  fetchOrFallback(peopleQuery, mapPeople, fallbackPeople);
 
 export const getPriceGroups = (): Promise<PriceGroup[]> =>
   fetchOrFallback(priceGroupsQuery, mapPriceGroups, fallbackPriceGroups);

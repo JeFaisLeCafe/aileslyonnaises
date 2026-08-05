@@ -21,6 +21,7 @@ les variables Sanity pour charger les contenus administrés.
 - `npm test` : tests unitaires
 - `npm run test:e2e` : tests Playwright
 - `npm run studio` : studio Sanity local
+- `npm run cms:dump-fallbacks` : rafraîchir `src/data/cms-fallbacks.json` depuis Sanity
 
 ## Déploiement
 

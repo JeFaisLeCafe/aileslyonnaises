@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   mapAircraft,
+  mapPeople,
   mapPriceGroups,
   mapSiteData,
   mapStories,
@@ -9,6 +10,7 @@ import {
 } from "./mappers";
 import {
   fallbackAircraft,
+  fallbackPeople,
   fallbackPriceGroups,
   fallbackSiteData,
   fallbackStories,
@@ -111,6 +113,7 @@ describe("mapPriceGroups", () => {
 describe("static fallbacks", () => {
   it("conform to the same runtime schemas as CMS responses", () => {
     expect(mapAircraft(fallbackAircraft, now)).toHaveLength(5);
+    expect(mapPeople(fallbackPeople, now)).toEqual(fallbackPeople);
     expect(mapPriceGroups(fallbackPriceGroups, now)).toHaveLength(4);
     expect(mapTrainingPrograms(fallbackTrainingPrograms, now)).toHaveLength(4);
     expect(mapStories(fallbackStories, now)).toHaveLength(1);

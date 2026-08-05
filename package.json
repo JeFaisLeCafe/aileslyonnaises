@@ -16,6 +16,7 @@
     "studio": "npm run studio --prefix studio --",
     "studio:build": "npm run build --prefix studio --",
     "studio:deploy": "npm run deploy --prefix studio --",
+    "cms:dump-fallbacks": "node --experimental-strip-types scripts/dump-cms-fallbacks.mjs",
     "cms:sync": "npm exec --prefix studio -- sanity exec ../scripts/sync-sanity-content.mjs --with-user-token"
   },
   "keywords": [

@@ -1,0 +1,535 @@
+{
+  "dumpedAt": "2026-08-05T14:20:51.346Z",
+  "source": "sanity:v6vpuuua/production",
+  "aircraft": [
+    {
+      "enabled": true,
+      "order": 10,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "aircraft-f-gypg",
+      "name": "DR400/160 F-GYPG",
+      "model": "DR400/160",
+      "registration": "F-GYPG",
+      "summary": "Avion de la flotte du club, proposé pour l’école et le voyage.",
+      "details": [],
+      "image": {
+        "alt": "Robin DR400 F-GYPG des Ailes Lyonnaises",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/866986d0303744659bfa543d8c5e80914e8ff639-4486x6730.jpg?w=1600&q=75&auto=format"
+      },
+      "uses": [
+        "École",
+        "Voyage"
+      ],
+      "features": []
+    },
+    {
+      "enabled": true,
+      "order": 20,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "aircraft-f-hlyo",
+      "name": "DR401/160 F-HLYO",
+      "model": "DR401/160",
+      "registration": "F-HLYO",
+      "summary": "Avion de la flotte du club, proposé pour l’école et le voyage.",
+      "details": [],
+      "image": {
+        "alt": "Robin DR401 F-HLYO de profil sur le tarmac de Lyon-Bron",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/f9d447a25a49ca1573a2dadcbd29a05d48fc4142-6960x4640.jpg?w=1600&q=75&auto=format"
+      },
+      "uses": [
+        "École",
+        "Voyage"
+      ],
+      "features": []
+    },
+    {
+      "enabled": true,
+      "order": 30,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "aircraft-f-hsmb",
+      "name": "Bristell B23 F-HSMB",
+      "model": "Bristell B23",
+      "registration": "F-HSMB",
+      "summary": "Avion de nouvelle génération avec glass cockpit, destiné à l’école et au voyage.",
+      "details": [],
+      "image": {
+        "alt": "Bristell B23 F-HSMB des Ailes Lyonnaises sur le tarmac",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/84514b06dfd1dbc115ad57ea7f76786f4264ee08-6960x4640.jpg?w=1600&q=75&auto=format"
+      },
+      "uses": [
+        "École",
+        "Voyage"
+      ],
+      "features": [
+        "Glass cockpit"
+      ]
+    },
+    {
+      "enabled": true,
+      "order": 40,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "aircraft-f-gxge",
+      "name": "DR400/120 F-GXGE",
+      "model": "DR400/120",
+      "registration": "F-GXGE",
+      "summary": "Avion de la flotte du club, proposé pour l’école et le voyage.",
+      "details": [],
+      "image": {
+        "alt": "Robin DR400 F-GXGE des Ailes Lyonnaises",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/5ef3de36dc4360078f2791dba08170c1c62565c3-4640x6960.jpg?w=1600&q=75&auto=format"
+      },
+      "uses": [
+        "École",
+        "Voyage"
+      ],
+      "features": []
+    },
+    {
+      "enabled": true,
+      "order": 50,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "aircraft-f-gjqt",
+      "name": "DR400/120 F-GJQT",
+      "model": "DR400/120",
+      "registration": "F-GJQT",
+      "summary": "Avion de la flotte du club, proposé pour l’école et le voyage.",
+      "details": [],
+      "image": {
+        "alt": "Robin DR400 F-GJQT des Ailes Lyonnaises",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/0bd3a0f368ad6e150e567c47625602e52e96b7bd-6960x4640.jpg?w=1600&q=75&auto=format"
+      },
+      "uses": [
+        "École",
+        "Voyage"
+      ],
+      "features": []
+    }
+  ],
+  "people": [
+    {
+      "enabled": true,
+      "order": 10,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "person-fabien-cochard",
+      "name": "Fabien Cochard",
+      "title": "Responable pédagogique",
+      "roles": [
+        "instructor",
+        "chiefInstructor"
+      ],
+      "summary": "Responsable pédagogique de l’école de pilotage. Il coordonne le parcours pédagogique et accompagne les élèves du premier vol au test.",
+      "biography": [
+        {
+          "_key": "fabien-bio",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "fabien-bio-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Portrait et biographie détaillée à compléter avec l’accord de l’intéressé."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ]
+    },
+    {
+      "enabled": true,
+      "order": 20,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "person-antoine-guerra",
+      "name": "Antoine Guerra",
+      "title": "FI",
+      "roles": [
+        "instructor"
+      ],
+      "summary": "Instructeur de vol (FI). Il forme les élèves sur le parcours pratique, du circuit d’aérodrome aux navigations.",
+      "biography": [
+        {
+          "_key": "antoine-bio",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "antoine-bio-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Portrait et biographie détaillée à compléter avec l’accord de l’intéressé."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ]
+    }
+  ],
+  "priceGroups": [
+    {
+      "enabled": true,
+      "order": 10,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "priceGroup-membership",
+      "title": "Adhésion au club",
+      "description": "Cotisation annuelle et participation aux frais.",
+      "items": [
+        {
+          "id": "membership",
+          "label": "Cotisation annuelle",
+          "amount": 50,
+          "unit": "year",
+          "enabled": true,
+          "order": 10
+        },
+        {
+          "id": "participation-under-25",
+          "label": "Participation aux frais",
+          "amount": 100,
+          "unit": "year",
+          "audience": "Moins de 25 ans",
+          "enabled": true,
+          "order": 20
+        },
+        {
+          "id": "participation-standard",
+          "label": "Participation aux frais",
+          "amount": 250,
+          "unit": "year",
+          "audience": "Tarif général",
+          "enabled": true,
+          "order": 30
+        },
+        {
+          "id": "visiting-pilot",
+          "label": "Pilote FFA de passage",
+          "amount": 10,
+          "unit": "fixed",
+          "note": "Nous consulter.",
+          "enabled": true,
+          "order": 40
+        }
+      ],
+      "disclaimer": "Tarifs issus du document de travail 2026 fourni par le club. Contactez le club pour confirmation."
+    },
+    {
+      "enabled": true,
+      "order": 20,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "priceGroup-ffa",
+      "title": "Licence FFA et assurance",
+      "description": "Licence fédérale annuelle et assurance de base.",
+      "items": [
+        {
+          "id": "ffa-license",
+          "label": "Licence FFA",
+          "amount": 80,
+          "unit": "year",
+          "enabled": true,
+          "order": 10
+        },
+        {
+          "id": "base-insurance",
+          "label": "Assurance de base",
+          "amount": 16,
+          "unit": "year",
+          "enabled": true,
+          "order": 20
+        },
+        {
+          "id": "info-pilote",
+          "label": "Abonnement optionnel Info-Pilote",
+          "amount": 49,
+          "unit": "year",
+          "enabled": true,
+          "order": 30
+        }
+      ],
+      "disclaimer": "Tarifs issus du document de travail 2026 fourni par le club. Contactez le club pour confirmation."
+    },
+    {
+      "enabled": true,
+      "order": 30,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "priceGroup-aircraft-rates",
+      "title": "Tarifs horaires des avions",
+      "description": "Le tarif réduit nécessite un forfait annuel initial de 450 €.",
+      "items": [
+        {
+          "id": "f-gypg-normal",
+          "label": "DR400/160 F-GYPG — tarif normal",
+          "amount": 211.2,
+          "unit": "hour",
+          "enabled": true,
+          "order": 10
+        },
+        {
+          "id": "f-gypg-reduced",
+          "label": "DR400/160 F-GYPG — tarif réduit",
+          "amount": 168.96,
+          "unit": "hour",
+          "enabled": true,
+          "order": 20
+        },
+        {
+          "id": "f-hlyo-normal",
+          "label": "DR401/160 F-HLYO — tarif normal",
+          "amount": 199.8,
+          "unit": "hour",
+          "enabled": true,
+          "order": 30
+        },
+        {
+          "id": "f-hlyo-reduced",
+          "label": "DR401/160 F-HLYO — tarif réduit",
+          "amount": 158.94,
+          "unit": "hour",
+          "enabled": true,
+          "order": 40
+        },
+        {
+          "id": "f-hsmb-normal",
+          "label": "Bristell B23 F-HSMB — tarif normal",
+          "amount": 179.4,
+          "unit": "hour",
+          "enabled": true,
+          "order": 50
+        },
+        {
+          "id": "f-hsmb-reduced",
+          "label": "Bristell B23 F-HSMB — tarif réduit",
+          "amount": 143.52,
+          "unit": "hour",
+          "enabled": true,
+          "order": 60
+        },
+        {
+          "id": "f-gxge-normal",
+          "label": "DR400/120 F-GXGE — tarif normal",
+          "amount": 179.4,
+          "unit": "hour",
+          "enabled": true,
+          "order": 70
+        },
+        {
+          "id": "f-gxge-reduced",
+          "label": "DR400/120 F-GXGE — tarif réduit",
+          "amount": 143.52,
+          "unit": "hour",
+          "enabled": true,
+          "order": 80
+        },
+        {
+          "id": "f-gjqt-normal",
+          "label": "DR400/120 F-GJQT — tarif normal",
+          "amount": 179.4,
+          "unit": "hour",
+          "enabled": true,
+          "order": 90
+        },
+        {
+          "id": "f-gjqt-reduced",
+          "label": "DR400/120 F-GJQT — tarif réduit",
+          "amount": 143.52,
+          "unit": "hour",
+          "enabled": true,
+          "order": 100
+        }
+      ],
+      "disclaimer": "Tarifs issus du document de travail 2026 fourni par le club. Contactez le club pour confirmation."
+    },
+    {
+      "enabled": true,
+      "order": 40,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "priceGroup-instruction",
+      "title": "Instruction",
+      "description": "Le coût total dépend du nombre d’heures nécessaires et des frais annexes.",
+      "items": [
+        {
+          "id": "instruction-hour",
+          "label": "Instruction",
+          "amount": 42,
+          "unit": "hour",
+          "note": "Briefing, débriefing, encadrement en vol et, selon le besoin, théorie en salle.",
+          "enabled": true,
+          "order": 10
+        }
+      ],
+      "disclaimer": "Tarifs issus du document de travail 2026 fourni par le club. Contactez le club pour confirmation."
+    }
+  ],
+  "trainingPrograms": [
+    {
+      "enabled": true,
+      "order": 10,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "trainingProgram-ppl",
+      "title": "PPL(A) — Licence de pilote privé",
+      "slug": "ppl",
+      "summary": "Formation au pilotage d’un avion monomoteur à pistons en VFR de jour.",
+      "details": [
+        {
+          "_key": "ppl",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "ppl-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Le minimum réglementaire annoncé est de 45 heures de vol, dont 10 heures en solo."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ],
+      "minimumFlightHours": 45,
+      "prerequisites": [
+        "Âge et aptitude médicale réglementaires à vérifier avant l’inscription."
+      ],
+      "availability": "available"
+    },
+    {
+      "enabled": true,
+      "order": 20,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "trainingProgram-lapl",
+      "title": "LAPL(A) — Licence de pilote d’avion léger",
+      "slug": "lapl",
+      "summary": "Formation européenne pour voler en aviation légère en VFR de jour.",
+      "details": [
+        {
+          "_key": "lapl",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "lapl-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Le minimum réglementaire annoncé est de 30 heures de vol, dont 6 heures en solo."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ],
+      "minimumFlightHours": 30,
+      "prerequisites": [
+        "Âge et aptitude médicale réglementaires à vérifier avant l’inscription."
+      ],
+      "availability": "available"
+    },
+    {
+      "enabled": true,
+      "order": 30,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "trainingProgram-vol-de-nuit",
+      "title": "Qualification au vol de nuit",
+      "slug": "vol-de-nuit",
+      "summary": "Formation complémentaire pour voler en conditions VFR de nuit.",
+      "details": [
+        {
+          "_key": "night",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "night-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Le programme fourni prévoit au minimum 5 heures de vol de nuit."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ],
+      "minimumFlightHours": 5,
+      "prerequisites": [
+        "Être titulaire d’une licence de pilote compatible et d’une aptitude médicale valide."
+      ],
+      "availability": "available"
+    },
+    {
+      "enabled": true,
+      "order": 40,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "trainingProgram-sensibilisation-vol-montagne",
+      "title": "Sensibilisation au vol en région montagneuse",
+      "slug": "sensibilisation-vol-montagne",
+      "summary": "Module de sensibilisation destiné à découvrir le vol en région montagneuse en sécurité.",
+      "details": [],
+      "prerequisites": [
+        "Programme et conditions à confirmer auprès du club."
+      ],
+      "availability": "available"
+    }
+  ],
+  "stories": [
+    {
+      "enabled": true,
+      "order": 10,
+      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "id": "story-histoire-du-club",
+      "title": "Un club ancré dans le territoire lyonnais",
+      "slug": "histoire-du-club",
+      "excerpt": "Né en 1965 à Lyon, le club s’est installé à Bron avant de prendre son nom actuel en 1978.",
+      "category": "history",
+      "body": [
+        {
+          "_key": "history-1",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "history-1-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Le club naît en 1965 sous le nom « Aéro-club des Jeunes de Monplaisir-Lumière », avec pour objectif de rendre les sports aériens plus accessibles aux jeunes."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "history-2",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "history-2-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Initialement actif à Satolas, il rejoint le terrain de Bron au début des travaux du futur aéroport de Lyon-Saint-Exupéry."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "history-3",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "history-3-span",
+              "_type": "span",
+              "marks": [],
+              "text": "En 1978, le club prend le nom « Les Ailes Lyonnaises »."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ]
+    }
+  ],
+  "siteData": {
+    "clubName": "Aéroclub Les Ailes Lyonnaises",
+    "tagline": "École de pilotage et aéroclub à Lyon-Bron",
+    "address": {
+      "street": "305 rue Albert Kimmerling",
+      "postalCode": "69680",
+      "city": "Chassieu"
+    },
+    "phone": "06 40 36 92 29",
+    "email": "info2@aileslyonnaises.com",
+    "locationLabel": "Aéroport de Lyon-Bron"
+  }
+}
