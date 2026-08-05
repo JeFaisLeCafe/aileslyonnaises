@@ -10,7 +10,7 @@ const publicationProjection = `
 const imageProjection = `
   image {
     alt,
-    "url": asset->url
+    "url": asset->url + "?w=1600&q=75&auto=format"
   }
 `;
 

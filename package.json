@@ -16,8 +16,6 @@
     "studio": "npm run studio --prefix studio --",
     "studio:build": "npm run build --prefix studio --",
     "studio:deploy": "npm run deploy --prefix studio --",
-    "cms:seed": "node --experimental-strip-types scripts/seed-sanity.mjs",
-    "cms:seed:import": "node --experimental-strip-types scripts/seed-sanity.mjs --import",
     "cms:sync": "npm exec --prefix studio -- sanity exec ../scripts/sync-sanity-content.mjs --with-user-token"
   },
   "keywords": [

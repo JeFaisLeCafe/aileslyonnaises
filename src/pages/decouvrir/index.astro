@@ -10,8 +10,8 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 >
   <PageHero
     eyebrow="Premières expériences"
-    title="Et si le pilote, c’était vous ?"
-    introduction="Offrez-vous le ciel, partagez-le avec vos proches ou prenez les commandes pour une première leçon."
+    title="Découvrir le ciel au départ de Lyon-Bron"
+    introduction="Offrez-vous le paysage, partagez-le avec vos proches ou commencez une première leçon de pilotage."
     image="/images/landscapes/dombes.webp"
     imageAlt="Les étangs de la Dombes vus depuis un avion"
   >
@@ -40,23 +40,43 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
               Le parcours exact dépend des conditions météorologiques et des
               contraintes aéronautiques du jour.
             </p>
-            <a class="text-link" href="/contact/">Demander les disponibilités</a
-            >
+            <a class="text-link" href="/contact/">Demander les disponibilités</a>
           </div>
         </article>
-        <article class="offer">
+        <article id="initiation" class="offer">
           <div class="offer__number">02</div>
           <div>
             <span class="tag">Avec un instructeur</span>
             <h3>Pack initiation</h3>
+            <p class="offer__hook">Et si le pilote, c’était vous ?</p>
             <p>
-              Vous préparez le vol, découvrez les commandes et réalisez vos
-              premières manœuvres avec un instructeur. Une expérience pensée
-              pour ressentir concrètement ce qu’est une leçon de pilotage.
+              Une première expérience de formation pour ressentir concrètement
+              ce qu’est une leçon de pilotage. Le pack comprend :
             </p>
+            <ul class="offer__list">
+              <li>
+                Votre inscription comme membre de notre aéroclub pour l’année en
+                cours
+              </li>
+              <li>
+                Votre assurance Pilote auprès de la FFA (Fédération Française
+                Aéronautique) valable pour l’année en cours
+              </li>
+              <li>
+                4 leçons de vol de 30 minutes chacune avec un instructeur ou une
+                instructrice du club
+              </li>
+              <li>
+                4 briefings et débriefings de 30 minutes à l’occasion de chaque
+                vol
+              </li>
+            </ul>
             <p class="offer__note">
-              Les vols réalisés dans un cadre d’instruction peuvent être
-              inscrits dans votre carnet selon les conditions applicables.
+              L’inscription à notre aéroclub, valable jusqu’au 31 décembre de
+              l’année en cours, vous permet de participer aux activités proposées
+              par les animateurs du groupe VAC (Voyages, Animations,
+              Communication) : balades, voyages, vols techniques de découverte
+              (vol de nuit, vol aux instruments…).
             </p>
             <a class="text-link" href="/contact/#formation"
               >Parler de l’initiation</a
@@ -88,10 +108,6 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
           <p>Une lecture aérienne de la métropole et de l’ouest lyonnais.</p>
         </article>
       </div>
-      <p class="route-disclaimer">
-        Les descriptifs détaillés et liens d’achat seront publiés après
-        validation par le club et configuration Aérogest FirstFlight.
-      </p>
     </div>
   </section>
 
@@ -107,13 +123,12 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       />
       <div>
         <p class="eyebrow">Offrir un vol</p>
-        <h2>Un cadeau qui ne reste pas dans un tiroir.</h2>
+        <h2>Le plus beau des cadeaux n’est pas un objet, c’est une émotion !</h2>
         <p class="lede">
-          Les bons cadeaux seront proposés avec leurs conditions de validité et
-          leur parcours de réservation dès que l’intégration Aérogest sera
-          confirmée.
+          Un bon cadeau sera édité et il vous restera à nous contacter pour fixer
+          un rendez-vous.
         </p>
-        <a class="button" href="/contact/">Être informé</a>
+        <a class="button" href="/contact/">Nous contacter</a>
       </div>
     </div>
   </section>
@@ -148,13 +163,31 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
   }
 
   .offer h3 {
-    margin: 1.25rem 0;
+    margin: 1.25rem 0 0.75rem;
     font-size: clamp(2rem, 4vw, 3rem);
+  }
+
+  .offer__hook {
+    margin: 0 0 1rem;
+    color: var(--navy-900);
+    font-size: 1.15rem;
+    font-weight: 800;
   }
 
   .offer p {
     color: var(--muted);
     line-height: 1.7;
+  }
+
+  .offer__list {
+    margin: 1rem 0 0;
+    padding-left: 1.1rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .offer__list li + li {
+    margin-top: 0.55rem;
   }
 
   .offer__note {
@@ -168,20 +201,20 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     padding: 2rem;
     color: var(--white);
     background:
-      linear-gradient(rgb(3 23 53 / 0.7), rgb(3 23 53 / 0.96)),
+      linear-gradient(rgb(3 23 53 / 0.35), rgb(3 23 53 / 0.68)),
       url("/images/landscapes/dombes.webp") center / cover;
     border-radius: var(--radius-md);
   }
 
   .route-card:nth-child(2) {
     background:
-      linear-gradient(rgb(3 23 53 / 0.7), rgb(3 23 53 / 0.96)),
+      linear-gradient(rgb(3 23 53 / 0.35), rgb(3 23 53 / 0.68)),
       url("/images/landscapes/aiguille-midi.webp") center / cover;
   }
 
   .route-card:nth-child(3) {
     background:
-      linear-gradient(rgb(3 23 53 / 0.7), rgb(3 23 53 / 0.96)),
+      linear-gradient(rgb(3 23 53 / 0.35), rgb(3 23 53 / 0.68)),
       url("/images/landscapes/lyon-tete-or.webp") center / cover;
   }
 
@@ -199,13 +232,6 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
   }
 
   .route-card p {
-    color: rgb(255 255 255 / 0.72);
-  }
-
-  .route-disclaimer {
-    max-width: 48rem;
-    margin-top: 1.5rem;
-    color: var(--muted);
-    font-size: 0.8rem;
+    color: rgb(255 255 255 / 0.82);
   }
 </style>

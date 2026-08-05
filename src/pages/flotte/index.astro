@@ -56,9 +56,12 @@ const fallbackImages: Record<string, string> = {
                   plane.image?.alt ??
                   `${plane.model} immatriculé ${plane.registration}`
                 }
-                width="1365"
-                height="2048"
+                width="1200"
+                height="900"
+                sizes="(max-width: 48rem) 100vw, 50vw"
                 loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+                fetchpriority={index === 0 ? "high" : undefined}
               />
             </div>
             <div class="aircraft__content">

@@ -121,9 +121,18 @@ const flightPrices = [...rates.values()];
         </article>
       </div>
       <p class="notice pricing-notice">
-        Les options d’assurance complémentaires et l’abonnement Info-Pilote sont
-        facultatifs. Des aides FFA peuvent s’appliquer aux moins de 21 ans et
-        aux titulaires du BIA selon les conditions en vigueur.
+        Des options d’assurances complémentaires et un abonnement à la revue
+        Info-Pilote sont proposés à titre facultatif. Des aides FFA peuvent
+        s’appliquer aux moins de 21 ans et aux titulaires du BIA selon les
+        conditions en vigueur.
+        <a
+          class="text-link"
+          href="https://www.ffa-aero.fr/fr/frm_decouvrir_aidesffapourjeunespilotes.awp"
+          target="_blank"
+          rel="noopener noreferrer external"
+        >
+          Découvrir les aides de la FFA
+        </a>
       </p>
     </div>
   </section>
@@ -133,9 +142,8 @@ const flightPrices = [...rates.values()];
       <p class="eyebrow">Heures de vol</p>
       <h2>Tarifs de la flotte</h2>
       <p class="lede">
-        Le forfait annuel de 450 € ouvre l’accès au tarif réduit. Les tarifs
-        sont publiés à titre indicatif et peuvent évoluer avec le prix du
-        carburant.
+        Les tarifs sont publiés à titre indicatif et peuvent évoluer avec le
+        prix du carburant.
       </p>
       <div class="table-wrap">
         <table>
@@ -164,6 +172,10 @@ const flightPrices = [...rates.values()];
           </tbody>
         </table>
       </div>
+      <p class="notice forfait-notice">
+        Un forfait optionnel de 450 € par an permet de bénéficier d’heures de
+        vol à prix réduit.
+      </p>
       <p class="updated">Base tarifaire fournie : avril 2026.</p>
     </div>
   </section>
@@ -260,6 +272,11 @@ const flightPrices = [...rates.values()];
 
   .table-wrap {
     margin-top: 2.5rem;
+  }
+
+  .forfait-notice {
+    margin-top: 1.5rem;
+    background: rgb(255 223 24 / 0.22);
   }
 
   .updated {

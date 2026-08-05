@@ -30,7 +30,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         </p>
         <a
           class="text-link"
-          href="https://www.education.gouv.fr/le-brevet-d-initiation-aeronautique-bia-6250"
+          href="https://sti.eduscol.education.fr/formations/tout-niveau/brevet-dinitiation-aeronautique-bia#presentation"
           target="_blank"
           rel="noopener noreferrer external"
         >
@@ -91,6 +91,14 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         <article class="card card--navy">
           <h3>Poursuite vers le pilotage</h3>
           <p>Des aides fédérales peuvent accompagner les jeunes lauréats.</p>
+          <a
+            class="text-link"
+            href="https://www.ffa-aero.fr/fr/frm_decouvrir_aidesffapourjeunespilotes.awp"
+            target="_blank"
+            rel="noopener noreferrer external"
+          >
+            Découvrir les aides de la FFA
+          </a>
         </article>
       </div>
     </div>
@@ -111,7 +119,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         target="_blank"
         rel="noopener noreferrer external"
       >
-        Rechercher une préparation BIA
+        Trouver les établissements préparant au BIA
       </a>
     </div>
   </section>
@@ -150,5 +158,9 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     font-size: clamp(4rem, 8vw, 7rem);
     letter-spacing: -0.08em;
     line-height: 0.9;
+  }
+
+  .card--navy .text-link {
+    color: var(--yellow-400);
   }
 </style>

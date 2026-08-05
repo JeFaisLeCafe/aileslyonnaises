@@ -5,12 +5,25 @@ interface Props {
   introduction: string;
   image?: string;
   imageAlt?: string;
+  longTitle?: boolean;
 }
 
-const { eyebrow, title, introduction, image, imageAlt = "" } = Astro.props;
+const {
+  eyebrow,
+  title,
+  introduction,
+  image,
+  imageAlt = "",
+  longTitle = false,
+} = Astro.props;
 ---
 
-<section class:list={["page-hero", { "page-hero--image": image }]}>
+<section
+  class:list={[
+    "page-hero",
+    { "page-hero--image": image, "page-hero--long-title": longTitle },
+  ]}
+>
   {image && <img class="page-hero__image" src={image} alt={imageAlt} />}
   <div class="page-hero__overlay"></div>
   <div class="container page-hero__content">
@@ -54,9 +67,9 @@ const { eyebrow, title, introduction, image, imageAlt = "" } = Astro.props;
   .page-hero__overlay {
     background: linear-gradient(
       90deg,
-      rgb(3 23 53 / 0.94) 0%,
-      rgb(3 23 53 / 0.72) 52%,
-      rgb(3 23 53 / 0.34) 100%
+      rgb(3 23 53 / 0.62) 0%,
+      rgb(3 23 53 / 0.34) 48%,
+      rgb(3 23 53 / 0.1) 100%
     );
   }
 
@@ -64,6 +77,7 @@ const { eyebrow, title, introduction, image, imageAlt = "" } = Astro.props;
     position: relative;
     z-index: 1;
     padding-block: clamp(4rem, 8vw, 7rem);
+    text-shadow: 0 1px 18px rgb(2 9 20 / 0.45);
   }
 
   .page-hero h1 {
@@ -71,6 +85,11 @@ const { eyebrow, title, introduction, image, imageAlt = "" } = Astro.props;
     margin-bottom: 1.5rem;
     color: var(--white);
     font-size: clamp(3rem, 7vw, 6.4rem);
+  }
+
+  .page-hero--long-title h1 {
+    max-width: 22ch;
+    font-size: clamp(2.2rem, 5vw, 4.2rem);
   }
 
   .page-hero .page-hero__eyebrow {

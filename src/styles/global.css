@@ -32,7 +32,7 @@ html {
   color: var(--ink);
   background: var(--paper);
   font-family: var(--font-sans);
-  scroll-padding-top: calc(var(--header-height) + 1rem);
+  scroll-padding-top: var(--header-height);
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
 }

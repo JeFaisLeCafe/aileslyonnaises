@@ -65,7 +65,8 @@ export const fallbackAircraft = [
     name: "DR400/120 F-GXGE",
     model: "DR400/120",
     registration: "F-GXGE",
-    summary: "Avion de la flotte du club, proposé pour l’école et le voyage.",
+    summary:
+      "Avion de la flotte du club, proposé prioritairement pour l’école.",
     details: [],
     uses: ["École", "Voyage"],
     features: [],
@@ -78,7 +79,8 @@ export const fallbackAircraft = [
     name: "DR400/120 F-GJQT",
     model: "DR400/120",
     registration: "F-GJQT",
-    summary: "Avion de la flotte du club, proposé pour l’école et le voyage.",
+    summary:
+      "Avion de la flotte du club, proposé prioritairement pour l’école.",
     details: [],
     uses: ["École", "Voyage"],
     features: [],
