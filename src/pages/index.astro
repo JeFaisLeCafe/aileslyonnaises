@@ -169,7 +169,7 @@ const fallbackImages: Record<string, string> = {
           aircraft.map((plane) => (
             <article class="card fleet-card">
               <img
-                src={fallbackImages[plane.registration] ?? plane.image?.url}
+                src={plane.image?.url ?? fallbackImages[plane.registration]}
                 alt={
                   plane.image?.alt ??
                   `${plane.model} immatriculé ${plane.registration}`
