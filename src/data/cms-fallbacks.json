@@ -1,25 +1,22 @@
 {
-  "dumpedAt": "2026-08-05T14:20:51.346Z",
+  "dumpedAt": "2026-09-19T13:57:07.484Z",
   "source": "sanity:v6vpuuua/production",
   "aircraft": [
     {
       "enabled": true,
       "order": 10,
-      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "publishedAt": "2026-09-02T14:01:25.530Z",
       "id": "aircraft-f-gypg",
       "name": "DR400/160 F-GYPG",
       "model": "DR400/160",
       "registration": "F-GYPG",
-      "summary": "Avion de la flotte du club, proposé pour l’école et le voyage.",
+      "summary": "Avion de la flotte du club, proposé pour le voyage. ",
       "details": [],
       "image": {
         "alt": "Robin DR400 F-GYPG des Ailes Lyonnaises",
-        "url": "https://cdn.sanity.io/images/v6vpuuua/production/866986d0303744659bfa543d8c5e80914e8ff639-4486x6730.jpg?w=1600&q=75&auto=format"
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/4cef469f62aa9d5c2370e2d3c64dd509c564bc5f-6960x4640.jpg?w=1600&q=75&auto=format"
       },
-      "uses": [
-        "École",
-        "Voyage"
-      ],
+      "uses": ["Voyage"],
       "features": []
     },
     {
@@ -36,10 +33,7 @@
         "alt": "Robin DR401 F-HLYO de profil sur le tarmac de Lyon-Bron",
         "url": "https://cdn.sanity.io/images/v6vpuuua/production/f9d447a25a49ca1573a2dadcbd29a05d48fc4142-6960x4640.jpg?w=1600&q=75&auto=format"
       },
-      "uses": [
-        "École",
-        "Voyage"
-      ],
+      "uses": ["École", "Voyage"],
       "features": []
     },
     {
@@ -56,52 +50,58 @@
         "alt": "Bristell B23 F-HSMB des Ailes Lyonnaises sur le tarmac",
         "url": "https://cdn.sanity.io/images/v6vpuuua/production/84514b06dfd1dbc115ad57ea7f76786f4264ee08-6960x4640.jpg?w=1600&q=75&auto=format"
       },
-      "uses": [
-        "École",
-        "Voyage"
-      ],
-      "features": [
-        "Glass cockpit"
-      ]
+      "uses": ["École", "Voyage"],
+      "features": ["Glass cockpit"]
     },
     {
       "enabled": true,
       "order": 40,
-      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "publishedAt": "2026-09-02T14:02:23.658Z",
       "id": "aircraft-f-gxge",
       "name": "DR400/120 F-GXGE",
       "model": "DR400/120",
       "registration": "F-GXGE",
-      "summary": "Avion de la flotte du club, proposé pour l’école et le voyage.",
+      "summary": "Avion de la flotte du club, proposé pour l’école.",
       "details": [],
       "image": {
         "alt": "Robin DR400 F-GXGE des Ailes Lyonnaises",
         "url": "https://cdn.sanity.io/images/v6vpuuua/production/5ef3de36dc4360078f2791dba08170c1c62565c3-4640x6960.jpg?w=1600&q=75&auto=format"
       },
-      "uses": [
-        "École",
-        "Voyage"
-      ],
+      "uses": ["École"],
       "features": []
     },
     {
       "enabled": true,
       "order": 50,
-      "publishedAt": "2026-07-25T00:00:00.000Z",
+      "publishedAt": "2026-09-02T14:02:55.562Z",
       "id": "aircraft-f-gjqt",
       "name": "DR400/120 F-GJQT",
       "model": "DR400/120",
       "registration": "F-GJQT",
-      "summary": "Avion de la flotte du club, proposé pour l’école et le voyage.",
+      "summary": "Avion de la flotte du club, proposé pour l’école.",
       "details": [],
       "image": {
         "alt": "Robin DR400 F-GJQT des Ailes Lyonnaises",
         "url": "https://cdn.sanity.io/images/v6vpuuua/production/0bd3a0f368ad6e150e567c47625602e52e96b7bd-6960x4640.jpg?w=1600&q=75&auto=format"
       },
-      "uses": [
-        "École",
-        "Voyage"
-      ],
+      "uses": ["École"],
+      "features": []
+    },
+    {
+      "enabled": true,
+      "order": 60,
+      "publishedAt": "2026-08-12T16:41:00.000Z",
+      "id": "7f52eeef-f206-44ce-9a9d-5a78b96a482a",
+      "name": "Vélis électro F-HGBN",
+      "model": "Pipistrel / Virus SW128",
+      "registration": "F-HGBN",
+      "summary": "Vélis électrique partagé entre les aéroclubs de Bron",
+      "details": [],
+      "image": {
+        "alt": "Vélis électrique F-HGBN Interclubs",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/d4748b1b2b745364ced2958beb8153fa01150714-6960x4640.jpg?w=1600&q=75&auto=format"
+      },
+      "uses": [],
       "features": []
     }
   ],
@@ -109,14 +109,56 @@
     {
       "enabled": true,
       "order": 10,
+      "publishedAt": "2026-08-05T16:47:00.000Z",
+      "id": "10018cb7-2f85-49c6-891c-6b2c537f6f74",
+      "name": "Gilles PELLENZ",
+      "title": "Président et Dirigeant Responsable",
+      "roles": ["president", "boardMember"],
+      "summary": "Président du club. Anime le bureau et son conseil d'administration. Assure le rôle de Dirigeant Responsable de l'ATO Les Ailes Lyonnaises",
+      "biography": [],
+      "image": {
+        "alt": "Photo d'identité",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/8d1ae1bb3fab70572ef446f7c2bf63cf6cd398cb-1035x1380.jpg?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 20,
       "publishedAt": "2026-07-25T00:00:00.000Z",
-      "id": "person-fabien-cochard",
-      "name": "Fabien Cochard",
-      "title": "Responable pédagogique",
-      "roles": [
-        "instructor",
-        "chiefInstructor"
+      "id": "person-antoine-guerra",
+      "name": "Antoine Guerra",
+      "title": "Instructeur (FI) ",
+      "roles": ["instructor"],
+      "summary": "Instructeur de vol (FI). Il forme les élèves sur le parcours pratique, du circuit d’aérodrome aux navigations.",
+      "biography": [
+        {
+          "_key": "antoine-bio",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "2cb0a57d5741",
+              "_type": "span",
+              "marks": [],
+              "text": "CPL(A)/IR-ME-VDN- FI(A) 1200 Hdv Total 840 Hdv FI"
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
       ],
+      "image": {
+        "alt": "Antoine GUERRA",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/3fea7dac4e90d7d0d6792e784b288550a97f2a52-111x133.png?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 50,
+      "publishedAt": "2026-09-02T14:04:12.737Z",
+      "id": "person-fabien-cochard",
+      "name": "Fabien COCHARD",
+      "title": "Instructeur et Responable pédagogique",
+      "roles": ["instructor", "chiefInstructor", "boardMember"],
       "summary": "Responsable pédagogique de l’école de pilotage. Il coordonne le parcours pédagogique et accompagne les élèves du premier vol au test.",
       "biography": [
         {
@@ -137,14 +179,12 @@
     },
     {
       "enabled": true,
-      "order": 20,
-      "publishedAt": "2026-07-25T00:00:00.000Z",
-      "id": "person-antoine-guerra",
-      "name": "Antoine Guerra",
-      "title": "FI",
-      "roles": [
-        "instructor"
-      ],
+      "order": 100,
+      "publishedAt": "2026-08-11T17:31:00.000Z",
+      "id": "1e010c27-254f-4d4b-b062-30c27a93c8bf",
+      "name": "Guillaume DUBOIS",
+      "title": "Instructeur (FI)",
+      "roles": ["instructor"],
       "summary": "Instructeur de vol (FI). Il forme les élèves sur le parcours pratique, du circuit d’aérodrome aux navigations.",
       "biography": [
         {
@@ -152,16 +192,20 @@
           "_type": "block",
           "children": [
             {
-              "_key": "antoine-bio-span",
+              "_key": "2cb0a57d5741",
               "_type": "span",
               "marks": [],
-              "text": "Portrait et biographie détaillée à compléter avec l’accord de l’intéressé."
+              "text": "Qualifications : CPL(A)/IR-ME-VDN-FI(A) 1002h TT, 591 FI"
             }
           ],
           "markDefs": [],
           "style": "normal"
         }
-      ]
+      ],
+      "image": {
+        "alt": "Guillaume DUBOIS",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/9749ad6acbba444ef314eceea61eef1f992b938a-111x133.png?w=1600&q=75&auto=format"
+      }
     }
   ],
   "priceGroups": [
@@ -252,7 +296,7 @@
       "publishedAt": "2026-07-25T00:00:00.000Z",
       "id": "priceGroup-aircraft-rates",
       "title": "Tarifs horaires des avions",
-      "description": "Le tarif réduit nécessite un forfait annuel initial de 450 €.",
+      "description": "Le tarif réduit nécessite la souscription d'un forfait annuel initial de 450 €.",
       "items": [
         {
           "id": "f-gypg-normal",
@@ -458,9 +502,7 @@
       "slug": "sensibilisation-vol-montagne",
       "summary": "Module de sensibilisation destiné à découvrir le vol en région montagneuse en sécurité.",
       "details": [],
-      "prerequisites": [
-        "Programme et conditions à confirmer auprès du club."
-      ],
+      "prerequisites": ["Programme et conditions à confirmer auprès du club."],
       "availability": "available"
     }
   ],
@@ -512,6 +554,249 @@
               "_type": "span",
               "marks": [],
               "text": "En 1978, le club prend le nom « Les Ailes Lyonnaises »."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ]
+    },
+    {
+      "enabled": true,
+      "order": 20,
+      "publishedAt": "2026-09-01T00:00:00.000Z",
+      "id": "story-marie-marvingt",
+      "title": "La fiancée du danger — Marie Marvingt",
+      "slug": "marie-marvingt",
+      "excerpt": "Marie Marvingt n’a pas cherché les records pour les records : dès 1910, elle a cherché à quoi pouvait servir l’aviation. Et sa réponse a été : sauver des vies.",
+      "category": "elles",
+      "body": [
+        {
+          "_key": "marvingt-1",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "marvingt-1-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Marie Marvingt est un cas à part. Elle n'a pas cherché les records pour les records, elle a cherché à quoi pouvait servir l'aviation. Et sa réponse, dès 1910, a été : sauver des vies."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "marvingt-2",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "marvingt-2-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Sportive hors norme : alpiniste, nageuse, cycliste, skieuse de compétition, elle obtient son brevet de pilote en 1910, parmi les toutes premières femmes en France."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "marvingt-3",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "marvingt-3-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Mais ce qui l'obsède, c'est l'avion sanitaire. Elle conçoit des projets d'ambulances volantes dès la Première Guerre mondiale, dépose des plans, écrit des articles."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "marvingt-4",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "marvingt-4-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Pendant la guerre, elle se déguise en homme pour pouvoir aller sur le front. Elle est démasquée et envoyée en Italie en tant qu’infirmière."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "marvingt-quote",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "marvingt-quote-span",
+              "_type": "span",
+              "marks": [],
+              "text": "On m'a dit cent fois que c'était impossible. J'ai décidé de ne pas écouter."
+            }
+          ],
+          "markDefs": [],
+          "style": "blockquote"
+        }
+      ],
+      "image": {
+        "alt": "Marie Marvingt aux commandes d’un aéroplane, début du XXe siècle",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/9bb3b2b2c0b28443edff0927a314ee33770bd243-1500x995.webp?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 30,
+      "publishedAt": "2026-09-01T00:00:00.000Z",
+      "id": "story-elisabeth-boselli",
+      "title": "Élisabeth Boselli",
+      "slug": "elisabeth-boselli",
+      "excerpt": "Du brevet de tourisme en 1938 à l’école de chasse de Meknès, Élisabeth Boselli ouvre une voie que l’armée n’avait pas prévue pour les femmes.",
+      "category": "elles",
+      "body": [
+        {
+          "_key": "boselli-1",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "boselli-1-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Les débuts : Inscrite en école de sciences politiques, sa passion pour l’aviation arrive plus tard. Elle valide le 10 janvier 1938 son brevet de pilote de tourisme."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "boselli-2",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "boselli-2-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Pendant la guerre elle s’engage comme pilote pour la Croix Rouge. Elle rejoint ensuite l’école de pilotage militaire de Châteauroux. Le rêve prend fin brutalement puisque l’armée coupe les financements pour les femmes. Elle reçoit tout de même le titre de pilote militaire mais on ne lui propose qu’un emploi de bureau."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "boselli-3",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "boselli-3-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Retour à l’armée : L'année 1952 marque un grand virage dans la vie de la jeune femme. L'Armée de l'air lui propose de s'entraîner avec l'escadrille de présentation basée à Etampes. En 1954 elle rejoint l’école de chasse de Meknès au Maroc où elle se perfectionne. En 1957 elle s’engage durant la guerre d’Algérie et rejoint l'escadrille de liaison aérienne. Elisabeth Boselli prend sa retraite en 1969."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ],
+      "image": {
+        "alt": "Élisabeth Boselli descendant d’un Mirage III",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/a6b9ec6e19b0a9ab969f6ca39e34ea73e4e2ec5d-1600x1210.webp?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 40,
+      "publishedAt": "2026-09-01T00:00:00.000Z",
+      "id": "story-reine-givord",
+      "title": "La femme oiseau — Reine Givord",
+      "slug": "reine-givord",
+      "excerpt": "Le 9 avril 1922, devant 25 000 personnes massées sur le terrain de Bron, Reine Givord devient la première femme à sauter en parachute.",
+      "category": "elles",
+      "body": [
+        {
+          "_key": "givord-1",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "givord-1-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Le 9 avril 1922, 25 000 personnes sont massées sur le terrain de Bron pour la grande fête de l'aviation. Dans le ciel, à 800 mètres de hauteur, une silhouette se détache d'un avion. Une femme. Elle tombe, puis s'ouvre la voile, et la foule retient son souffle avant d'exploser en applaudissements."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "givord-2",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "givord-2-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Reine Givord vient de devenir la première femme à sauter en parachute. Ses premiers essais, deux ans plus tôt en 1920, s'étaient faits depuis un avion Caudron, presque discrètement. Mais ce jour-là, devant la foule lyonnaise, elle est entrée dans l'histoire locale. Les journaux la surnomment « la femme oiseau »."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "givord-quote",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "givord-quote-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Le parachute ne vous donne pas des ailes. Il vous apprend à ne pas en avoir besoin."
+            }
+          ],
+          "markDefs": [],
+          "style": "blockquote"
+        }
+      ],
+      "image": {
+        "alt": "Portrait de Reine Givord en tenue d’aviatrice",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/a1aecf4866d9e0e5e5c4526fd79a560aa051d0b0-959x719.webp?w=1600&q=75&auto=format"
+      }
+    }
+  ],
+  "newsArticles": [
+    {
+      "enabled": true,
+      "order": 10,
+      "publishedAt": "2026-09-18T08:00:00.000Z",
+      "id": "news-nouveau-site",
+      "title": "Le nouveau site des Ailes Lyonnaises est en ligne",
+      "slug": "nouveau-site",
+      "excerpt": "Formations, flotte, vie du club et démarche environnementale : le site public du club est désormais à jour pour préparer une visite ou une formation.",
+      "body": [
+        {
+          "_key": "news-1",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "news-1-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Le site public des Ailes Lyonnaises présente désormais l’école de pilotage agréée ATO, la flotte de six avions, les tarifs associatifs et la vie du club à Lyon-Bron."
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        },
+        {
+          "_key": "news-2",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "news-2-span",
+              "_type": "span",
+              "marks": [],
+              "text": "Vous y trouverez aussi notre démarche environnementale, les récits des Elles Lyonnaises et un formulaire pour parler d’un projet de formation. Les actualités du club seront publiées ici au fil de l’année."
             }
           ],
           "markDefs": [],

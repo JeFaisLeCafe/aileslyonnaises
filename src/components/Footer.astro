@@ -1,4 +1,6 @@
 ---
+import ClubEmail from "@/components/ClubEmail.astro";
+
 const year = new Date().getFullYear();
 ---
 
@@ -24,12 +26,14 @@ const year = new Date().getFullYear();
         <li><a href="/apprendre/#parcours">Les parcours</a></li>
         <li><a href="/flotte/">Notre flotte</a></li>
         <li><a href="/tarifs/">Tarifs</a></li>
+        <li><a href="/environnement/">Environnement</a></li>
       </ul>
     </div>
     <div>
       <h2>Le club</h2>
       <ul>
         <li><a href="/vie-du-club/">Vie du club</a></li>
+        <li><a href="/actualites/">Actualités</a></li>
         <li><a href="/bia/">Programme BIA</a></li>
         <li><a href="/contact/">Nous rencontrer</a></li>
       </ul>
@@ -41,7 +45,7 @@ const year = new Date().getFullYear();
         305 rue Albert Kimmerling<br />
         69680 Chassieu<br />
         <a href="tel:+33640369229">06 40 36 92 29</a><br />
-        info2@aileslyonnaises.com
+        <ClubEmail variant="dark" />
       </address>
     </div>
   </div>

@@ -129,7 +129,14 @@ for (const photo of aircraftPhotos) {
   const localJpg = resolve(workDir, photo.fileName);
   execFileSync(
     "sh",
-    ["-c", `unzip -p "$1" "$2" > "$3"`, "extract", zip, photo.zipPath, localJpg],
+    [
+      "-c",
+      `unzip -p "$1" "$2" > "$3"`,
+      "extract",
+      zip,
+      photo.zipPath,
+      localJpg,
+    ],
     { stdio: "inherit" },
   );
 

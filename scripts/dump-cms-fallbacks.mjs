@@ -16,6 +16,7 @@ import { fileURLToPath } from "node:url";
 
 import {
   mapAircraft,
+  mapNews,
   mapPeople,
   mapPriceGroups,
   mapSiteData,
@@ -24,6 +25,7 @@ import {
 } from "../src/lib/cms/mappers.ts";
 import {
   aircraftQuery,
+  newsQuery,
   peopleQuery,
   priceGroupsQuery,
   siteDataQuery,
@@ -94,6 +96,7 @@ const [
   priceGroupsRaw,
   trainingProgramsRaw,
   storiesRaw,
+  newsRaw,
   siteDataRaw,
 ] = await Promise.all([
   client.fetch(aircraftQuery),
@@ -101,6 +104,7 @@ const [
   client.fetch(priceGroupsQuery),
   client.fetch(trainingProgramsQuery),
   client.fetch(storiesQuery),
+  client.fetch(newsQuery),
   client.fetch(siteDataQuery),
 ]);
 
@@ -117,6 +121,7 @@ const snapshot = {
   priceGroups: mapPriceGroups(priceGroupsRaw, now),
   trainingPrograms: mapTrainingPrograms(trainingProgramsRaw, now),
   stories: mapStories(storiesRaw, now),
+  newsArticles: mapNews(newsRaw, now),
   siteData: mapSiteData(siteDataRaw),
 };
 
@@ -132,5 +137,6 @@ console.log(
     `${String(snapshot.priceGroups.length)} price groups`,
     `${String(snapshot.trainingPrograms.length)} training programs`,
     `${String(snapshot.stories.length)} stories`,
+    `${String(snapshot.newsArticles.length)} news`,
   ].join(", "),
 );

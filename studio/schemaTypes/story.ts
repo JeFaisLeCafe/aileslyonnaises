@@ -36,6 +36,7 @@ export const story = defineType({
           { title: "Histoire", value: "history" },
           { title: "Vie du club", value: "clubLife" },
           { title: "Navigation", value: "trip" },
+          { title: "Les Elles Lyonnaises", value: "elles" },
         ],
       },
       validation: (rule) => rule.required(),

@@ -1,0 +1,176 @@
+---
+import CtaBand from "@/components/CtaBand.astro";
+import PageHero from "@/components/PageHero.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const commitments = [
+  {
+    id: "velis",
+    number: "01",
+    title: "Un pas vers une aviation décarbonée",
+    text: "Le club participe, avec les autres aéroclubs de la plateforme, la FFA et les collectivités, au développement d’une aviation plus sobre. Le Vélis Electro, partagé entre les aéroclubs de Bron, permet l’école de base sans combustion à bord, donc sans émission de CO₂ en vol, et dans un silence remarquable.",
+  },
+  {
+    id: "retrofit",
+    number: "02",
+    title: "Moins de bruit sur un avion d’école",
+    text: "Le club a investi près de 18 000 € pour transformer un DR400-120 d’école (F-GXGE) : changement d’hélice et de pot d’échappement dans un atelier agréé. Ces modifications permettent le classement Calypso A, le meilleur vis-à-vis des émissions sonores.",
+  },
+  {
+    id: "nouvelle-generation",
+    number: "03",
+    title: "Des avions de nouvelle génération",
+    text: "Le Bristell B23 F-HSMB, classé Calypso A+, consomme moins et utilise du SP98 à la place de l’AVGAS 100LL. Une flotte plus moderne, plus économe et mieux adaptée à l’école comme au voyage.",
+  },
+  {
+    id: "charte",
+    number: "04",
+    title: "Une charte avec les riverains",
+    text: "L’urbanisation autour de l’aérodrome a rapproché les habitants des trajectoires. Le club, les autres acteurs de la plateforme et les riverains se sont engagés sur des procédures et des améliorations destinées à diminuer l’impact du trafic sur les communes voisines.",
+  },
+  {
+    id: "biodiversite",
+    number: "05",
+    title: "Le relais des actions de la FFA",
+    text: "Les aérodromes rassemblent de grandes surfaces non bâties, prairies et terres agricoles, favorables à la biodiversité. Les Ailes Lyonnaises relaient les actions nationales de la FFA, dont le fablab Envie de piloter.",
+  },
+];
+---
+
+<BaseLayout
+  title="Environnement"
+  description="La démarche environnementale des Ailes Lyonnaises à Lyon-Bron : Vélis électrique, réduction du bruit, flotte moderne et charte avec les riverains."
+  image="/images/environment/velis-electro.webp"
+  imageAlt="Pipistrel Velis Electro en vol"
+>
+  <PageHero
+    eyebrow="Démarche éco-responsable"
+    title="Voler en tenant compte de ceux qui vivent sous nos trajectoires"
+    introduction="Les Ailes Lyonnaises inscrivent le développement du club dans la transition écologique, avec un plan d’action en cinq points : énergie, bruit, flotte, riverains et biodiversité."
+    image="/images/environment/velis-electro.webp"
+    imageAlt="Pipistrel Velis Electro en vol au-dessus de la campagne"
+    longTitle
+  />
+
+  <section class="section section--white">
+    <div class="container split">
+      <div>
+        <p class="eyebrow">Cinq engagements</p>
+        <h2>Une démarche volontaire, pas un affichage.</h2>
+      </div>
+      <p class="lede">
+        La formation se fait avec des avions qui respectent la
+        <a class="text-link" href="#charte"
+          >charte du bruit avec les riverains</a
+        >. Le Vélis électrique, le rétrofit sonore et le renouvellement de la
+        flotte donnent un contenu concret à cet engagement.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container commitments">
+      {
+        commitments.map((item) => (
+          <article class="commitment" id={item.id}>
+            <span>{item.number}</span>
+            <div>
+              <h2>{item.title}</h2>
+              <p>{item.text}</p>
+              {item.id === "biodiversite" && (
+                <a
+                  class="text-link"
+                  href="https://enviedepiloter.fr/fablab/"
+                  rel="noopener noreferrer external"
+                >
+                  Découvrir le fablab FFA
+                </a>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container split">
+      <img
+        class="split__image"
+        src="/images/environment/bron-fox.webp"
+        alt="Renard observé depuis un avion sur la plateforme de Bron en 2026"
+        width="354"
+        height="527"
+        loading="lazy"
+      />
+      <div>
+        <p class="eyebrow">Plateforme de Bron — 2026</p>
+        <h2>Un terrain d’aviation est aussi un milieu vivant.</h2>
+        <p class="lede">
+          Prairies, lisières et espaces non bâtis autour de l’aérodrome
+          accueillent une faune que l’on croise parfois au départ. La
+          photographie ci-contre, prise depuis un avion du club, rappelle
+          pourquoi la FFA relie aviation légère et biodiversité.
+        </p>
+        <a class="text-link" href="/flotte/">Voir la flotte concernée</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Envie d’en parler au terrain ?"
+    text="La meilleure façon de comprendre nos choix de flotte et de procédures, c’est encore de venir à Lyon-Bron."
+    href="/contact/"
+    label="Nous rencontrer"
+  />
+</BaseLayout>
+
+<style>
+  .commitments {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .commitment {
+    display: grid;
+    gap: 1.25rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+  }
+
+  .commitment span {
+    color: var(--navy-800);
+    font-size: 0.8rem;
+    font-weight: 900;
+  }
+
+  .commitment h2 {
+    max-width: none;
+    margin-bottom: 0.75rem;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    white-space: nowrap;
+  }
+
+  .commitment p {
+    max-width: 48rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .commitment .text-link {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 40rem) {
+    .commitment {
+      grid-template-columns: 1fr;
+    }
+
+    .commitment h2 {
+      white-space: normal;
+    }
+  }
+</style>

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   mapAircraft,
+  mapNews,
   mapPeople,
   mapPriceGroups,
   mapSiteData,
@@ -10,6 +11,7 @@ import {
 } from "./mappers";
 import {
   fallbackAircraft,
+  fallbackNews,
   fallbackPeople,
   fallbackPriceGroups,
   fallbackSiteData,
@@ -112,11 +114,15 @@ describe("mapPriceGroups", () => {
 
 describe("static fallbacks", () => {
   it("conform to the same runtime schemas as CMS responses", () => {
-    expect(mapAircraft(fallbackAircraft, now)).toHaveLength(5);
-    expect(mapPeople(fallbackPeople, now)).toEqual(fallbackPeople);
-    expect(mapPriceGroups(fallbackPriceGroups, now)).toHaveLength(4);
-    expect(mapTrainingPrograms(fallbackTrainingPrograms, now)).toHaveLength(4);
-    expect(mapStories(fallbackStories, now)).toHaveLength(1);
+    const publishedNow = new Date("2026-09-19T12:00:00.000Z");
+    expect(mapAircraft(fallbackAircraft, publishedNow)).toHaveLength(6);
+    expect(mapPeople(fallbackPeople, publishedNow)).toEqual(fallbackPeople);
+    expect(mapPriceGroups(fallbackPriceGroups, publishedNow)).toHaveLength(4);
+    expect(
+      mapTrainingPrograms(fallbackTrainingPrograms, publishedNow),
+    ).toHaveLength(4);
+    expect(mapStories(fallbackStories, publishedNow)).toHaveLength(4);
+    expect(mapNews(fallbackNews, publishedNow)).toHaveLength(1);
     expect(mapSiteData(fallbackSiteData).clubName).toBe(
       "Aéroclub Les Ailes Lyonnaises",
     );

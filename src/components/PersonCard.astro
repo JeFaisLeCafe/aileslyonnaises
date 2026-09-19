@@ -1,0 +1,76 @@
+---
+import type { Person } from "@/lib/cms";
+
+interface Props {
+  person: Person;
+}
+
+const { person } = Astro.props;
+---
+
+<article class="card person-card">
+  {
+    person.image && (
+      <img
+        class="person-card__image"
+        src={person.image.url}
+        alt={person.image.alt}
+        width="1035"
+        height="1380"
+        loading="lazy"
+      />
+    )
+  }
+  <div class="person-card__content">
+    {person.title && <p class="person-card__role">{person.title}</p>}
+    <h3>{person.name}</h3>
+    <p>{person.summary}</p>
+  </div>
+</article>
+
+<style>
+  .person-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .person-card__image {
+    width: 100%;
+    height: 6rem;
+    padding: 0.65rem;
+    object-fit: contain;
+    object-position: center;
+    background: var(--paper);
+  }
+
+  .person-card__content {
+    padding: 0.85rem;
+  }
+
+  .person-card h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .person-card__role {
+    margin: 0 0 0.4rem;
+    color: var(--navy-800);
+    font-size: 0.68rem;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+
+  .person-card__content > p:last-child {
+    display: -webkit-box;
+    overflow: hidden;
+    margin-bottom: 0;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+  }
+</style>

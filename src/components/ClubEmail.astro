@@ -1,0 +1,30 @@
+---
+interface Props {
+  variant?: "light" | "dark";
+}
+
+const { variant = "light" } = Astro.props;
+---
+
+<img
+  class="club-email"
+  src={variant === "dark"
+    ? "/images/brand/email-on-dark.webp"
+    : "/images/brand/email-on-light.webp"}
+  width="320"
+  height="28"
+  alt="Adresse électronique du club"
+  draggable="false"
+/>
+
+<style>
+  .club-email {
+    display: inline-block;
+    width: auto;
+    height: 1.15em;
+    max-width: 100%;
+    user-select: none;
+    pointer-events: none;
+    vertical-align: text-bottom;
+  }
+</style>

@@ -79,6 +79,16 @@ export const storiesQuery = `*[_type == "story" && ${publicGate}] | order(order 
   ${publicationProjection}
 }`;
 
+export const newsQuery = `*[_type == "newsArticle" && ${publicGate}] | order(publishedAt desc, order asc) {
+  "id": _id,
+  title,
+  "slug": slug.current,
+  excerpt,
+  body,
+  ${imageProjection},
+  ${publicationProjection}
+}`;
+
 export const siteDataQuery = `*[
   _type == "siteSettings" &&
   _id == "siteSettings" &&

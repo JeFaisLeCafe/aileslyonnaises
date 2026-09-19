@@ -17,7 +17,8 @@
     "studio:build": "npm run build --prefix studio --",
     "studio:deploy": "npm run deploy --prefix studio --",
     "cms:dump-fallbacks": "node --experimental-strip-types scripts/dump-cms-fallbacks.mjs",
-    "cms:sync": "npm exec --prefix studio -- sanity exec ../scripts/sync-sanity-content.mjs --with-user-token"
+    "cms:sync": "npm exec --prefix studio -- sanity exec ../scripts/sync-sanity-content.mjs --with-user-token",
+    "cms:seed-launch": "cd studio && npx sanity exec ../scripts/seed-launch-content.mjs --with-user-token"
   },
   "keywords": [
     "aeroclub",

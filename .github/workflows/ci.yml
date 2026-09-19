@@ -19,10 +19,19 @@ jobs:
 
       - run: npm ci
 
+      - run: npm run format:check
       - run: npm run check
       - run: npm test
       - run: npm run build
         env:
+          PUBLIC_SANITY_PROJECT_ID: ${{ vars.PUBLIC_SANITY_PROJECT_ID }}
+          PUBLIC_SANITY_DATASET: ${{ vars.PUBLIC_SANITY_DATASET || 'production' }}
+          SANITY_PREVIEW_DRAFTS: "false"
+
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+        env:
+          CI: true
           PUBLIC_SANITY_PROJECT_ID: ${{ vars.PUBLIC_SANITY_PROJECT_ID }}
           PUBLIC_SANITY_DATASET: ${{ vars.PUBLIC_SANITY_DATASET || 'production' }}
           SANITY_PREVIEW_DRAFTS: "false"

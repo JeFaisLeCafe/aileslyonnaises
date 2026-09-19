@@ -62,14 +62,15 @@ const {
 
   .page-hero__image {
     object-fit: cover;
+    filter: brightness(1.12);
   }
 
   .page-hero__overlay {
     background: linear-gradient(
       90deg,
-      rgb(3 23 53 / 0.62) 0%,
-      rgb(3 23 53 / 0.34) 48%,
-      rgb(3 23 53 / 0.1) 100%
+      rgb(3 23 53 / 0.42) 0%,
+      rgb(3 23 53 / 0.2) 48%,
+      rgb(3 23 53 / 0.06) 100%
     );
   }
 
@@ -81,15 +82,15 @@ const {
   }
 
   .page-hero h1 {
-    max-width: 13ch;
+    max-width: 16ch;
     margin-bottom: 1.5rem;
     color: var(--white);
-    font-size: clamp(3rem, 7vw, 6.4rem);
+    font-size: clamp(2.4rem, 5.4vw, 4.6rem);
   }
 
   .page-hero--long-title h1 {
     max-width: 22ch;
-    font-size: clamp(2.2rem, 5vw, 4.2rem);
+    font-size: clamp(2rem, 4.4vw, 3.6rem);
   }
 
   .page-hero .page-hero__eyebrow {

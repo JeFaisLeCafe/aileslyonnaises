@@ -9,6 +9,7 @@ const eventSchema = z.object({
     "training_form_start",
     "training_form_submit",
     "aerogest_outbound_click",
+    "firstflight_outbound_click",
   ]),
   path: z.string().startsWith("/").max(200),
 });

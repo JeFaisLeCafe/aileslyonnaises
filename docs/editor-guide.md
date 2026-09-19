@@ -13,9 +13,11 @@ En local : `npm run studio` (http://127.0.0.1:3333).
 ## Contenus administrables
 
 - **Avions** : modèle, immatriculation, usage, description, photographie et ordre.
+- **Actualités** : informations datées, distinctes de la page Vie du club.
 - **Personnes** : nom, titre affiché, rôles, portrait, biographie courte et ordre.
+  Les vues **Équipe pédagogique**, **Bureau** et **Conseil d’administration** filtrent le même document selon les rôles.
 - **Tarifs** : groupes, lignes, montants, unité et date d’effet.
-- **Récits** : titre, résumé, photographie, contenu et mise en avant.
+- **Récits** : titre, résumé, photographie, contenu, y compris la série « Les Elles Lyonnaises ».
 
 Les formations, la navigation et la composition des pages restent dans le code
 afin d’éviter qu’une modification éditoriale casse la mise en page.

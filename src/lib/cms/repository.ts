@@ -1,5 +1,6 @@
 import {
   fallbackAircraft,
+  fallbackNews,
   fallbackPeople,
   fallbackPriceGroups,
   fallbackSiteData,
@@ -10,6 +11,7 @@ import {
 import { sanityClient } from "./client";
 import {
   mapAircraft,
+  mapNews,
   mapPeople,
   mapPriceGroups,
   mapSiteData,
@@ -18,6 +20,7 @@ import {
 } from "./mappers";
 import {
   aircraftQuery,
+  newsQuery,
   peopleQuery,
   priceGroupsQuery,
   siteDataQuery,
@@ -26,6 +29,7 @@ import {
 } from "./queries";
 import type {
   Aircraft,
+  NewsArticle,
   Person,
   PriceGroup,
   SiteData,
@@ -70,6 +74,9 @@ export const getTrainingPrograms = (): Promise<TrainingProgram[]> =>
 
 export const getStories = (): Promise<Story[]> =>
   fetchOrFallback(storiesQuery, mapStories, fallbackStories);
+
+export const getNews = (): Promise<NewsArticle[]> =>
+  fetchOrFallback(newsQuery, mapNews, fallbackNews);
 
 export const getSiteData = (): Promise<SiteData> =>
   fetchOrFallback(siteDataQuery, mapSiteData, fallbackSiteData);

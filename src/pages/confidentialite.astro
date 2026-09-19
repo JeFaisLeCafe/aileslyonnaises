@@ -5,7 +5,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Confidentialité"
-  description="Politique de confidentialité du site des Ailes Lyonnaises : formulaire de formation, analytics sans cookies et durée de conservation des données."
+  description="Politique de confidentialité du site des Ailes Lyonnaises : formulaire de formation, mesure d’audience Cloudflare sans cookies et durée de conservation des données."
 >
   <PageHero
     eyebrow="Vos données"
@@ -18,8 +18,9 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       <p>
         Le formulaire transmet vos coordonnées, votre projet, votre tranche
         d’âge, votre expérience et vos disponibilités à l’équipe formation par
-        email. Ces informations servent uniquement à répondre à votre demande et
-        ne sont pas enregistrées dans une base de prospection par le site.
+        email, via Resend. Ces informations servent uniquement à répondre à
+        votre demande et ne sont pas enregistrées dans une base de prospection
+        par le site.
       </p>
       <p>
         Les messages restent soumis aux règles de conservation de la messagerie
@@ -30,23 +31,25 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       <h2>Sous-traitants techniques</h2>
       <ul>
         <li>
-          l’hébergeur du site pour la livraison des pages et la sécurité ;
+          Cloudflare Pages pour l’hébergement, la livraison des pages et la
+          sécurité ;
         </li>
         <li>
           Cloudflare Turnstile pour la protection contre les envois automatisés
           ;
         </li>
-        <li>
-          le prestataire d’envoi d’email configuré lors de la mise en production
-          ;
-        </li>
+        <li>Resend pour l’envoi de l’email de demande de formation ;</li>
         <li>Sanity pour les contenus publics administrés par le club.</li>
       </ul>
       <h2>Mesure d’audience</h2>
       <p>
-        Le site prévoit une mesure d’audience agrégée et sans cookie. Elle sert
-        à comprendre les pages consultées et les actions principales, sans
-        profilage publicitaire.
+        Le site utilise Cloudflare Web Analytics, une mesure d’audience agrégée
+        et sans cookie, pour comprendre les pages consultées. Les actions
+        principales (début et envoi du formulaire, clic vers FirstFlight) sont
+        journalisées dans Cloudflare Analytics Engine sous forme d’événements
+        non personnels : nom de l’action et chemin de la page. Aucun
+        identifiant, adresse IP ou contenu de formulaire n’est stocké dans ces
+        journaux. Il n’y a pas de tableau de bord public.
       </p>
       <h2>Vos droits</h2>
       <p>

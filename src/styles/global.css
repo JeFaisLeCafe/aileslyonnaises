@@ -261,6 +261,16 @@ h3 {
   transform: translateX(0.25rem);
 }
 
+a[rel~="external"]:not(.text-link)::after {
+  content: "↗";
+  margin-left: 0.35em;
+  font-size: 0.78em;
+}
+
+.text-link[rel~="external"]::after {
+  content: "↗";
+}
+
 .grid {
   display: grid;
   gap: 1.25rem;

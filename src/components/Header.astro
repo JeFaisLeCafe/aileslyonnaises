@@ -7,6 +7,7 @@ const navigation = [
   { href: "/bia/", label: "BIA" },
   { href: "/flotte/", label: "Flotte" },
   { href: "/tarifs/", label: "Tarifs" },
+  { href: "/environnement/", label: "Environnement" },
   { href: "/vie-du-club/", label: "Vie du club" },
   { href: "/contact/", label: "Contact" },
 ];
@@ -149,7 +150,7 @@ const isCurrent = (href: string) =>
   }
 
   .main-navigation ul {
-    gap: clamp(0.75rem, 1.5vw, 1.35rem);
+    gap: clamp(0.55rem, 1.1vw, 1.1rem);
     padding: 0;
     margin: 0;
     list-style: none;
@@ -159,7 +160,7 @@ const isCurrent = (href: string) =>
     position: relative;
     padding-block: 1rem;
     color: rgb(255 255 255 / 0.72);
-    font-size: 0.8rem;
+    font-size: 0.74rem;
     font-weight: 700;
     text-decoration: none;
   }
@@ -202,7 +203,7 @@ const isCurrent = (href: string) =>
     background: var(--white);
   }
 
-  @media (max-width: 68rem) {
+  @media (max-width: 76rem) {
     .menu-button {
       display: block;
     }

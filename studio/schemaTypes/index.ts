@@ -1,4 +1,5 @@
 import { aircraft } from "./aircraft";
+import { newsArticle } from "./newsArticle";
 import { person } from "./person";
 import { priceGroup } from "./priceGroup";
 import { accessibleImage, portableText } from "./shared";
@@ -14,5 +15,6 @@ export const schemaTypes = [
   priceGroup,
   trainingProgram,
   story,
+  newsArticle,
   siteSettings,
 ];

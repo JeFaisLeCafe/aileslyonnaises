@@ -19,7 +19,7 @@ export const sanityClient: SanityClient | null =
         dataset,
         apiVersion: "2025-02-19",
         ...(previewDrafts && token ? { token } : {}),
-        useCdn: !previewDrafts,
+        useCdn: false,
         perspective: previewDrafts ? "drafts" : "published",
       })
     : null;

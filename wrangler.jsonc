@@ -4,7 +4,10 @@
   "name": "aileslyonnaises",
   "compatibility_date": "2026-07-25",
   "pages_build_output_dir": "./dist",
-  // Re-add analytics_engine_datasets after enabling Analytics Engine:
-  // https://dash.cloudflare.com/?to=/:account/workers/analytics-engine
-  // { "binding": "ANALYTICS", "dataset": "ailes_lyonnaises_events" }
+  "analytics_engine_datasets": [
+    {
+      "binding": "ANALYTICS",
+      "dataset": "ailes_lyonnaises_events",
+    },
+  ],
 }

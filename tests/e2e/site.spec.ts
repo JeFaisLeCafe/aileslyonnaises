@@ -66,9 +66,12 @@ test("navbar pages use consistent, readable image heroes", async ({ page }) => {
   const routes = [
     "/decouvrir/",
     "/apprendre/",
+    "/bia/",
     "/flotte/",
     "/tarifs/",
+    "/environnement/",
     "/vie-du-club/",
+    "/actualites/",
     "/contact/",
   ];
   const heroHeights: number[] = [];
@@ -156,7 +159,7 @@ test("homepage visual essentials remain legible and complete", async ({
     await expect(page.locator(".menu-button")).toBeHidden();
     await expect(page.locator(".main-navigation")).toHaveCSS("display", "flex");
   }
-  await expect(page.locator(".fleet-card img")).toHaveCount(3);
+  await expect(page.locator(".fleet-card img")).toHaveCount(6);
 
   const mainImages = page.locator("main img");
   for (const image of await mainImages.all()) {
@@ -236,4 +239,98 @@ test("homepage has no automatically detectable accessibility violations", async 
   const results = await new AxeBuilder({ page }).analyze();
 
   expect(results.violations).toEqual([]);
+});
+
+test("environment and news appear in site navigation", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(
+    page.locator("#main-navigation a[href='/environnement/']"),
+  ).toHaveCount(1);
+  await expect(
+    page.locator("footer").getByRole("link", { name: "Actualités" }),
+  ).toHaveAttribute("href", "/actualites/");
+
+  await page.goto("/environnement/");
+  await expect(
+    page.getByRole("heading", { name: /Voler en tenant compte/ }),
+  ).toBeVisible();
+  await expect(page.locator("#charte")).toBeVisible();
+
+  await page.goto("/actualites/");
+  await expect(
+    page.getByRole("heading", { name: /nouveau site des Ailes Lyonnaises/i }),
+  ).toBeVisible();
+});
+
+test("external links open in a new tab", async ({ page }) => {
+  await page.goto("/bia/");
+  const external = page.locator("a[rel~='external']").first();
+  await expect(external).toHaveAttribute("target", "_blank");
+});
+
+test("club life splits bureau and board when CMS members exist", async ({
+  page,
+}) => {
+  await page.goto("/vie-du-club/");
+
+  await expect(page.locator(".eyebrow", { hasText: "Bureau" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Gilles PELLENZ" }).first(),
+  ).toBeVisible();
+  await expect(
+    page.locator(".eyebrow", { hasText: "Conseil d’administration" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Fabien COCHARD" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: /Marie Marvingt/ }),
+  ).toBeVisible();
+
+  const story = page.locator(".story-grid .media-card").first();
+  await expect(story).toHaveAttribute("href", "/vie-du-club/histoire-du-club/");
+  await story.click();
+  await expect(
+    page.getByRole("heading", {
+      name: "Un club ancré dans le territoire lyonnais",
+      level: 1,
+    }),
+  ).toBeVisible();
+});
+
+test("partner marks load correctly", async ({ page }) => {
+  await page.goto("/vie-du-club/");
+
+  const marks = page.locator(".partner-list img");
+  await expect(marks).toHaveCount(4);
+  for (const mark of await marks.all()) {
+    await mark.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() =>
+        mark.evaluate((image) =>
+          image instanceof HTMLImageElement ? image.naturalWidth : 0,
+        ),
+      )
+      .toBeGreaterThan(0);
+  }
+});
+
+test("main routes have no automatically detectable accessibility violations", async ({
+  page,
+}) => {
+  const routes = [
+    "/",
+    "/apprendre/",
+    "/environnement/",
+    "/vie-du-club/",
+    "/actualites/",
+    "/contact/",
+  ];
+
+  for (const route of routes) {
+    await page.goto(route);
+    const results = await new AxeBuilder({ page }).analyze();
+    expect(results.violations, route).toEqual([]);
+  }
 });

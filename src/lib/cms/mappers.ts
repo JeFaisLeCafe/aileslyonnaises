@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import type {
   Aircraft,
+  NewsArticle,
   Person,
   PriceGroup,
   SiteData,
@@ -26,7 +27,13 @@ const portableTextBlockSchema = z.object({
 
 const imageSchema = z.object({
   alt: z.string().min(3),
-  url: z.url(),
+  url: z
+    .string()
+    .min(1)
+    .refine(
+      (value) => value.startsWith("/") || URL.canParse(value),
+      "URL d’image invalide",
+    ),
 });
 
 const publicationSchema = z.object({
@@ -143,7 +150,16 @@ export const storySchema = publicationSchema.extend({
   title: z.string(),
   slug: z.string(),
   excerpt: z.string(),
-  category: z.enum(["history", "clubLife", "trip"]),
+  category: z.enum(["history", "clubLife", "trip", "elles"]),
+  body: z.array(portableTextBlockSchema),
+  image: imageSchema.nullish().transform((value) => value ?? undefined),
+});
+
+export const newsArticleSchema = publicationSchema.extend({
+  id: z.string(),
+  title: z.string(),
+  slug: z.string(),
+  excerpt: z.string(),
   body: z.array(portableTextBlockSchema),
   image: imageSchema.nullish().transform((value) => value ?? undefined),
 });
@@ -208,6 +224,13 @@ export const mapTrainingPrograms = (
 
 export const mapStories = (input: unknown, now = new Date()): Story[] =>
   mapPublicCollection(input, storySchema, now);
+
+export const mapNews = (input: unknown, now = new Date()): NewsArticle[] =>
+  mapPublicCollection(input, newsArticleSchema, now).sort(
+    (left, right) =>
+      Date.parse(right.publishedAt) - Date.parse(left.publishedAt) ||
+      left.order - right.order,
+  );
 
 export const mapSiteData = (input: unknown): SiteData =>
   siteDataSchema.parse(input);

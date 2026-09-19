@@ -1,4 +1,5 @@
 ---
+import ClubEmail from "@/components/ClubEmail.astro";
 import PageHero from "@/components/PageHero.astro";
 import TrainingForm from "@/components/TrainingForm.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
@@ -32,7 +33,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
           </div>
           <div>
             <span>Email</span>
-            <strong>info2@aileslyonnaises.com</strong>
+            <strong><ClubEmail /></strong>
           </div>
         </div>
         <div class="button-row">
@@ -91,8 +92,8 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         <p class="lede">
           BIA, partenariat, vie associative, passage au club ou question
           administrative : indiquez un objet précis pour faciliter la réponse
-          des bénévoles. Écrivez à info2@aileslyonnaises.com ou utilisez le
-          formulaire de formation ci-dessus.
+          des bénévoles. Écrivez à <ClubEmail variant="dark" /> ou utilisez le formulaire
+          de formation ci-dessus.
         </p>
         <a class="button" href="#formation">Utiliser le formulaire</a>
       </div>

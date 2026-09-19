@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import {
   aircraftSchema,
+  newsArticleSchema,
   personSchema,
   priceGroupSchema,
   siteDataSchema,
@@ -10,6 +11,7 @@ import {
 } from "../lib/cms/mappers";
 import type {
   Aircraft,
+  NewsArticle,
   Person,
   PriceGroup,
   SiteData,
@@ -27,6 +29,7 @@ const cmsFallbacksSchema = z.object({
   priceGroups: z.array(priceGroupSchema),
   trainingPrograms: z.array(trainingProgramSchema),
   stories: z.array(storySchema),
+  newsArticles: z.array(newsArticleSchema).default([]),
   siteData: siteDataSchema,
 });
 
@@ -38,4 +41,5 @@ export const fallbackPriceGroups: PriceGroup[] = snapshot.priceGroups;
 export const fallbackTrainingPrograms: TrainingProgram[] =
   snapshot.trainingPrograms;
 export const fallbackStories: Story[] = snapshot.stories;
+export const fallbackNews: NewsArticle[] = snapshot.newsArticles;
 export const fallbackSiteData: SiteData = snapshot.siteData;

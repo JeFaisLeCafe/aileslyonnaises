@@ -28,7 +28,7 @@ export const person = defineType({
       name: "title",
       title: "Titre affiché",
       type: "string",
-      description: "Ex. Chef instructeur, FI(A), Présidente…",
+      description: "Ex. Chef instructeur, FI(A), Président…",
       validation: (rule) => rule.max(80),
     }),
     defineField({
@@ -36,8 +36,30 @@ export const person = defineType({
       title: "Rôles",
       type: "array",
       of: [defineArrayMember({ type: "string" })],
+      description:
+        "Un même document peut combiner plusieurs rôles. L’équipe pédagogique apparaît sur Apprendre ; le bureau et le conseil d’administration sur Vie du club.",
       options: { list: roles },
-      validation: (rule) => rule.required().min(1).unique(),
+      validation: (rule) =>
+        rule
+          .required()
+          .min(1)
+          .unique()
+          .custom((value: string[] | undefined) => {
+            if (!value?.length) return "Choisissez au moins un rôle.";
+            const instruction = value.some(
+              (role) => role === "instructor" || role === "chiefInstructor",
+            );
+            const bureau = value.some((role) =>
+              ["president", "vicePresident", "treasurer", "secretary"].includes(
+                role,
+              ),
+            );
+            const board = value.includes("boardMember");
+            if (!instruction && !bureau && !board) {
+              return "Attribuez un rôle d’instruction, de bureau ou de conseil d’administration.";
+            }
+            return true;
+          }),
     }),
     defineField({
       name: "summary",

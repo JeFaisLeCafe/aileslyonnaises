@@ -1,0 +1,110 @@
+---
+import CtaBand from "@/components/CtaBand.astro";
+import PageHero from "@/components/PageHero.astro";
+import { getNews } from "@/lib/cms";
+import { portableTextPlain } from "@/lib/cms/portableText";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const articles = await getNews();
+const date = (value: string) =>
+  new Intl.DateTimeFormat("fr-FR", {
+    dateStyle: "long",
+    timeZone: "Europe/Paris",
+  }).format(new Date(value));
+---
+
+<BaseLayout
+  title="Actualités"
+  description="Les actualités de l’Aéroclub Les Ailes Lyonnaises : vie du club, flotte, formations et rendez-vous à Lyon-Bron."
+>
+  <PageHero
+    eyebrow="Le club en mouvement"
+    title="Actualités des Ailes Lyonnaises"
+    introduction="Les informations datées du club, distinctes de la présentation permanente de la vie associative."
+    image="/images/club/barbecue-animation.webp"
+    imageAlt="Membres des Ailes Lyonnaises réunis autour d’un moment convivial"
+  />
+
+  <section class="section section--white">
+    <div class="narrow">
+      {
+        articles.length === 0 ? (
+          <p class="lede">
+            Aucune actualité n’est publiée pour le moment. La vie associative,
+            l’histoire du club et les récits se trouvent sur la page
+            <a class="text-link" href="/vie-du-club/">
+              Vie du club
+            </a>
+            .
+          </p>
+        ) : (
+          <div class="news-list">
+            {articles.map((article) => (
+              <article class="news-item" id={article.slug}>
+                <p class="eyebrow">{date(article.publishedAt)}</p>
+                <h2>{article.title}</h2>
+                {article.image && (
+                  <img
+                    src={article.image.url}
+                    alt={article.image.alt}
+                    width="1600"
+                    height="900"
+                    loading="lazy"
+                  />
+                )}
+                {article.body.map((block) =>
+                  block.style === "blockquote" ? (
+                    <blockquote>{portableTextPlain(block)}</blockquote>
+                  ) : (
+                    <p>{portableTextPlain(block)}</p>
+                  ),
+                )}
+              </article>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <CtaBand
+    title="Une question, un projet, une visite ?"
+    text="Le formulaire de formation et les coordonnées du club restent le moyen le plus direct de nous joindre."
+    href="/contact/"
+    label="Contacter le club"
+  />
+</BaseLayout>
+
+<style>
+  .news-list {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .news-item h2 {
+    max-width: 22ch;
+    margin-bottom: 1.25rem;
+  }
+
+  .news-item img {
+    width: 100%;
+    max-height: 22rem;
+    margin-bottom: 1.25rem;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+
+  .news-item p,
+  .news-item blockquote {
+    color: #344054;
+    font-size: 1.08rem;
+    line-height: 1.8;
+  }
+
+  .news-item blockquote {
+    margin: 0 0 1rem;
+    padding-left: 1.25rem;
+    border-left: 4px solid var(--yellow-500);
+    font-style: italic;
+  }
+</style>

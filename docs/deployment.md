@@ -1,217 +1,162 @@
-# Déploiement
+# Deployment and infrastructure
 
-## Cible provisoire : Cloudflare Pages
+This document describes the project's stable deployment architecture. Current
+launch tasks and one-off operational notes belong in the local, ignored
+`.scratch/launch/spec.md` file.
 
-Cloudflare Pages héberge le site **statique** et les **fonctions** du formulaire
-(`/api/training-enquiry`, analytics). OVH reste le registrar et le fournisseur
-email. On ne bascule pas `www` tant que `v2` n’est pas validé.
+## Architecture
 
-### Pourquoi Cloudflare (et pas seulement OVH) ?
+- **Application:** Astro static site with Cloudflare Pages Functions.
+- **Hosting:** Cloudflare Pages project `aileslyonnaises`.
+- **Preview domain:** `https://v2.aileslyonnaises.com`.
+- **Content:** Sanity project `v6vpuuua`, dataset `production`.
+- **CMS Studio:** `https://ailes-lyonnaises.sanity.studio/`.
+- **Registrar and email:** OVH remains authoritative for the domain and club
+  mailboxes.
+- **Transactional email:** Resend sends form submissions to the club.
+- **Bot protection:** Cloudflare Turnstile protects the training enquiry form.
+- **Analytics:** Cloudflare Web Analytics tracks traffic; Analytics Engine
+  records non-personal conversion events.
 
-Le site a besoin d’un runtime pour :
+The site does not require running the Wrangler CLI for normal deployments.
+GitHub pushes trigger Cloudflare Pages builds. The `wrangler.jsonc` file remains
+the Cloudflare project configuration: Pages reads the output directory and
+Analytics Engine binding from it.
 
-- recevoir le formulaire de formation ;
-- vérifier Turnstile ;
-- envoyer l’email via Resend ;
-- journaliser des événements sans cookies.
+## Deployment flow
 
-Un hébergement mutualisé OVH classique ne couvre pas ces fonctions aussi simplement.
-DNS et boîtes mail restent chez OVH ; seul le trafic web pointe vers Pages.
+The Cloudflare Pages project is connected to the GitHub repository. A push to
+`main` starts a production build. Pull requests and non-production branches can
+produce preview deployments.
 
-### CI/CD : GitHub lié à Cloudflare Pages
+GitHub Actions runs validation only:
 
-Le projet Pages `aileslyonnaises` est **connecté au repo GitHub**. Chaque push
-sur `main` déclenche un build Cloudflare. GitHub Actions (`.github/workflows/ci.yml`)
-ne fait que `check` / tests / `build` de validation — pas le déploiement.
+- Astro and TypeScript checks;
+- ESLint;
+- unit tests;
+- production build;
+- Playwright end-to-end and accessibility tests.
 
-#### Réglages build (Pages → Settings → Builds)
+Cloudflare Pages performs the actual deployment.
 
-| Champ | Valeur |
-| --- | --- |
-| Framework preset | Astro |
-| Build command | `npm run build` |
-| Build output directory | `dist` |
-| Root directory | `/` (vide) |
-| Node version | `22` (via `.node-version` ou variable `NODE_VERSION=22`) |
+## Cloudflare Pages build settings
 
-Sans **Build command**, Cloudflare saute `npm install` / le build Astro, puis
-échoue en compilant `functions/` (erreurs `zod` / `resend`).
+- Framework preset: Astro
+- Build command: `npm run build`
+- Output directory: `dist`
+- Root directory: repository root
+- Node.js: 22
 
-#### Variables d’environnement (Pages → Settings → Environment variables)
+The Pages Functions under `functions/` are deployed with the static output.
 
-Projet : [aileslyonnaises](https://dash.cloudflare.com/a65e979c4b1932a343772154116fbfdd/pages/view/aileslyonnaises/settings/environment-variables)
+## Environment variables
 
-Ajouter en **Production** et **Preview**, puis **Retry deployment** :
+Configure variables in the Cloudflare Pages project for both Production and
+Preview where appropriate.
 
-| Variable | Valeur | Secret ? |
-| --- | --- | --- |
-| `PUBLIC_SANITY_PROJECT_ID` | `v6vpuuua` | non |
-| `PUBLIC_SANITY_DATASET` | `production` | non |
-| `SANITY_PREVIEW_DRAFTS` | `false` | non |
-| `PUBLIC_TURNSTILE_SITE_KEY` | (clé publique Turnstile) | non |
-| `TURNSTILE_SECRET_KEY` | (clé secrète Turnstile) | **oui** |
-| `RESEND_API_KEY` | `re_…` | **oui** |
-| `TRAINING_RECIPIENT_EMAIL` | `info2@aileslyonnaises.com` | non |
-| `TRAINING_SENDER_EMAIL` | `site@send.aileslyonnaises.com` | non |
-
-`PUBLIC_*` est lu **au build** Astro : après ajout/modif, il faut redéployer.
-Les autres variables sont lues par les Pages Functions au runtime.
-
-Analytics Engine n’est **pas** requis pour publier le site.
-
-Variables GitHub (optionnel, pour le workflow CI) :
+Public build-time variables:
 
 - `PUBLIC_SANITY_PROJECT_ID=v6vpuuua`
 - `PUBLIC_SANITY_DATASET=production`
+- `PUBLIC_TURNSTILE_SITE_KEY`
+- `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN`
 
-### Checklist 1 — Sanity CMS → rebuild
+Server-side variables:
 
-1. **Env Sanity** dans Pages (tableau ci-dessus) + Retry deployment.
-2. **Deploy Hook** Cloudflare : Settings → Builds → Deploy hooks → Add  
-   Name `sanity-publish`, branch `main` → copier l’URL (secret).
-3. **Webhook Sanity** : [manage.sanity.io](https://www.sanity.io/manage/project/v6vpuuua/api)  
-   → API → Webhooks → Create :
-   - Name : `Cloudflare Pages`
-   - URL : le Deploy Hook
-   - Dataset : `production`
-   - Trigger : Create, Update, Delete
-   - Drafts : **off** (publications seulement)
-4. Test : modifier un avion dans le Studio → Publish → un nouveau déploiement
-   Pages doit apparaître sous 1–2 minutes.
-5. **CORS Studio** (si besoin) : Sanity → API → CORS origins → ajouter
-   `https://v2.aileslyonnaises.com` et `https://aileslyonnaises.pages.dev`.
+- `SANITY_PREVIEW_DRAFTS=false`
+- `TURNSTILE_SECRET_KEY`
+- `RESEND_API_KEY`
+- `TRAINING_RECIPIENT_EMAIL=info2@aileslyonnaises.com`
+- `TRAINING_SENDER_EMAIL=site@send.aileslyonnaises.com`
 
-### Checklist 3 — Formulaire (Turnstile + Resend)
+`PUBLIC_*` values are embedded during the Astro build, so changing one requires
+a new deployment. Keep Turnstile and Resend secret values out of Git.
 
-#### Turnstile
+## Content publishing
 
-1. [Turnstile](https://dash.cloudflare.com/a65e979c4b1932a343772154116fbfdd/turnstile) → Add widget.
-2. Hostnames : `v2.aileslyonnaises.com`, `aileslyonnaises.pages.dev`
-   (plus `www.aileslyonnaises.com` au cutover).
-3. Copier Site Key → `PUBLIC_TURNSTILE_SITE_KEY`  
-   Secret Key → `TURNSTILE_SECRET_KEY` (secret).
+Sanity is the source of truth for public content. The repository contains
+`src/data/cms-fallbacks.json` so the site remains buildable if Sanity is
+temporarily unavailable.
 
-#### Resend
+The established publishing flow is:
 
-Préférer un **sous-domaine d’envoi** pour ne pas toucher au SPF/MX OVH du mail club.
+1. An editor publishes content in Sanity.
+2. A Sanity webhook calls the Cloudflare Pages deploy hook.
+3. Pages rebuilds the static site from the latest published content.
 
-1. Compte : [resend.com](https://resend.com) → Domains → Add `send.aileslyonnaises.com`.
-2. Ajouter chez OVH **uniquement** les enregistrements DNS que Resend affiche
-   (souvent TXT/CNAME sur `send` / `resend._domainkey.send`, etc.).
-   Ne pas modifier les `MX` ni le SPF `@` existant.
-3. Attendre le statut **Verified**.
-4. API Keys → Create → copier dans `RESEND_API_KEY` (secret).
-5. `TRAINING_SENDER_EMAIL=site@send.aileslyonnaises.com`  
-   `TRAINING_RECIPIENT_EMAIL=info2@aileslyonnaises.com` (ou la boîte formation).
-6. Retry deployment Pages, puis tester le formulaire sur
-   https://v2.aileslyonnaises.com/contact/#formation
+Do not recreate this integration if it is already working. Diagnose it only when
+a published change fails to trigger a deployment.
 
-### Préproduction `v2` (fait)
+After substantial CMS changes, refresh the committed fallback snapshot:
 
-`https://v2.aileslyonnaises.com` pointe vers Pages. Ne pas toucher à `www` /
-`@` / MX tant que l’UAT n’est pas validée.
+```sh
+npm run cms:dump-fallbacks
+```
 
-## Ce dont on a besoin concrètement
+Production uses published documents only. Preview deployments may enable draft
+content with a read-only Sanity token.
 
-### 1. « Snapshot » DNS OVH (pas un bouton magique)
+## Training enquiry form
 
-Il n’y a pas d’export nommé « snapshot » : on veut juste la **liste actuelle**
-des enregistrements pour `aileslyonnaises.com`, afin de ne pas casser l’email
-ni le site en ligne.
+`functions/api/training-enquiry.ts`:
 
-Chemin dans l’espace client OVH :
+1. validates the request;
+2. verifies the Turnstile response;
+3. sends an email through Resend;
+4. does not persist the submission in a database.
 
-1. Se connecter : [https://www.ovh.com/manager/](https://www.ovh.com/manager/)
-2. `Web Cloud` → `Noms de domaine` → `aileslyonnaises.com`
-3. Onglet `Zone DNS`
+Turnstile is only relevant to this form. If the form is already working on the
+preview domain, no Turnstile setup work is required.
 
-Guide officiel : [Éditer une zone DNS OVHcloud](https://docs.ovhcloud.com/fr/guides/web-cloud/domains/dns-zone-edit).
+Use a dedicated sending subdomain such as `send.aileslyonnaises.com` so Resend
+configuration does not replace the club's OVH mail records.
 
-À envoyer (screenshot ou copier-coller du tableau) :
+## Analytics
 
-- lignes `A` / `AAAA` / `CNAME` pour `@` et `www`
-- toutes les lignes `MX`
-- lignes `TXT` contenant `SPF`, `DKIM`, `DMARC` (ou équivalent)
+`src/components/Analytics.astro` injects the Cloudflare Web Analytics beacon
+only when `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` is defined.
 
-Ne rien modifier pour l’instant.
+### Cloudflare project configuration
 
-**État relevé (2026-08-02)** : `v2` existe déjà en `A → 213.186.33.4`
-(même IP qu’OVH pour `www`). Pour la préprod Pages, on **remplacera** cet
-`A` par un `CNAME` vers `<projet>.pages.dev` — sans toucher aux `MX` /
-`SPF` / `DKIM` / `www` / `@`.
+Despite its name, `wrangler.jsonc` is not evidence of a manual CLI deployment.
+It is the configuration format shared by Cloudflare Pages and Wrangler. This
+project uses it to declare:
 
-Astuce : au-dessus du tableau, `Actions sur ma zone` → `Modifier en mode textuel`
-affiche toute la zone en texte (pratique à coller ici).
+- the Pages project name;
+- the static output directory (`dist`);
+- the compatibility date;
+- the Analytics Engine binding.
 
-### 2. Cloudflare Pages (déjà créé via GitHub)
+The Analytics Engine binding is:
 
-Projet : [`aileslyonnaises`](https://dash.cloudflare.com/a65e979c4b1932a343772154116fbfdd/pages/view/aileslyonnaises).
+- binding: `ANALYTICS`
+- dataset: `ailes_lyonnaises_events`
 
-À faire dans le dashboard si le premier build a échoué :
+The conversion endpoint stores event name and page path only. It must not receive
+form contents or other personal data.
 
-1. **Settings → Builds** : Build command = `npm run build`, output = `dist`.
-2. **Settings → Environment variables** : ajouter les variables Sanity
-   (voir tableau plus haut).
-3. **Deployments → Retry deployment** (ou push un commit).
+The Wrangler package is useful for validating this configuration and for
+occasional local diagnostics. Nobody needs to run it for the normal
+GitHub-to-Pages workflow.
 
-Le domaine peut rester chez OVH ; Cloudflare n’héberge que Pages. Pas besoin
-de token GitHub Actions pour déployer tant que le lien Git Pages est actif.
+## Domains and DNS
 
-### 3. Turnstile + Resend (plus tard, pour le formulaire)
+Until the final launch:
 
-- **Turnstile** = captcha Cloudflare (case « je ne suis pas un robot », sans
-  Google). Donne une *site key* (publique) et une *secret key*.
-  Dashboard : [https://dash.cloudflare.com/?to=/:account/turnstile](https://dash.cloudflare.com/?to=/:account/turnstile)
-- **Resend** = service d’envoi d’emails transactionnels (API). Le formulaire
-  n’écrit pas en base : il envoie un mail à `TRAINING_RECIPIENT_EMAIL`.
-  Compte : [https://resend.com](https://resend.com)
+- `v2.aileslyonnaises.com` serves the Pages preview;
+- the existing `www` site remains unchanged;
+- OVH continues to manage DNS and email;
+- MX, SPF, DKIM, and DMARC records must not be altered.
 
-À configurer ensuite sur Cloudflare Pages (variables d’environnement du projet)
-et/ou en local dans `.env` : `PUBLIC_TURNSTILE_SITE_KEY`,
-`TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `TRAINING_RECIPIENT_EMAIL`,
-`TRAINING_SENDER_EMAIL`.
+The final `www` cutover is an explicit operational action. Its live checklist,
+rollback record, and current status are kept in `.scratch/launch/spec.md`, not
+in this architecture document.
 
-## Formulaire (Turnstile + Resend)
+## Useful links
 
-Le formulaire de formation n’enregistre rien en base : il valide les champs,
-vérifie le captcha Cloudflare Turnstile, puis **Resend** envoie un email à
-`TRAINING_RECIPIENT_EMAIL`.
-
-À configurer :
-
-- Créer un widget Turnstile pour le domaine (`v2` puis `www`).
-- Créer un compte Resend, vérifier le domaine expéditeur (ou un sous-domaine).
-- Définir `RESEND_API_KEY`, `PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`,
-  `TRAINING_RECIPIENT_EMAIL`, `TRAINING_SENDER_EMAIL`.
-- Ne pas mettre de donnée personnelle dans les journaux ou l’Analytics Engine.
-
-## Sanity
-
-- Créer le projet et le dataset `production`.
-- Déployer ou héberger le Studio.
-- Ajouter l’origine de préproduction puis le domaine final aux origines CORS.
-- Configurer un webhook de publication vers le hook de déploiement Pages.
-- Pour une prévisualisation privée, définir `SANITY_PREVIEW_DRAFTS=true` et un
-  `SANITY_API_READ_TOKEN` en lecture seule uniquement sur le déploiement preview.
-  Le build de production conserve `SANITY_PREVIEW_DRAFTS=false`.
-- Après des changements de contenu importants, rafraîchir le repli local avec
-  `npm run cms:dump-fallbacks` (écrit `src/data/cms-fallbacks.json`) et committer
-  le fichier si le site doit rester correct sans Sanity.
-
-## Audit OVH avant lancement
-
-Relever le nom du forfait, le prix de renouvellement, les capacités de déploiement
-statique, les redirections, les sauvegardes, les journaux et les services email.
-Conserver OVH comme cible web uniquement si cette solution est plus simple et
-aussi sûre que Pages pour l’équipe qui maintiendra le site.
-
-## Checklist de mise en production
-
-- coordonnées, destinataires et liens Aérogest validés ;
-- mentions légales complètes ;
-- comptes Sanity nominatifs et protégés ;
-- tests unitaires, E2E et accessibilité réussis ;
-- redirections historiques vérifiées ;
-- formulaire testé de bout en bout sans conservation en base ;
-- sauvegarde du site existant et plan de retour arrière ;
-- suivi des erreurs et alertes de quota activés.
+- [Cloudflare Pages project](https://dash.cloudflare.com/a65e979c4b1932a343772154116fbfdd/pages/view/aileslyonnaises)
+- [Cloudflare Pages environment variables](https://dash.cloudflare.com/a65e979c4b1932a343772154116fbfdd/pages/view/aileslyonnaises/settings/environment-variables)
+- [Cloudflare Web Analytics](https://dash.cloudflare.com/a65e979c4b1932a343772154116fbfdd/web-analytics)
+- [Sanity project settings](https://www.sanity.io/manage/project/v6vpuuua)
+- [Sanity Studio](https://ailes-lyonnaises.sanity.studio/)
+- [OVH Manager](https://www.ovh.com/manager/)

@@ -87,12 +87,23 @@ export interface TrainingProgram extends Publication {
   availability: "available" | "planned";
 }
 
+export type StoryCategory = "history" | "clubLife" | "trip" | "elles";
+
 export interface Story extends Publication {
   id: string;
   title: string;
   slug: string;
   excerpt: string;
-  category: "history" | "clubLife" | "trip";
+  category: StoryCategory;
+  body: PortableTextBlock[];
+  image?: CmsImage | undefined;
+}
+
+export interface NewsArticle extends Publication {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
   body: PortableTextBlock[];
   image?: CmsImage | undefined;
 }
