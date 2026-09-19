@@ -1,6 +1,9 @@
 ---
 import PageHero from "@/components/PageHero.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getSiteData } from "@/lib/cms";
+
+const siteData = await getSiteData();
 ---
 
 <BaseLayout
@@ -25,8 +28,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       <p>
         Les messages restent soumis aux règles de conservation de la messagerie
         du club. Vous pouvez demander leur suppression à
-        <a href="mailto:info2@aileslyonnaises.com">info2@aileslyonnaises.com</a
-        >.
+        <a href={`mailto:${siteData.email}`}>{siteData.email}</a>.
       </p>
       <h2>Sous-traitants techniques</h2>
       <ul>

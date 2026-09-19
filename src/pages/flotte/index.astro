@@ -2,9 +2,13 @@
 import CtaBand from "@/components/CtaBand.astro";
 import PageHero from "@/components/PageHero.astro";
 import { getAircraft } from "@/lib/cms";
+import { portableTextPlain } from "@/lib/cms/portableText";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
 const aircraft = await getAircraft();
+const heroAircraft = aircraft.find(
+  ({ registration }) => registration === "F-HLYO",
+);
 const fallbackImages: Record<string, string> = {
   "F-HSMB": "/images/aircraft/bristell-b23.webp",
   "F-GXGE": "/images/aircraft/dr400-gxge.webp",
@@ -23,8 +27,9 @@ const fallbackImages: Record<string, string> = {
     eyebrow="Six avions"
     title="Du premier tour de piste au voyage"
     introduction="Une flotte cohérente, entretenue et adaptée à chaque étape : apprendre, gagner en autonomie et partir plus loin."
-    image="/images/aircraft/dr401-hlyo.webp"
-    imageAlt="Robin DR401 des Ailes Lyonnaises sur le tarmac"
+    image={heroAircraft?.image?.url ?? "/images/aircraft/dr401-hlyo.webp"}
+    imageAlt={heroAircraft?.image?.alt ??
+      "Robin DR401 des Ailes Lyonnaises sur le tarmac"}
   >
     <div class="button-row">
       <a class="button" href="/tarifs/">Voir les tarifs avions</a>
@@ -78,6 +83,22 @@ const fallbackImages: Record<string, string> = {
               )}
               <h2>{plane.model}</h2>
               <p class="lede">{plane.summary}</p>
+              {plane.details.map((block) =>
+                block.style === "h2" || block.style === "h3" ? (
+                  <h3>{portableTextPlain(block)}</h3>
+                ) : block.style === "blockquote" ? (
+                  <blockquote>{portableTextPlain(block)}</blockquote>
+                ) : (
+                  <p>{portableTextPlain(block)}</p>
+                ),
+              )}
+              {plane.features.length > 0 && (
+                <ul class="aircraft__features" aria-label="Équipements">
+                  {plane.features.map((feature) => (
+                    <li>{feature}</li>
+                  ))}
+                </ul>
+              )}
             </div>
           </article>
         ))
@@ -151,6 +172,33 @@ const fallbackImages: Record<string, string> = {
 
   .aircraft__content .lede {
     margin: 0;
+  }
+
+  .aircraft__content > p {
+    margin: 0;
+  }
+
+  .aircraft__content h3,
+  .aircraft__content blockquote {
+    margin: 0;
+  }
+
+  .aircraft__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0.25rem 0 0;
+    list-style: none;
+  }
+
+  .aircraft__features li {
+    padding: 0.35rem 0.65rem;
+    color: var(--navy-800);
+    font-size: 0.75rem;
+    font-weight: 800;
+    background: rgb(255 233 91 / 0.28);
+    border-radius: 999px;
   }
 
   @media (max-width: 48rem) {

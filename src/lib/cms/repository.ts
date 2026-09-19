@@ -39,6 +39,8 @@ import type {
 
 type Mapper<T> = (input: unknown) => T;
 
+const requestCache = new Map<string, Promise<unknown>>();
+
 const fetchOrFallback = async <T>(
   query: string,
   mapper: Mapper<T>,
@@ -49,9 +51,13 @@ const fetchOrFallback = async <T>(
   }
 
   try {
-    const response = await sanityClient.fetch<unknown>(query);
+    const pendingRequest =
+      requestCache.get(query) ?? sanityClient.fetch<unknown>(query);
+    requestCache.set(query, pendingRequest);
+    const response = await pendingRequest;
     return mapper(response);
   } catch {
+    requestCache.delete(query);
     return fallback;
   }
 };

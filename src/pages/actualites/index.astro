@@ -6,6 +6,7 @@ import { portableTextPlain } from "@/lib/cms/portableText";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
 const articles = await getNews();
+const latestArticle = articles[0];
 const date = (value: string) =>
   new Intl.DateTimeFormat("fr-FR", {
     dateStyle: "long",
@@ -21,8 +22,9 @@ const date = (value: string) =>
     eyebrow="Le club en mouvement"
     title="Actualités des Ailes Lyonnaises"
     introduction="Les informations datées du club, distinctes de la présentation permanente de la vie associative."
-    image="/images/club/barbecue-animation.webp"
-    imageAlt="Membres des Ailes Lyonnaises réunis autour d’un moment convivial"
+    image={latestArticle?.image?.url ?? "/images/club/barbecue-animation.webp"}
+    imageAlt={latestArticle?.image?.alt ??
+      "Membres des Ailes Lyonnaises réunis autour d’un moment convivial"}
   />
 
   <section class="section section--white">

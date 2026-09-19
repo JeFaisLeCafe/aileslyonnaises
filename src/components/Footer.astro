@@ -1,7 +1,14 @@
 ---
 import ClubEmail from "@/components/ClubEmail.astro";
+import type { SiteData } from "@/lib/cms";
 
+interface Props {
+  siteData: SiteData;
+}
+
+const { siteData } = Astro.props;
 const year = new Date().getFullYear();
+const phoneHref = `tel:${siteData.phone.replace(/[^\d+]/g, "")}`;
 ---
 
 <footer class="footer">
@@ -11,7 +18,7 @@ const year = new Date().getFullYear();
         src="/images/brand/logo.png"
         width="256"
         height="256"
-        alt="Aéroclub Les Ailes Lyonnaises"
+        alt={siteData.clubName}
       />
       <p>
         École de pilotage approuvée<br />
@@ -41,16 +48,17 @@ const year = new Date().getFullYear();
     <div>
       <h2>Nous trouver</h2>
       <address>
-        Aéroport de Lyon-Bron<br />
-        305 rue Albert Kimmerling<br />
-        69680 Chassieu<br />
-        <a href="tel:+33640369229">06 40 36 92 29</a><br />
-        <ClubEmail variant="dark" />
+        {siteData.locationLabel}<br />
+        {siteData.address.street}<br />
+        {siteData.address.postalCode}
+        {siteData.address.city}<br />
+        <a href={phoneHref}>{siteData.phone}</a><br />
+        <ClubEmail email={siteData.email} variant="dark" />
       </address>
     </div>
   </div>
   <div class="container footer__bottom">
-    <span>© {year} Les Ailes Lyonnaises</span>
+    <span>© {year} {siteData.clubName}</span>
     <nav aria-label="Informations légales">
       <a href="/mentions-legales/">Mentions légales</a>
       <a href="/confidentialite/">Confidentialité</a>

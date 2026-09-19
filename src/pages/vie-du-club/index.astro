@@ -11,6 +11,7 @@ const stories = await getStories();
 const people = await getPeople();
 const clubStories = stories.filter((story) => story.category !== "elles");
 const ellesStories = stories.filter((story) => story.category === "elles");
+const historyStory = stories.find((story) => story.category === "history");
 const bureau = people.filter(isBureauMember);
 const board = people.filter(isBoardMember);
 const categoryLabels = {
@@ -135,7 +136,7 @@ const partners: Partner[] = [
       <section class="section section--white">
         <div class="container">
           <p class="eyebrow">Les Elles Lyonnaises</p>
-          <h2>Trois figures qui ont ouvert le ciel.</h2>
+          <h2>{ellesStories.length} figures qui ont ouvert le ciel.</h2>
           <div class="elles-list">
             {ellesStories.map((story) => (
               <article class="elles-card">
@@ -200,12 +201,25 @@ const partners: Partner[] = [
     <div class="container split">
       <div>
         <p class="eyebrow">Depuis 1965</p>
-        <h2>Un club né pour démocratiser les sports aériens.</h2>
-        <p class="lede">
-          L’Aéro-club des Jeunes de Monplaisir-Lumière développe d’abord ses
-          activités à Satolas. Au début de la construction du futur aéroport
-          Lyon-Saint-Exupéry, il rejoint Bron.
-        </p>
+        <h2>
+          {
+            historyStory?.title ??
+              "Un club né pour démocratiser les sports aériens."
+          }
+        </h2>
+        {
+          historyStory ? (
+            historyStory.body.map((block) => (
+              <p class="lede">{portableTextPlain(block)}</p>
+            ))
+          ) : (
+            <p class="lede">
+              L’Aéro-club des Jeunes de Monplaisir-Lumière développe d’abord ses
+              activités à Satolas. Au début de la construction du futur aéroport
+              Lyon-Saint-Exupéry, il rejoint Bron.
+            </p>
+          )
+        }
       </div>
       <div class="history">
         <div><strong>1965</strong><span>Création du club à Lyon</span></div>

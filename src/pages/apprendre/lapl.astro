@@ -1,13 +1,30 @@
 ---
 import TrainingLayout from "@/layouts/TrainingLayout.astro";
+import { getTrainingPrograms } from "@/lib/cms";
+import { portableTextPlain } from "@/lib/cms/portableText";
+
+const program = (await getTrainingPrograms()).find(
+  ({ slug }) => slug === "lapl",
+);
 
 const facts = [
-  { value: "30 h", label: "minimum réglementaire de formation en vol" },
+  {
+    value: `${program?.minimumFlightHours ?? 30} h`,
+    label: "minimum réglementaire de formation en vol",
+  },
   { value: "3", label: "passagers au maximum" },
   { value: "2 000 kg", label: "masse maximale de l’avion" },
 ];
 
 const sections = [
+  ...(program?.details.length
+    ? [
+        {
+          title: "Présentation publiée par le club",
+          content: program.details.map(portableTextPlain),
+        },
+      ]
+    : []),
   {
     title: "Une licence européenne pour l’aviation légère",
     content: [
@@ -29,13 +46,17 @@ const sections = [
       "Après la délivrance, dix heures de vol comme commandant de bord sont nécessaires avant d’emmener des passagers, sauf si cette expérience a été acquise dans le cadre d’un parcours répondant aux conditions réglementaires.",
     ],
   },
+  ...(program?.prerequisites.length
+    ? [{ title: "Conditions publiées", content: program.prerequisites }]
+    : []),
 ];
 ---
 
 <TrainingLayout
   eyebrow="Formation LAPL(A)"
-  title="Licence de pilote d’avion léger"
-  introduction="Un parcours européen exigeant et plus court pour pratiquer l’aviation légère en loisir."
+  title={program?.title ?? "Licence de pilote d’avion léger"}
+  introduction={program?.summary ??
+    "Un parcours européen exigeant et plus court pour pratiquer l’aviation légère en loisir."}
   description="Préparez votre licence LAPL(A) à Lyon-Bron avec l’école de pilotage approuvée ATO des Ailes Lyonnaises."
   {facts}
   {sections}

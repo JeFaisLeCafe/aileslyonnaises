@@ -1,13 +1,30 @@
 ---
 import TrainingLayout from "@/layouts/TrainingLayout.astro";
+import { getTrainingPrograms } from "@/lib/cms";
+import { portableTextPlain } from "@/lib/cms/portableText";
+
+const program = (await getTrainingPrograms()).find(
+  ({ slug }) => slug === "ppl",
+);
 
 const facts = [
-  { value: "45 h", label: "minimum réglementaire de formation en vol" },
+  {
+    value: `${program?.minimumFlightHours ?? 45} h`,
+    label: "minimum réglementaire de formation en vol",
+  },
   { value: "17 ans", label: "âge minimum pour la délivrance" },
   { value: "Classe 2", label: "certificat médical requis" },
 ];
 
 const sections = [
+  ...(program?.details.length
+    ? [
+        {
+          title: "Présentation publiée par le club",
+          content: program.details.map(portableTextPlain),
+        },
+      ]
+    : []),
   {
     title: "La licence de référence pour voyager",
     content: [
@@ -29,13 +46,17 @@ const sections = [
       "Un certificat médical de classe 2 en cours de validité est requis. Nous recommandons d’effectuer cette démarche tôt dans le parcours.",
     ],
   },
+  ...(program?.prerequisites.length
+    ? [{ title: "Conditions publiées", content: program.prerequisites }]
+    : []),
 ];
 ---
 
 <TrainingLayout
   eyebrow="Formation PPL(A)"
-  title="Licence de pilote privé"
-  introduction="Pour voler en autonomie, emmener des passagers et construire une véritable expérience de voyage en Europe."
+  title={program?.title ?? "Licence de pilote privé"}
+  introduction={program?.summary ??
+    "Pour voler en autonomie, emmener des passagers et construire une véritable expérience de voyage en Europe."}
   description="Préparez votre licence PPL(A) à Lyon-Bron avec l’école de pilotage approuvée ATO des Ailes Lyonnaises."
   {facts}
   {sections}

@@ -4,6 +4,7 @@ import { ClientRouter } from "astro:transitions";
 import Analytics from "@/components/Analytics.astro";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import { getSiteData } from "@/lib/cms";
 import "@/styles/global.css";
 
 interface Props {
@@ -22,28 +23,29 @@ const {
   noindex = false,
 } = Astro.props;
 
+const siteData = await getSiteData();
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
 const fullTitle =
-  title === "Les Ailes Lyonnaises"
-    ? `${title} — Aéroclub et école de pilotage à Lyon-Bron`
-    : `${title} | Les Ailes Lyonnaises`;
+  Astro.url.pathname === "/"
+    ? `${title} — ${siteData.tagline}`
+    : `${title} | ${siteData.clubName}`;
 
 const organization = {
   "@context": "https://schema.org",
   "@type": ["SportsClub", "EducationalOrganization"],
-  name: "Aéroclub Les Ailes Lyonnaises",
+  name: siteData.clubName,
   alternateName: "Les Ailes Lyonnaises",
   url: Astro.site?.href,
   logo: new URL("/images/brand/logo.png", Astro.site).href,
   image: socialImage.href,
-  telephone: "+33640369229",
-  email: "info2@aileslyonnaises.com",
+  telephone: siteData.phone,
+  email: siteData.email,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "305 rue Albert Kimmerling",
-    postalCode: "69680",
-    addressLocality: "Chassieu",
+    streetAddress: siteData.address.street,
+    postalCode: siteData.address.postalCode,
+    addressLocality: siteData.address.city,
     addressRegion: "Auvergne-Rhône-Alpes",
     addressCountry: "FR",
   },
@@ -84,7 +86,7 @@ const organization = {
     <link rel="icon" type="image/png" href="/images/brand/logo.png" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />
-    <meta property="og:site_name" content="Les Ailes Lyonnaises" />
+    <meta property="og:site_name" content={siteData.clubName} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -104,11 +106,11 @@ const organization = {
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
-    <Header />
+    <Header {siteData} />
     <main id="contenu">
       <slot />
     </main>
-    <Footer />
+    <Footer {siteData} />
     <Analytics />
   </body>
 </html>

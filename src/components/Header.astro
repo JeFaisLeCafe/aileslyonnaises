@@ -1,4 +1,11 @@
 ---
+import type { SiteData } from "@/lib/cms";
+
+interface Props {
+  siteData: SiteData;
+}
+
+const { siteData } = Astro.props;
 const pathname = Astro.url.pathname;
 
 const navigation = [
@@ -19,7 +26,7 @@ const isCurrent = (href: string) =>
 <header class="site-header">
   <div class="navigation">
     <div class="container navigation__inner">
-      <a class="brand" href="/" aria-label="Les Ailes Lyonnaises — accueil">
+      <a class="brand" href="/" aria-label={`${siteData.clubName} — accueil`}>
         <img
           class="brand__mark"
           src="/images/brand/logo.png"
@@ -28,8 +35,8 @@ const isCurrent = (href: string) =>
           alt=""
         />
         <span class="brand__text">
-          <strong>Les Ailes Lyonnaises</strong>
-          <small>Aéroclub · Lyon-Bron</small>
+          <strong>{siteData.clubName}</strong>
+          <small>{siteData.locationLabel}</small>
         </span>
       </a>
       <button

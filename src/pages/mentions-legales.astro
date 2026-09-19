@@ -1,6 +1,9 @@
 ---
 import PageHero from "@/components/PageHero.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getSiteData } from "@/lib/cms";
+
+const siteData = await getSiteData();
 ---
 
 <BaseLayout
@@ -16,10 +19,11 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     <div class="narrow prose">
       <h2>Éditeur</h2>
       <p>
-        Aéroclub Les Ailes Lyonnaises, association loi 1901<br />
-        305 rue Albert Kimmerling, 69680 Chassieu<br />
-        Email : info2@aileslyonnaises.com<br />
-        Téléphone : 06 40 36 92 29
+        {siteData.clubName}, association loi 1901<br />
+        {siteData.address.street}, {siteData.address.postalCode}
+        {siteData.address.city}<br />
+        Email : <a href={`mailto:${siteData.email}`}>{siteData.email}</a><br />
+        Téléphone : {siteData.phone}
       </p>
       <h2>Directeur de la publication</h2>
       <p>Pierre-Etienne Soury, pour le compte de l’association.</p>

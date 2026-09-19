@@ -3,18 +3,29 @@ import ClubEmail from "@/components/ClubEmail.astro";
 import PageHero from "@/components/PageHero.astro";
 import TrainingForm from "@/components/TrainingForm.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getAircraft, getSiteData } from "@/lib/cms";
+
+const siteData = await getSiteData();
+const heroAircraft = (await getAircraft()).find(
+  ({ registration }) => registration === "F-HLYO",
+);
+const phoneHref = `tel:${siteData.phone.replace(/[^\d+]/g, "")}`;
+const mapsQuery = encodeURIComponent(
+  `${siteData.address.street} ${siteData.address.postalCode} ${siteData.address.city}`,
+);
 ---
 
 <BaseLayout
   title="Contact et accès"
-  description="Contactez l’Aéroclub Les Ailes Lyonnaises et préparez votre visite à l’aéroport de Lyon-Bron, 305 rue Albert Kimmerling à Chassieu."
+  description={`Contactez ${siteData.clubName} et préparez votre visite à ${siteData.locationLabel}, ${siteData.address.street} à ${siteData.address.city}.`}
 >
   <PageHero
     eyebrow="Nous rencontrer"
     title="Venez parler aviation à Lyon-Bron"
     introduction="Une question, un projet de formation ou simplement l’envie de découvrir le club ? Choisissez le moyen le plus direct."
-    image="/images/aircraft/dr401-side.webp"
-    imageAlt="Robin DR401 des Ailes Lyonnaises sur le tarmac de Lyon-Bron"
+    image={heroAircraft?.image?.url ?? "/images/aircraft/dr401-side.webp"}
+    imageAlt={heroAircraft?.image?.alt ??
+      "Robin DR401 des Ailes Lyonnaises sur le tarmac de Lyon-Bron"}
   />
 
   <section class="section section--white">
@@ -25,21 +36,24 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         <div class="contact-list">
           <div>
             <span>Adresse</span>
-            <strong>305 rue Albert Kimmerling<br />69680 Chassieu</strong>
+            <strong
+              >{siteData.address.street}<br />{siteData.address.postalCode}
+              {siteData.address.city}</strong
+            >
           </div>
           <div>
             <span>Téléphone</span>
-            <strong><a href="tel:+33640369229">06 40 36 92 29</a></strong>
+            <strong><a href={phoneHref}>{siteData.phone}</a></strong>
           </div>
           <div>
             <span>Email</span>
-            <strong><ClubEmail /></strong>
+            <strong><ClubEmail email={siteData.email} /></strong>
           </div>
         </div>
         <div class="button-row">
           <a
             class="button button--ghost"
-            href="https://www.google.com/maps/search/?api=1&query=305+rue+Albert+Kimmerling+69680+Chassieu"
+            href={`https://www.google.com/maps/search/?api=1&query=${mapsQuery}`}
             target="_blank"
             rel="noopener noreferrer external"
           >
@@ -92,8 +106,10 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         <p class="lede">
           BIA, partenariat, vie associative, passage au club ou question
           administrative : indiquez un objet précis pour faciliter la réponse
-          des bénévoles. Écrivez à <ClubEmail variant="dark" /> ou utilisez le formulaire
-          de formation ci-dessus.
+          des bénévoles. Écrivez à <ClubEmail
+            email={siteData.email}
+            variant="dark"
+          /> ou utilisez le formulaire de formation ci-dessus.
         </p>
         <a class="button" href="#formation">Utiliser le formulaire</a>
       </div>

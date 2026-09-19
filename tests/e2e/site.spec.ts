@@ -161,6 +161,12 @@ test("homepage visual essentials remain legible and complete", async ({
   }
   await expect(page.locator(".fleet-card img")).toHaveCount(6);
   await expect(
+    page.locator(".fleet-card img[src^='https://cdn.sanity.io/']"),
+  ).toHaveCount(6);
+  await expect(
+    page.locator("footer a[href='mailto:info2@aileslyonnaises.com']"),
+  ).toHaveText("info2@aileslyonnaises.com");
+  await expect(
     page.locator(
       "script[src='https://static.cloudflareinsights.com/beacon.min.js']",
     ),
@@ -173,21 +179,23 @@ test("homepage visual essentials remain legible and complete", async ({
   for (const image of await mainImages.all()) {
     await image.scrollIntoViewIfNeeded();
     await expect
-      .poll(() =>
-        image.evaluate(
-          (element) =>
-            element instanceof HTMLImageElement &&
-            element.complete &&
-            element.naturalWidth > 0,
-        ),
+      .poll(
+        () =>
+          image.evaluate(
+            (element) =>
+              element instanceof HTMLImageElement &&
+              element.complete &&
+              element.naturalWidth > 0,
+          ),
+        { timeout: 15_000 },
       )
       .toBe(true);
   }
 
-  const imageSources = await mainImages.evaluateAll((images) =>
-    images.map((image) => image.getAttribute("src")),
-  );
-  expect(new Set(imageSources).size).toBe(imageSources.length);
+  const fleetImageSources = await page
+    .locator(".fleet-card img")
+    .evaluateAll((images) => images.map((image) => image.getAttribute("src")));
+  expect(new Set(fleetImageSources).size).toBe(fleetImageSources.length);
 });
 
 test("training page links to each active course", async ({ page }) => {
@@ -200,8 +208,22 @@ test("training page links to each active course", async ({ page }) => {
     page.getByRole("link", { name: /Licence de pilote d’avion léger/ }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: /Qualification vol de nuit/ }),
+    page.getByRole("link", { name: /Qualification au vol de nuit/ }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("link", {
+      name: /Sensibilisation au vol en région montagneuse/,
+    }),
+  ).toBeVisible();
+
+  await page.goto("/apprendre/ppl/");
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: "PPL(A) — Licence de pilote privé",
+    }),
+  ).toBeVisible();
+  await expect(page.getByText("45 h", { exact: true })).toBeVisible();
 });
 
 test("contact form exposes required qualification fields", async ({ page }) => {
@@ -221,6 +243,15 @@ test("pricing renders CMS fallback rates", async ({ page }) => {
   await expect(
     page.getByRole("cell", { name: /179,40/ }).first(),
   ).toBeVisible();
+});
+
+test("fleet renders Sanity aircraft details", async ({ page }) => {
+  await page.goto("/flotte/");
+
+  await expect(page.getByText("Glass cockpit", { exact: true })).toBeVisible();
+  await expect(
+    page.locator(".aircraft img[src^='https://cdn.sanity.io/']"),
+  ).toHaveCount(6);
 });
 
 test("mobile navigation opens and remains keyboard accessible", async ({

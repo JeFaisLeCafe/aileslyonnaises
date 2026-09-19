@@ -1,10 +1,25 @@
 ---
 import CtaBand from "@/components/CtaBand.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getAircraft, getNews } from "@/lib/cms";
+import {
+  getAircraft,
+  getNews,
+  getSiteData,
+  getTrainingPrograms,
+} from "@/lib/cms";
 
 const aircraft = await getAircraft();
 const latestNews = (await getNews())[0];
+const siteData = await getSiteData();
+const trainingPrograms = await getTrainingPrograms();
+const schoolAircraft = aircraft.find(
+  ({ registration }) => registration === "F-HLYO",
+);
+const welcomeClubName = siteData.clubName.startsWith("Aéroclub ")
+  ? `l’${siteData.clubName}`
+  : siteData.clubName;
+const minimumHours = (slug: string) =>
+  trainingPrograms.find((program) => program.slug === slug)?.minimumFlightHours;
 const fallbackImages: Record<string, string> = {
   "F-HSMB": "/images/aircraft/bristell-b23.webp",
   "F-GXGE": "/images/aircraft/dr400-gxge.webp",
@@ -16,7 +31,7 @@ const fallbackImages: Record<string, string> = {
 ---
 
 <BaseLayout
-  title="Les Ailes Lyonnaises"
+  title={siteData.clubName}
   description="Aéroclub et école de pilotage approuvée ATO à Lyon-Bron. Découvrez le vol, préparez votre PPL ou LAPL et rejoignez une communauté de pilotes."
 >
   <section class="home-hero">
@@ -39,10 +54,10 @@ const fallbackImages: Record<string, string> = {
     </div>
     <div class="home-hero__overlay"></div>
     <div class="container home-hero__content">
-      <p class="eyebrow">Aéroport de Lyon-Bron</p>
+      <p class="eyebrow">{siteData.locationLabel}</p>
       <h1>
-        Bienvenue à l’Aéroclub
-        <span class="display-serif">Les Ailes Lyonnaises</span>
+        Bienvenue à
+        <span class="display-serif">{welcomeClubName}</span>
       </h1>
       <p class="lede">
         École de pilotage approuvée FR.ATO.0078. Rejoignez une communauté
@@ -130,9 +145,17 @@ const fallbackImages: Record<string, string> = {
           ou vol de nuit.
         </p>
         <div class="stats">
-          <div class="stat"><strong>45 h</strong><span>minimum PPL</span></div>
-          <div class="stat"><strong>30 h</strong><span>minimum LAPL</span></div>
-          <div class="stat"><strong>6</strong><span>avions au club</span></div>
+          <div class="stat">
+            <strong>{minimumHours("ppl") ?? 45} h</strong>
+            <span>minimum PPL</span>
+          </div>
+          <div class="stat">
+            <strong>{minimumHours("lapl") ?? 30} h</strong>
+            <span>minimum LAPL</span>
+          </div>
+          <div class="stat">
+            <strong>{aircraft.length}</strong><span>avions au club</span>
+          </div>
         </div>
         <div class="button-row">
           <a class="button" href="/apprendre/">Voir les parcours</a>
@@ -143,8 +166,9 @@ const fallbackImages: Record<string, string> = {
       </div>
       <img
         class="split__image"
-        src="/images/aircraft/dr401-side.webp"
-        alt="Robin DR401 F-HLYO de profil sur le tarmac"
+        src={schoolAircraft?.image?.url ?? "/images/aircraft/dr401-side.webp"}
+        alt={schoolAircraft?.image?.alt ??
+          "Robin DR401 F-HLYO de profil sur le tarmac"}
         width="2200"
         height="1466"
         loading="lazy"
@@ -157,7 +181,7 @@ const fallbackImages: Record<string, string> = {
       <div class="split section-heading">
         <div>
           <p class="eyebrow">La flotte</p>
-          <h2>Six avions, du premier tour de piste au voyage.</h2>
+          <h2>{aircraft.length} avions, du premier tour de piste au voyage.</h2>
         </div>
         <p class="lede">
           Des avions adaptés à l’école, aux navigations et aux voyages, avec des

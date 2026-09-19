@@ -18,9 +18,16 @@ En local : `npm run studio` (http://127.0.0.1:3333).
   Les vues **Équipe pédagogique**, **Bureau** et **Conseil d’administration** filtrent le même document selon les rôles.
 - **Tarifs** : groupes, lignes, montants, unité et date d’effet.
 - **Récits** : titre, résumé, photographie, contenu, y compris la série « Les Elles Lyonnaises ».
+- **Formations** : titre, résumé, présentation, minimum d’heures, prérequis,
+  disponibilité et ordre.
+- **Coordonnées du site** : nom, accroche, adresse, téléphone, courriel et lieu
+  affichés dans l’en-tête, le pied de page, les pages de contact et les
+  métadonnées.
 
-Les formations, la navigation et la composition des pages restent dans le code
-afin d’éviter qu’une modification éditoriale casse la mise en page.
+La navigation, la composition des pages et les explications réglementaires
+détaillées restent dans le code afin d’éviter qu’une modification éditoriale
+casse la mise en page. Les données de formation publiées dans Sanity restent
+prioritaires pour les titres, résumés, minima, prérequis et disponibilités.
 
 ## Publication
 

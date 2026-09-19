@@ -1,13 +1,29 @@
 ---
 import TrainingLayout from "@/layouts/TrainingLayout.astro";
+import { getTrainingPrograms } from "@/lib/cms";
+import { portableTextPlain } from "@/lib/cms/portableText";
 
+const program = (await getTrainingPrograms()).find(
+  ({ slug }) => slug === "vol-de-nuit",
+);
 const facts = [
-  { value: "5 h", label: "minimum de vol de nuit" },
+  {
+    value: `${program?.minimumFlightHours ?? 5} h`,
+    label: "minimum de vol de nuit",
+  },
   { value: "3 h", label: "au moins en double commande" },
   { value: "50 km", label: "navigation de nuit en double commande" },
 ];
 
 const sections = [
+  ...(program?.details.length
+    ? [
+        {
+          title: "Présentation publiée par le club",
+          content: program.details.map(portableTextPlain),
+        },
+      ]
+    : []),
   {
     title: "Étendre vos privilèges après le coucher du soleil",
     content: [
@@ -29,13 +45,17 @@ const sections = [
       "La formation doit être réalisée dans une période de six mois au sein d’un organisme habilité.",
     ],
   },
+  ...(program?.prerequisites.length
+    ? [{ title: "Conditions publiées", content: program.prerequisites }]
+    : []),
 ];
 ---
 
 <TrainingLayout
   eyebrow="Qualification VFR de nuit"
-  title="Vol de nuit"
-  introduction="Une autre lecture du ciel, des repères plus exigeants et une qualification qui élargit votre pratique."
+  title={program?.title ?? "Vol de nuit"}
+  introduction={program?.summary ??
+    "Une autre lecture du ciel, des repères plus exigeants et une qualification qui élargit votre pratique."}
   description="Préparez la qualification VFR de nuit à Lyon-Bron avec l’école approuvée ATO des Ailes Lyonnaises."
   {facts}
   {sections}

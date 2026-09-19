@@ -1,7 +1,7 @@
 ---
 import CtaBand from "@/components/CtaBand.astro";
 import PageHero from "@/components/PageHero.astro";
-import { getPeople } from "@/lib/cms";
+import { getAircraft, getPeople, getTrainingPrograms } from "@/lib/cms";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
 const instructors = (await getPeople()).filter((person) =>
@@ -9,29 +9,33 @@ const instructors = (await getPeople()).filter((person) =>
     (role) => role === "instructor" || role === "chiefInstructor",
   ),
 );
-const courses = [
-  {
-    href: "/apprendre/ppl/",
-    code: "PPL(A)",
-    title: "Licence de pilote privé",
-    text: "La licence de référence pour voler en VFR de jour, emmener des passagers et voyager en Europe.",
-    facts: ["45 h minimum", "Dès 17 ans", "Classe médicale 2"],
-  },
-  {
-    href: "/apprendre/lapl/",
-    code: "LAPL(A)",
-    title: "Licence de pilote d’avion léger",
-    text: "Un parcours européen plus court pour piloter un monomoteur avec jusqu’à trois passagers.",
-    facts: ["30 h minimum", "Dès 17 ans", "Certificat médical LAPL"],
-  },
-  {
-    href: "/apprendre/vol-de-nuit/",
-    code: "VFR-N",
-    title: "Qualification vol de nuit",
-    text: "Une qualification complémentaire pour prolonger vos privilèges après la nuit aéronautique.",
-    facts: ["5 h minimum", "Après PPL ou LAPL", "Formation pratique"],
-  },
-];
+const programs = await getTrainingPrograms();
+const trainingAircraft = (await getAircraft()).find(
+  ({ registration }) => registration === "F-GXGE",
+);
+const programCodes: Record<string, string> = {
+  ppl: "PPL(A)",
+  lapl: "LAPL(A)",
+  "vol-de-nuit": "VFR-N",
+  "sensibilisation-vol-montagne": "Montagne",
+};
+const dedicatedPages = new Set(["ppl", "lapl", "vol-de-nuit"]);
+const courses = programs
+  .filter((program) => program.availability === "available")
+  .map((program) => ({
+    href: dedicatedPages.has(program.slug)
+      ? `/apprendre/${program.slug}/`
+      : "/contact/#formation",
+    code: programCodes[program.slug] ?? "Formation",
+    title: program.title,
+    text: program.summary,
+    facts: [
+      ...(program.minimumFlightHours === undefined
+        ? []
+        : [`${program.minimumFlightHours} h minimum`]),
+      ...program.prerequisites,
+    ],
+  }));
 ---
 
 <BaseLayout
@@ -42,8 +46,9 @@ const courses = [
     eyebrow="Approved Training Organisation"
     title="École de pilotage agréée ATO (Approved Training Organisation — FR.ATO.0078)"
     introduction="Une formation structurée, un accompagnement personnel et une flotte adaptée pour transformer un projet en compétences durables."
-    image="/images/aircraft/dr400-gxge.webp"
-    imageAlt="Robin DR400 utilisé pour l’école de pilotage"
+    image={trainingAircraft?.image?.url ?? "/images/aircraft/dr400-gxge.webp"}
+    imageAlt={trainingAircraft?.image?.alt ??
+      "Robin DR400 utilisé pour l’école de pilotage"}
     longTitle
   >
     <div class="button-row">

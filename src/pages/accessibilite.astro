@@ -1,6 +1,9 @@
 ---
 import PageHero from "@/components/PageHero.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getSiteData } from "@/lib/cms";
+
+const siteData = await getSiteData();
 ---
 
 <BaseLayout
@@ -34,7 +37,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       <p>
         Si un contenu ou une fonctionnalité vous empêche d’accéder à une
         information, écrivez à
-        <a href="mailto:info2@aileslyonnaises.com">info2@aileslyonnaises.com</a>
+        <a href={`mailto:${siteData.email}`}>{siteData.email}</a>
         en précisant la page et la difficulté rencontrée.
       </p>
     </div>
