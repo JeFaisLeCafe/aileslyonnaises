@@ -160,6 +160,14 @@ test("homepage visual essentials remain legible and complete", async ({
     await expect(page.locator(".main-navigation")).toHaveCSS("display", "flex");
   }
   await expect(page.locator(".fleet-card img")).toHaveCount(6);
+  await expect(
+    page.locator(
+      "script[src='https://static.cloudflareinsights.com/beacon.min.js']",
+    ),
+  ).toHaveAttribute(
+    "data-cf-beacon",
+    '{"token":"d9527efe77b644e5a501cc8369a0c26c"}',
+  );
 
   const mainImages = page.locator("main img");
   for (const image of await mainImages.all()) {

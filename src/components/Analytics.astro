@@ -1,17 +1,12 @@
 ---
-const token = import.meta.env.PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN;
+const token = "d9527efe77b644e5a501cc8369a0c26c";
 ---
 
-{
-  token && (
-    <script
-      is:inline
-      defer
-      src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon={JSON.stringify({ token })}
-    />
-  )
-}
+<script
+  is:inline
+  type="module"
+  src="https://static.cloudflareinsights.com/beacon.min.js"
+  data-cf-beacon={JSON.stringify({ token })}></script>
 
 <script>
   interface ConversionDetail {

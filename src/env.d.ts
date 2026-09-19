@@ -6,7 +6,6 @@ interface ImportMetaEnv {
   readonly SANITY_API_READ_TOKEN?: string;
   readonly SANITY_PREVIEW_DRAFTS?: string;
   readonly PUBLIC_TURNSTILE_SITE_KEY?: string;
-  readonly PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN?: string;
 }
 
 interface ImportMeta {

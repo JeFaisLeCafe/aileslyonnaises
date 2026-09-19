@@ -59,7 +59,6 @@ Public build-time variables:
 - `PUBLIC_SANITY_PROJECT_ID=v6vpuuua`
 - `PUBLIC_SANITY_DATASET=production`
 - `PUBLIC_TURNSTILE_SITE_KEY`
-- `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN`
 
 Server-side variables:
 
@@ -114,7 +113,8 @@ configuration does not replace the club's OVH mail records.
 ## Analytics
 
 `src/components/Analytics.astro` injects the Cloudflare Web Analytics beacon
-only when `PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN` is defined.
+immediately before the closing `body` tag. The public site token is stored
+directly in that component; it is an identifier, not a secret.
 
 ### Cloudflare project configuration
 
