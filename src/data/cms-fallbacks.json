@@ -1,5 +1,5 @@
 {
-  "dumpedAt": "2026-09-19T13:57:07.484Z",
+  "dumpedAt": "2026-10-04T12:23:20.913Z",
   "source": "sanity:v6vpuuua/production",
   "aircraft": [
     {
@@ -114,52 +114,22 @@
       "name": "Gilles PELLENZ",
       "title": "Président et Dirigeant Responsable",
       "roles": ["president", "boardMember"],
-      "summary": "Président du club. Anime le bureau et son conseil d'administration. Assure le rôle de Dirigeant Responsable de l'ATO Les Ailes Lyonnaises",
+      "summary": "",
       "biography": [],
       "image": {
         "alt": "Photo d'identité",
-        "url": "https://cdn.sanity.io/images/v6vpuuua/production/8d1ae1bb3fab70572ef446f7c2bf63cf6cd398cb-1035x1380.jpg?w=1600&q=75&auto=format"
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/9bd9473b0cf49054e0a8bc893ede1ae229fe9bcf-4621x3080.jpg?w=1600&q=75&auto=format"
       }
     },
     {
       "enabled": true,
-      "order": 20,
-      "publishedAt": "2026-07-25T00:00:00.000Z",
-      "id": "person-antoine-guerra",
-      "name": "Antoine Guerra",
-      "title": "Instructeur (FI) ",
-      "roles": ["instructor"],
-      "summary": "Instructeur de vol (FI). Il forme les élèves sur le parcours pratique, du circuit d’aérodrome aux navigations.",
-      "biography": [
-        {
-          "_key": "antoine-bio",
-          "_type": "block",
-          "children": [
-            {
-              "_key": "2cb0a57d5741",
-              "_type": "span",
-              "marks": [],
-              "text": "CPL(A)/IR-ME-VDN- FI(A) 1200 Hdv Total 840 Hdv FI"
-            }
-          ],
-          "markDefs": [],
-          "style": "normal"
-        }
-      ],
-      "image": {
-        "alt": "Antoine GUERRA",
-        "url": "https://cdn.sanity.io/images/v6vpuuua/production/3fea7dac4e90d7d0d6792e784b288550a97f2a52-111x133.png?w=1600&q=75&auto=format"
-      }
-    },
-    {
-      "enabled": true,
-      "order": 50,
-      "publishedAt": "2026-09-02T14:04:12.737Z",
+      "order": 10,
+      "publishedAt": "2026-09-25T12:41:59.280Z",
       "id": "person-fabien-cochard",
       "name": "Fabien COCHARD",
-      "title": "Instructeur et Responable pédagogique",
+      "title": "Instructeur et Responable pédagogique ATO",
       "roles": ["instructor", "chiefInstructor", "boardMember"],
-      "summary": "Responsable pédagogique de l’école de pilotage. Il coordonne le parcours pédagogique et accompagne les élèves du premier vol au test.",
+      "summary": "",
       "biography": [
         {
           "_key": "fabien-bio",
@@ -175,36 +145,267 @@
           "markDefs": [],
           "style": "normal"
         }
-      ]
+      ],
+      "image": {
+        "alt": "Photo de Fabien COCHARD",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/a4e4aa9498c7e07a6d50ba649f06be88f8f8b629-411x418.jpg?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 20,
+      "publishedAt": "2026-09-10T15:02:53.454Z",
+      "id": "00d24dd3-e79f-4a4b-898a-2ab8294ce91c",
+      "name": "Franck BACCI",
+      "title": "Sécrétaire Général",
+      "roles": ["president", "secretary", "boardMember"],
+      "summary": "",
+      "biography": [],
+      "image": {
+        "alt": "Phot de Franck BACCI",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/cb79e46e4a97fed9637f92e8d1eaaf587c864867-4931x3287.jpg?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 30,
+      "publishedAt": "2026-09-20T10:09:02.815Z",
+      "id": "238f1144-f17d-4566-a3ca-8b69689003eb",
+      "name": "Jean CAPIEMONT",
+      "title": "Sécrétaire Général Adjoint",
+      "roles": ["secretary", "boardMember"],
+      "summary": "",
+      "biography": [],
+      "image": {
+        "alt": "Photo de Jean CAPIEMONT",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/1fd684256a2ff19b57e1f8e9ee2b95560f067c92-4783x3189.jpg?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 30,
+      "publishedAt": "2026-09-25T20:16:18.385Z",
+      "id": "49e6a7a4-d50c-4080-acbf-bc76e8013804",
+      "name": "Guillaume DUBOIS",
+      "title": "Instructeur (FI)",
+      "roles": ["instructor"],
+      "summary": "Qualifications : CPL(A)/IR-ME-VDN-FI(A)",
+      "biography": []
+    },
+    {
+      "enabled": true,
+      "order": 40,
+      "publishedAt": "2026-09-10T15:30:00.882Z",
+      "id": "05647eff-7ded-4c02-b7de-849965dc9819",
+      "name": "Pierre-Marie MONIN",
+      "title": "Trésorier",
+      "roles": ["treasurer", "boardMember"],
+      "summary": "",
+      "biography": [],
+      "image": {
+        "alt": "Photo de Pierre-Marie MONIN",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/4c33520ea8a445176a31ec6f7985fc4725a21d0a-5171x3447.jpg?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 40,
+      "publishedAt": "2026-09-25T20:10:53.719Z",
+      "id": "e21b3890-f08c-4c56-9496-20ca6781aa81",
+      "name": "Gilles RABILLOUD",
+      "title": "Instructeur (FI)",
+      "roles": ["instructor"],
+      "summary": "",
+      "biography": []
+    },
+    {
+      "enabled": true,
+      "order": 50,
+      "publishedAt": "2026-09-25T20:12:43.493Z",
+      "id": "dac87bbd-e634-4106-bac2-ab980c3a5849",
+      "name": "Frédéric SOUCHU",
+      "title": "Instructeur (FI)",
+      "roles": ["instructor"],
+      "summary": "",
+      "biography": []
+    },
+    {
+      "enabled": true,
+      "order": 60,
+      "publishedAt": "2026-09-25T20:19:10.865Z",
+      "id": "1240954b-e0de-47f1-890e-c8f63d596c4c",
+      "name": "Pierre D'HOIR",
+      "title": "Instructeur (FI)",
+      "roles": ["instructor"],
+      "summary": "",
+      "biography": []
+    },
+    {
+      "enabled": true,
+      "order": 60,
+      "publishedAt": "2026-09-20T10:05:22.160Z",
+      "id": "f0fd39e4-d85e-4dcb-9ce0-4308bf2c4c52",
+      "name": "Bertrand CASTERA",
+      "title": "Safety manager-Suivi ATO/SGS",
+      "roles": ["boardMember"],
+      "summary": "",
+      "biography": [],
+      "image": {
+        "alt": "Photo de Bertrand CASTERA",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/705378b7f49491223e6d901e0706f6487a544323-5115x3410.jpg?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 70,
+      "publishedAt": "2026-09-25T20:20:23.239Z",
+      "id": "9d9f756b-04f8-49e8-915c-e3a07cebfd1b",
+      "name": "Vincent PAGES",
+      "title": "Instructeur (FI)",
+      "roles": ["instructor"],
+      "summary": "",
+      "biography": []
+    },
+    {
+      "enabled": true,
+      "order": 70,
+      "publishedAt": "2026-09-20T10:19:48.069Z",
+      "id": "e51ac149-5755-4e5c-a2a5-9cfe61ba731e",
+      "name": "Gérard AUDIGNON",
+      "title": "Appui BIA",
+      "roles": ["boardMember"],
+      "summary": "",
+      "biography": [],
+      "image": {
+        "alt": "Photo de Gérard AUDIGNON",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/b44fa73435a39baa28860c1272c79e0621381d34-5066x3377.jpg?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 80,
+      "publishedAt": "2026-09-25T20:21:57.829Z",
+      "id": "7be8bd96-10e3-4709-a015-80ffd64cf68a",
+      "name": "Florent GRAFFOUILLERE",
+      "title": "Instructeur (FI)",
+      "roles": ["instructor"],
+      "summary": "",
+      "biography": []
+    },
+    {
+      "enabled": true,
+      "order": 80,
+      "publishedAt": "2026-09-20T10:10:59.715Z",
+      "id": "c83d70a3-0ac8-4378-8f04-d9d78c3a45c5",
+      "name": "Pierre ALFONSI",
+      "title": "Budget-Finances",
+      "roles": ["boardMember"],
+      "summary": "",
+      "biography": [],
+      "image": {
+        "alt": "Photo Pierre ALFONSI",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/e91db19cf42eadec676e79abf305f99c02ef49d2-5226x3484.jpg?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 90,
+      "publishedAt": "2026-09-25T20:23:15.265Z",
+      "id": "0edda311-564a-40d5-9e35-bc1469310810",
+      "name": "Gérard BAUDOUIN",
+      "title": "Instructeur (FI-FE)",
+      "roles": ["instructor"],
+      "summary": "",
+      "biography": []
     },
     {
       "enabled": true,
       "order": 100,
-      "publishedAt": "2026-08-11T17:31:00.000Z",
-      "id": "1e010c27-254f-4d4b-b062-30c27a93c8bf",
-      "name": "Guillaume DUBOIS",
-      "title": "Instructeur (FI)",
-      "roles": ["instructor"],
-      "summary": "Instructeur de vol (FI). Il forme les élèves sur le parcours pratique, du circuit d’aérodrome aux navigations.",
-      "biography": [
-        {
-          "_key": "antoine-bio",
-          "_type": "block",
-          "children": [
-            {
-              "_key": "2cb0a57d5741",
-              "_type": "span",
-              "marks": [],
-              "text": "Qualifications : CPL(A)/IR-ME-VDN-FI(A) 1002h TT, 591 FI"
-            }
-          ],
-          "markDefs": [],
-          "style": "normal"
-        }
-      ],
+      "publishedAt": "2026-09-20T10:11:52.040Z",
+      "id": "e1aea3f7-a026-4c1d-afcb-bdea9273d075",
+      "name": "Nicolas CAREL",
+      "title": "Responsable BIA",
+      "roles": ["boardMember"],
+      "summary": "",
+      "biography": [],
       "image": {
-        "alt": "Guillaume DUBOIS",
-        "url": "https://cdn.sanity.io/images/v6vpuuua/production/9749ad6acbba444ef314eceea61eef1f992b938a-111x133.png?w=1600&q=75&auto=format"
+        "alt": "Photo de Nicolas CAREL",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/ac73202c92344e8371fd26787011673e16185689-4270x2847.jpg?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 110,
+      "publishedAt": "2026-09-20T10:12:45.623Z",
+      "id": "e160a223-0029-4f20-a890-8f6e6f9b410e",
+      "name": "René FERRAND",
+      "title": "Chargé de la revue d'organisation ATO",
+      "roles": ["boardMember"],
+      "summary": "",
+      "biography": [],
+      "image": {
+        "alt": "photo de René FERRAND",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/a1d5877a61d5ef2f1205f11e0ec68cde23fa111b-4894x3263.jpg?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 120,
+      "publishedAt": "2026-09-20T10:13:44.633Z",
+      "id": "d6683473-a0db-4d76-8e69-6efde7344a19",
+      "name": "Bruno HUBERT",
+      "title": "Réseaux sociaux-Informatique",
+      "roles": ["boardMember"],
+      "summary": "",
+      "biography": [],
+      "image": {
+        "alt": "Photo de Bruno HUBERT",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/47481b9350712db6a3a1aec397cdb86add5c882a-4469x2979.jpg?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 130,
+      "publishedAt": "2026-09-20T10:24:41.407Z",
+      "id": "b40dfa8c-6e36-45fb-9da9-0c689e0b7096",
+      "name": "Julien IBORRA",
+      "title": "Suivi maintenance avions",
+      "roles": ["boardMember"],
+      "summary": "",
+      "biography": [],
+      "image": {
+        "alt": "Photo Julien IBORRA",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/4153b1eb6740b8e044244dc38c3ec36ae0b17fd1-4922x3281.jpg?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 140,
+      "publishedAt": "2026-09-20T10:16:22.080Z",
+      "id": "578a1ea6-c75c-4a5b-9798-0d2b72f3324c",
+      "name": "Didier SOUET",
+      "title": "Suivi avionique et sorties club",
+      "roles": ["boardMember"],
+      "summary": "",
+      "biography": [],
+      "image": {
+        "alt": "Photo de Didier",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/e9e780822c6927aa7913a1f5d79b08e82106de4d-5004x3336.jpg?w=1600&q=75&auto=format"
+      }
+    },
+    {
+      "enabled": true,
+      "order": 160,
+      "publishedAt": "2026-09-20T10:17:33.590Z",
+      "id": "6303dae1-d42b-4869-977f-6561bb7ded46",
+      "name": "Camille LAFITTE",
+      "title": "Sorties club",
+      "roles": ["boardMember"],
+      "summary": "",
+      "biography": [],
+      "image": {
+        "alt": "Photo de Camille LAFITTE",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/1f52bdac23cd01a296f7a253ae71f91546473863-5264x3509.jpg?w=1600&q=75&auto=format"
       }
     }
   ],
@@ -253,7 +454,7 @@
           "order": 40
         }
       ],
-      "disclaimer": "Tarifs issus du document de travail 2026 fourni par le club. Contactez le club pour confirmation."
+      "disclaimer": "Contactez le club pour confirmation."
     },
     {
       "enabled": true,
@@ -266,7 +467,7 @@
         {
           "id": "ffa-license",
           "label": "Licence FFA",
-          "amount": 80,
+          "amount": 85,
           "unit": "year",
           "enabled": true,
           "order": 10
@@ -288,20 +489,20 @@
           "order": 30
         }
       ],
-      "disclaimer": "Tarifs issus du document de travail 2026 fourni par le club. Contactez le club pour confirmation."
+      "disclaimer": "Contactez le club pour confirmation."
     },
     {
       "enabled": true,
       "order": 30,
       "publishedAt": "2026-07-25T00:00:00.000Z",
       "id": "priceGroup-aircraft-rates",
-      "title": "Tarifs horaires des avions",
-      "description": "Le tarif réduit nécessite la souscription d'un forfait annuel initial de 450 €.",
+      "title": "Tarifs horaires des avions au 1/10/2026",
+      "description": "Le tarif réduit nécessite la souscription d'un forfait annuel initial de 480 €.",
       "items": [
         {
           "id": "f-gypg-normal",
           "label": "DR400/160 F-GYPG — tarif normal",
-          "amount": 211.2,
+          "amount": 216.2,
           "unit": "hour",
           "enabled": true,
           "order": 10
@@ -309,7 +510,7 @@
         {
           "id": "f-gypg-reduced",
           "label": "DR400/160 F-GYPG — tarif réduit",
-          "amount": 168.96,
+          "amount": 172.96,
           "unit": "hour",
           "enabled": true,
           "order": 20
@@ -317,7 +518,7 @@
         {
           "id": "f-hlyo-normal",
           "label": "DR401/160 F-HLYO — tarif normal",
-          "amount": 199.8,
+          "amount": 205.2,
           "unit": "hour",
           "enabled": true,
           "order": 30
@@ -325,7 +526,7 @@
         {
           "id": "f-hlyo-reduced",
           "label": "DR401/160 F-HLYO — tarif réduit",
-          "amount": 158.94,
+          "amount": 164.16,
           "unit": "hour",
           "enabled": true,
           "order": 40
@@ -333,7 +534,7 @@
         {
           "id": "f-hsmb-normal",
           "label": "Bristell B23 F-HSMB — tarif normal",
-          "amount": 179.4,
+          "amount": 184.2,
           "unit": "hour",
           "enabled": true,
           "order": 50
@@ -341,7 +542,7 @@
         {
           "id": "f-hsmb-reduced",
           "label": "Bristell B23 F-HSMB — tarif réduit",
-          "amount": 143.52,
+          "amount": 147.36,
           "unit": "hour",
           "enabled": true,
           "order": 60
@@ -349,7 +550,7 @@
         {
           "id": "f-gxge-normal",
           "label": "DR400/120 F-GXGE — tarif normal",
-          "amount": 179.4,
+          "amount": 184.2,
           "unit": "hour",
           "enabled": true,
           "order": 70
@@ -357,7 +558,7 @@
         {
           "id": "f-gxge-reduced",
           "label": "DR400/120 F-GXGE — tarif réduit",
-          "amount": 143.52,
+          "amount": 147.36,
           "unit": "hour",
           "enabled": true,
           "order": 80
@@ -365,7 +566,7 @@
         {
           "id": "f-gjqt-normal",
           "label": "DR400/120 F-GJQT — tarif normal",
-          "amount": 179.4,
+          "amount": 184.2,
           "unit": "hour",
           "enabled": true,
           "order": 90
@@ -373,13 +574,13 @@
         {
           "id": "f-gjqt-reduced",
           "label": "DR400/120 F-GJQT — tarif réduit",
-          "amount": 143.52,
+          "amount": 147.36,
           "unit": "hour",
           "enabled": true,
           "order": 100
         }
       ],
-      "disclaimer": "Tarifs issus du document de travail 2026 fourni par le club. Contactez le club pour confirmation."
+      "disclaimer": "Tarifs sucesptible d'évoluer en fonction des pris de l'essence-Contactez le club pour confirmation."
     },
     {
       "enabled": true,
@@ -387,7 +588,7 @@
       "publishedAt": "2026-07-25T00:00:00.000Z",
       "id": "priceGroup-instruction",
       "title": "Instruction",
-      "description": "Le coût total dépend du nombre d’heures nécessaires et des frais annexes.",
+      "description": "Le coût total dépend du nombre d’heures d'instruction nécessaires et des frais annexes.",
       "items": [
         {
           "id": "instruction-hour",
@@ -767,6 +968,36 @@
   "newsArticles": [
     {
       "enabled": true,
+      "order": 20,
+      "publishedAt": "2026-09-20T16:43:56.181Z",
+      "id": "6fd3f631-82f7-48e6-b949-ab97a0be0496",
+      "title": "Visite chez Issoire Aviation",
+      "slug": "autre-site",
+      "excerpt": "Berceau du constructeur des avions APM ",
+      "body": [
+        {
+          "_key": "8c3a76b2d82e",
+          "_type": "block",
+          "children": [
+            {
+              "_key": "ec36f65dec02",
+              "_type": "span",
+              "marks": [],
+              "text": "L’APM Lion et la collection personnelle de P. Moniot"
+            }
+          ],
+          "markDefs": [],
+          "style": "normal"
+        }
+      ],
+      "image": {
+        "alt": "Philippe Moniot constructeur des avion APM et propriétaire d'avions de collection",
+        "url": "https://cdn.sanity.io/images/v6vpuuua/production/c7d4e8b93b69d9041bfb6130b3df7965c8a954cf-2000x1600.jpg?w=1600&q=75&auto=format"
+      },
+      "gallery": []
+    },
+    {
+      "enabled": true,
       "order": 10,
       "publishedAt": "2026-09-18T08:00:00.000Z",
       "id": "news-nouveau-site",
@@ -802,7 +1033,8 @@
           "markDefs": [],
           "style": "normal"
         }
-      ]
+      ],
+      "gallery": []
     }
   ],
   "siteData": {

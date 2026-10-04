@@ -1,0 +1,154 @@
+---
+import CtaBand from "@/components/CtaBand.astro";
+import PageHero from "@/components/PageHero.astro";
+import { getNews } from "@/lib/cms";
+import { portableTextPlain } from "@/lib/cms/portableText";
+import type { NewsArticle } from "@/lib/cms";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+interface Props {
+  article: NewsArticle;
+}
+
+export async function getStaticPaths() {
+  const articles = await getNews();
+
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const images = [article.image, ...article.gallery]
+  .filter((image) => image !== undefined)
+  .filter(
+    (image, index, all) =>
+      all.findIndex((candidate) => candidate.url === image.url) === index,
+  );
+const date = new Intl.DateTimeFormat("fr-FR", {
+  dateStyle: "long",
+  timeZone: "Europe/Paris",
+}).format(new Date(article.publishedAt));
+const socialImage = images[0];
+---
+
+<BaseLayout
+  title={article.title}
+  description={article.excerpt}
+  image={socialImage?.url}
+  imageAlt={socialImage?.alt}
+>
+  <PageHero
+    eyebrow={date}
+    title={article.title}
+    introduction={article.excerpt}
+    longTitle
+    compact
+  />
+
+  <article class="section section--white">
+    <div class="narrow news-article">
+      {
+        images.length > 0 && (
+          <div
+            class:list={[
+              "news-gallery",
+              { "news-gallery--single": images.length === 1 },
+            ]}
+          >
+            {images.map((image) => (
+              <figure>
+                <img
+                  src={image.url}
+                  alt={image.alt}
+                  width="1600"
+                  height="900"
+                  loading="eager"
+                />
+              </figure>
+            ))}
+          </div>
+        )
+      }
+
+      <div class="prose">
+        {
+          article.body.map((block) =>
+            block.style === "h2" ? (
+              <h2>{portableTextPlain(block)}</h2>
+            ) : block.style === "h3" ? (
+              <h3>{portableTextPlain(block)}</h3>
+            ) : block.style === "blockquote" ? (
+              <blockquote>{portableTextPlain(block)}</blockquote>
+            ) : (
+              <p>{portableTextPlain(block)}</p>
+            ),
+          )
+        }
+      </div>
+    </div>
+  </article>
+
+  <CtaBand
+    eyebrow="La vie du club"
+    title="Retrouvez les autres nouvelles des Ailes Lyonnaises."
+    text="Navigations, rendez-vous et informations du club sont regroupés sur la page Actualités."
+    href="/actualites/"
+    label="Toutes les actualités"
+  />
+</BaseLayout>
+
+<style>
+  .news-article {
+    display: grid;
+    gap: clamp(2rem, 6vw, 4rem);
+  }
+
+  .news-gallery {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .news-gallery--single {
+    grid-template-columns: 1fr;
+  }
+
+  .news-gallery figure {
+    display: grid;
+    place-items: center;
+    padding: 0.75rem;
+    margin: 0;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+
+  .news-gallery img {
+    width: 100%;
+    height: auto;
+    max-height: 46rem;
+    object-fit: contain;
+  }
+
+  .prose p,
+  .prose blockquote {
+    color: #344054;
+    font-size: 1.08rem;
+    line-height: 1.8;
+  }
+
+  .prose blockquote {
+    margin: 0 0 1rem;
+    padding-left: 1.25rem;
+    border-left: 4px solid var(--yellow-500);
+    font-style: italic;
+  }
+
+  @media (max-width: 40rem) {
+    .news-gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,6 +1,7 @@
 ---
 import CtaBand from "@/components/CtaBand.astro";
 import PageHero from "@/components/PageHero.astro";
+import PersonCard from "@/components/PersonCard.astro";
 import { getAircraft, getPeople, getTrainingPrograms } from "@/lib/cms";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
@@ -135,26 +136,9 @@ const courses = programs
         <div class="container">
           <p class="eyebrow">L’équipe pédagogique</p>
           <h2>Les instructeurs qui vous accompagnent.</h2>
-          <div class="grid grid--3 instructor-grid">
+          <div class="instructor-grid">
             {instructors.map((instructor) => (
-              <article class="card">
-                {instructor.image && (
-                  <img
-                    class="instructor-image"
-                    src={instructor.image.url}
-                    alt={instructor.image.alt}
-                    loading="lazy"
-                  />
-                )}
-                <h3>{instructor.name}</h3>
-                <p class="instructor-title">
-                  {instructor.title ??
-                    (instructor.roles.includes("chiefInstructor")
-                      ? "Chef instructeur"
-                      : "Instructeur")}
-                </p>
-                <p>{instructor.summary}</p>
-              </article>
+              <PersonCard person={instructor} />
             ))}
           </div>
         </div>
@@ -316,23 +300,28 @@ const courses = programs
   }
 
   .instructor-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     margin-top: 2.5rem;
   }
 
-  .instructor-image {
-    width: calc(100% + clamp(3rem, 6vw, 4.5rem));
-    max-width: none;
-    height: 18rem;
-    margin: calc(clamp(1.5rem, 3vw, 2.25rem) * -1)
-      calc(clamp(1.5rem, 3vw, 2.25rem) * -1) 1.5rem;
-    object-fit: cover;
+  @media (max-width: 52rem) {
+    .instructor-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
-  .instructor-title {
-    margin: 0 0 0.75rem;
-    color: var(--navy-800);
-    font-size: 0.86rem;
-    font-weight: 800;
+  @media (min-width: 52.01rem) and (max-width: 72rem) {
+    .instructor-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 32rem) {
+    .instructor-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 40rem) {

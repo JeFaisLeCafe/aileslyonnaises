@@ -86,6 +86,10 @@ export const newsQuery = `*[_type == "newsArticle" && ${publicGate}] | order(pub
   excerpt,
   body,
   ${imageProjection},
+  gallery[] {
+    alt,
+    "url": asset->url + "?w=1600&q=75&auto=format"
+  },
   ${publicationProjection}
 }`;
 

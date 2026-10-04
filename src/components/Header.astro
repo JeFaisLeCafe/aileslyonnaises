@@ -7,8 +7,10 @@ interface Props {
 
 const { siteData } = Astro.props;
 const pathname = Astro.url.pathname;
+const brandName = siteData.clubName.replace(/^Aéroclub\s+/u, "");
 
 const navigation = [
+  { href: "/", label: "Accueil" },
   { href: "/decouvrir/", label: "Découvrir" },
   { href: "/apprendre/", label: "Apprendre" },
   { href: "/bia/", label: "BIA" },
@@ -35,7 +37,7 @@ const isCurrent = (href: string) =>
           alt=""
         />
         <span class="brand__text">
-          <strong>{siteData.clubName}</strong>
+          <strong>{brandName}</strong>
           <small>{siteData.locationLabel}</small>
         </span>
       </a>

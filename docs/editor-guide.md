@@ -13,7 +13,9 @@ En local : `npm run studio` (http://127.0.0.1:3333).
 ## Contenus administrables
 
 - **Avions** : modèle, immatriculation, usage, description, photographie et ordre.
-- **Actualités** : informations datées, distinctes de la page Vie du club.
+- **Actualités** : informations datées, photo principale et galerie de photos
+  supplémentaires. Ajoutez les photos séparément : le site les affiche sans
+  recadrage et il n’est pas nécessaire de créer un pêle-mêle.
 - **Personnes** : nom, titre affiché, rôles, portrait, biographie courte et ordre.
   Les vues **Équipe pédagogique**, **Bureau** et **Conseil d’administration** filtrent le même document selon les rôles.
 - **Tarifs** : groupes, lignes, montants, unité et date d’effet.

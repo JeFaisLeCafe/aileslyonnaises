@@ -112,9 +112,40 @@ describe("mapPriceGroups", () => {
   });
 });
 
+describe("mapNews", () => {
+  it("supports multiple photos and defaults older articles to an empty gallery", () => {
+    const baseArticle = {
+      id: "news-1",
+      title: "Navigation du club",
+      slug: "navigation-du-club",
+      excerpt: "Une sortie récente.",
+      body: [],
+      enabled: true,
+      order: 10,
+      publishedAt: "2026-07-25T10:00:00.000Z",
+    };
+
+    expect(mapNews([baseArticle], now)[0]?.gallery).toEqual([]);
+    expect(
+      mapNews(
+        [
+          {
+            ...baseArticle,
+            gallery: [
+              { alt: "Premier équipage", url: "/images/news/crew.webp" },
+              { alt: "Avion au parking", url: "/images/news/aircraft.webp" },
+            ],
+          },
+        ],
+        now,
+      )[0]?.gallery,
+    ).toHaveLength(2);
+  });
+});
+
 describe("static fallbacks", () => {
   it("conform to the same runtime schemas as CMS responses", () => {
-    const publishedNow = new Date("2026-09-19T12:00:00.000Z");
+    const publishedNow = new Date("9999-12-31T23:59:59.999Z");
     expect(mapAircraft(fallbackAircraft, publishedNow)).toHaveLength(6);
     expect(mapPeople(fallbackPeople, publishedNow)).toEqual(fallbackPeople);
     expect(mapPriceGroups(fallbackPriceGroups, publishedNow)).toHaveLength(4);
@@ -122,7 +153,9 @@ describe("static fallbacks", () => {
       mapTrainingPrograms(fallbackTrainingPrograms, publishedNow),
     ).toHaveLength(4);
     expect(mapStories(fallbackStories, publishedNow)).toHaveLength(4);
-    expect(mapNews(fallbackNews, publishedNow)).toHaveLength(1);
+    expect(mapNews(fallbackNews, publishedNow)).toHaveLength(
+      fallbackNews.length,
+    );
     expect(mapSiteData(fallbackSiteData).clubName).toBe(
       "Aéroclub Les Ailes Lyonnaises",
     );

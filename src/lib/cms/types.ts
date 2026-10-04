@@ -106,6 +106,7 @@ export interface NewsArticle extends Publication {
   excerpt: string;
   body: PortableTextBlock[];
   image?: CmsImage | undefined;
+  gallery: CmsImage[];
 }
 
 export interface SiteData {

@@ -162,6 +162,10 @@ export const newsArticleSchema = publicationSchema.extend({
   excerpt: z.string(),
   body: z.array(portableTextBlockSchema),
   image: imageSchema.nullish().transform((value) => value ?? undefined),
+  gallery: z
+    .array(imageSchema)
+    .nullish()
+    .transform((value) => value ?? []),
 });
 
 export const siteDataSchema = z.object({

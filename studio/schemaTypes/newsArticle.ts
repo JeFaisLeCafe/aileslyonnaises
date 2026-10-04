@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 import { publishingFields } from "./shared";
 
@@ -35,8 +35,16 @@ export const newsArticle = defineType({
     }),
     defineField({
       name: "image",
-      title: "Image",
+      title: "Photo principale",
       type: "accessibleImage",
+    }),
+    defineField({
+      name: "gallery",
+      title: "Photos supplémentaires",
+      description:
+        "Ajoutez plusieurs photos ici plutôt que de créer un pêle-mêle. Elles seront affichées sans recadrage.",
+      type: "array",
+      of: [defineArrayMember({ type: "accessibleImage" })],
     }),
     ...publishingFields,
   ],

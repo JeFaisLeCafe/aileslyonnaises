@@ -71,7 +71,6 @@ test("navbar pages use consistent, readable image heroes", async ({ page }) => {
     "/tarifs/",
     "/environnement/",
     "/vie-du-club/",
-    "/actualites/",
     "/contact/",
   ];
   const heroHeights: number[] = [];
@@ -125,6 +124,10 @@ test("navbar pages use consistent, readable image heroes", async ({ page }) => {
   expect(
     Math.max(...heroHeights) - Math.min(...heroHeights),
   ).toBeLessThanOrEqual(1);
+
+  await page.goto("/actualites/");
+  await expect(page.locator(".page-hero--compact")).toBeVisible();
+  await expect(page.locator(".page-hero__image")).toHaveCount(0);
 });
 
 test("homepage visual essentials remain legible and complete", async ({
@@ -166,6 +169,10 @@ test("homepage visual essentials remain legible and complete", async ({
   await expect(
     page.locator("footer a[href='mailto:info2@aileslyonnaises.com']"),
   ).toHaveText("info2@aileslyonnaises.com");
+  await expect(page.locator(".bia-card__logo")).toHaveAttribute(
+    "src",
+    "/images/brand/bia.webp",
+  );
   await expect(
     page.locator(
       "script[src='https://static.cloudflareinsights.com/beacon.min.js']",
@@ -236,13 +243,13 @@ test("contact form exposes required qualification fields", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("pricing renders CMS fallback rates", async ({ page }) => {
+test("pricing renders CMS rates", async ({ page }) => {
   await page.goto("/tarifs/");
 
-  await expect(page.getByRole("cell", { name: "F-HSMB" })).toBeVisible();
-  await expect(
-    page.getByRole("cell", { name: /179,40/ }).first(),
-  ).toBeVisible();
+  const bristellRate = page.getByRole("row", { name: /F-HSMB/ });
+  await expect(bristellRate).toBeVisible();
+  await expect(bristellRate.getByRole("cell")).toHaveCount(4);
+  await expect(bristellRate).toContainText("€");
 });
 
 test("fleet renders Sanity aircraft details", async ({ page }) => {
@@ -283,6 +290,9 @@ test("homepage has no automatically detectable accessibility violations", async 
 test("environment and news appear in site navigation", async ({ page }) => {
   await page.goto("/");
 
+  await expect(page.locator("#main-navigation a[href='/']")).toContainText(
+    "Accueil",
+  );
   await expect(
     page.locator("#main-navigation a[href='/environnement/']"),
   ).toHaveCount(1);
@@ -295,11 +305,31 @@ test("environment and news appear in site navigation", async ({ page }) => {
     page.getByRole("heading", { name: /Voler en tenant compte/ }),
   ).toBeVisible();
   await expect(page.locator("#charte")).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Voir la flotte concernée" }),
+  ).toHaveCount(0);
 
   await page.goto("/actualites/");
+  const latestNews = page.locator(".news-card").first();
+  await expect(latestNews).toBeVisible();
+  await latestNews.click();
+  await expect(page).toHaveURL(/\/actualites\/[^/]+\/$/);
+  await expect(page.locator(".news-gallery img").first()).toHaveCSS(
+    "object-fit",
+    "contain",
+  );
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+});
+
+test("instructor cards use the compact governance layout", async ({ page }) => {
+  await page.goto("/apprendre/");
+
+  expect(
+    await page.locator(".instructor-grid .person-card").count(),
+  ).toBeGreaterThan(0);
   await expect(
-    page.getByRole("heading", { name: /nouveau site des Ailes Lyonnaises/i }),
-  ).toBeVisible();
+    page.locator(".instructor-grid .person-card__image").first(),
+  ).toHaveCSS("height", "96px");
 });
 
 test("external links open in a new tab", async ({ page }) => {
