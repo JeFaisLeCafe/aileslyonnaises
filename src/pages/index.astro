@@ -256,9 +256,14 @@ const fallbackImages: Record<string, string> = {
             <p class="eyebrow">Actualités</p>
             <h2>{latestNews.title}</h2>
             <p class="lede">{latestNews.excerpt}</p>
-            <a class="text-link" href={`/actualites/${latestNews.slug}/`}>
-              Lire l’actualité
-            </a>
+            <div class="button-row">
+              <a class="button" href="/actualites/">
+                Toutes les actualités
+              </a>
+              <a class="text-link" href={`/actualites/${latestNews.slug}/`}>
+                Lire l’actualité
+              </a>
+            </div>
           </div>
           <figure class="news-teaser">
             <img

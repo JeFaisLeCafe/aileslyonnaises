@@ -299,6 +299,9 @@ test("environment and news appear in site navigation", async ({ page }) => {
   await expect(
     page.locator("footer").getByRole("link", { name: "Actualités" }),
   ).toHaveAttribute("href", "/actualites/");
+  await expect(
+    page.getByRole("link", { name: "Toutes les actualités" }),
+  ).toHaveAttribute("href", "/actualites/");
 
   await page.goto("/environnement/");
   await expect(
@@ -356,6 +359,10 @@ test("club life splits bureau and board when CMS members exist", async ({
   await expect(
     page.getByRole("heading", { name: /Marie Marvingt/ }),
   ).toBeVisible();
+
+  await expect(
+    page.getByRole("link", { name: "Voir toutes les actualités" }),
+  ).toHaveAttribute("href", "/actualites/");
 
   const story = page.locator(".story-grid .media-card").first();
   await expect(story).toHaveAttribute("href", "/vie-du-club/histoire-du-club/");
